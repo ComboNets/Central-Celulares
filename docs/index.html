@@ -7,7 +7,7 @@
     <meta name="description" content="Central Celulares · Catálogo de celulares nuevos y usados en Caaguazú, Paraguay" />
     <meta name="author" content="Central Celulares" />
 
-    <link rel="icon" type="image/png" href="/Central-Celulares/central-celulares-logo.png" />
+    <link rel="icon" type="image/png" href="/Central-Celulares/docs/central-celulares-logo.png" />
 
     <meta property="og:title" content="Central Celulares" />
     <meta property="og:description" content="Catálogo de celulares nuevos y usados, con precios claros y atención personalizada." />
@@ -16,11 +16,38 @@
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content="/central-celulares-logo.png" />
-    <script type="module" crossorigin src="/Central-Celulares/assets/index-B2Yl1XWh.js"></script>
-    <link rel="stylesheet" crossorigin href="/Central-Celulares/assets/index-DvV2A6Oi.css">
+    <script type="module" crossorigin src="/Central-Celulares/docs/assets/index-D2eYgLMK.js"></script>
+    <link rel="stylesheet" crossorigin href="/Central-Celulares/docs/assets/index-DvV2A6Oi.css">
   </head>
 
   <body>
-    <div id="root"></div>
+    <div id="root"></div>
+
+    <!--
+      GitHub Pages is currently serving this repository from the root, but the production build lives in /docs.
+      Redirect GitHub Pages visitors to the built app while keeping local dev (localhost) working.
+    -->
+    <script>
+      (function () {
+        var isGithubPages = window.location.hostname.endsWith("github.io");
+        var repoBase = "/Central-Celulares";
+        var path = window.location.pathname || "/";
+
+        if (!isGithubPages) return;
+        if (!path.startsWith(repoBase)) return;
+
+        var rest = path.slice(repoBase.length); // includes leading slash or empty
+        if (!rest) rest = "/";
+
+        // Already in /docs -> no redirect
+        if (rest.startsWith("/docs/")) return;
+
+        var target = repoBase + "/docs" + rest;
+        if (!target.endsWith("/") && rest === "/") target += "/";
+
+        window.location.replace(target + window.location.search + window.location.hash);
+      })();
+    </script>
+
   </body>
 </html>

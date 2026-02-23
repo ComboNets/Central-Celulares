@@ -20,6 +20,33 @@
 
   <body>
     <div id="root"></div>
+
+    <!--
+      GitHub Pages is currently serving this repository from the root, but the production build lives in /docs.
+      Redirect GitHub Pages visitors to the built app while keeping local dev (localhost) working.
+    -->
+    <script>
+      (function () {
+        var isGithubPages = window.location.hostname.endsWith("github.io");
+        var repoBase = "/Central-Celulares";
+        var path = window.location.pathname || "/";
+
+        if (!isGithubPages) return;
+        if (!path.startsWith(repoBase)) return;
+
+        var rest = path.slice(repoBase.length); // includes leading slash or empty
+        if (!rest) rest = "/";
+
+        // Already in /docs -> no redirect
+        if (rest.startsWith("/docs/")) return;
+
+        var target = repoBase + "/docs" + rest;
+        if (!target.endsWith("/") && rest === "/") target += "/";
+
+        window.location.replace(target + window.location.search + window.location.hash);
+      })();
+    </script>
+
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
