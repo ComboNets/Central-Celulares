@@ -70,6 +70,16 @@ export default function PhoneDetail() {
     { icon: Calendar, label: "Lanzamiento", value: phone.release_year?.toString() },
   ];
 
+  const baseUrl = import.meta.env.BASE_URL || "/";
+  const rawImages = Array.isArray(phone.images) ? phone.images : [];
+  const resolvedImages = rawImages
+    .filter(Boolean)
+    .map((raw) => {
+      if (raw.startsWith("http")) return raw;
+      return `${baseUrl.replace(/\/$/, "")}/${raw.replace(/^\//, "")}`;
+    });
+  const mainImage = resolvedImages[0];
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -83,8 +93,8 @@ export default function PhoneDetail() {
         <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
           {/* Image */}
           <div className="relative aspect-square bg-secondary rounded-2xl overflow-hidden">
-            {phone.images?.[0] ? (
-              <img src={phone.images[0]} alt={phone.model} className="w-full h-full object-cover" />
+            {mainImage ? (
+              <img src={mainImage} alt={phone.model} className="w-full h-full object-cover" />
             ) : (
               <div className="w-full h-full flex items-center justify-center text-muted-foreground">
                 Sin imagen
@@ -94,6 +104,17 @@ export default function PhoneDetail() {
               {phone.is_featured && <span className="featured-badge">Destacado</span>}
               {hasDiscount && <span className="sale-badge">-{discountPercent}% dto.</span>}
             </div>
+            {mainImage && (
+              <a
+                href={mainImage}
+                target="_blank"
+                rel="noreferrer"
+                download
+                className="absolute bottom-4 right-4 rounded-md bg-background/80 px-3 py-2 text-xs font-medium text-foreground shadow"
+              >
+                Abrir foto
+              </a>
+            )}
           </div>
 
           {/* Details */}

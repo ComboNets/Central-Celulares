@@ -16,12 +16,17 @@
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content="/central-celulares-logo.png" />
-    <script type="module" crossorigin src="/Central-Celulares/docs/assets/index-D2eYgLMK.js"></script>
-    <link rel="stylesheet" crossorigin href="/Central-Celulares/docs/assets/index-DvV2A6Oi.css">
+    <script type="module" crossorigin src="/Central-Celulares/docs/assets/index-CKOa5sDQ.js"></script>
+    <link rel="stylesheet" crossorigin href="/Central-Celulares/docs/assets/index-DEoaS_hf.css">
   </head>
 
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <div style="padding: 24px; font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;">
+        Redirecting… If nothing happens, open
+        <a href="/Central-Celulares/docs/">/Central-Celulares/docs/</a>.
+      </div>
+    </div>
 
     <!--
       GitHub Pages is currently serving this repository from the root, but the production build lives in /docs.
@@ -29,23 +34,20 @@
     -->
     <script>
       (function () {
-        var isGithubPages = window.location.hostname.endsWith("github.io");
+        var isGithubPages = /\.github\.io$/.test(window.location.hostname);
         var repoBase = "/Central-Celulares";
         var path = window.location.pathname || "/";
 
-        if (!isGithubPages) return;
-        if (!path.startsWith(repoBase)) return;
+        if (isGithubPages && path.startsWith(repoBase)) {
+          var rest = path.slice(repoBase.length); // includes leading slash or empty
+          if (!rest) rest = "/";
 
-        var rest = path.slice(repoBase.length); // includes leading slash or empty
-        if (!rest) rest = "/";
-
-        // Already in /docs -> no redirect
-        if (rest.startsWith("/docs/")) return;
-
-        var target = repoBase + "/docs" + rest;
-        if (!target.endsWith("/") && rest === "/") target += "/";
-
-        window.location.replace(target + window.location.search + window.location.hash);
+          // Already in /docs -> do nothing
+          if (!rest.startsWith("/docs/")) {
+            var target = repoBase + "/docs" + rest;
+            window.location.replace(target + window.location.search + window.location.hash);
+          }
+        }
       })();
     </script>
 

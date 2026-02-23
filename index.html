@@ -43,18 +43,12 @@
           // Already in /docs -> do nothing
           if (!rest.startsWith("/docs/")) {
             var target = repoBase + "/docs" + rest;
-            if (!target.endsWith("/") && rest === "/") target += "/";
             window.location.replace(target + window.location.search + window.location.hash);
-            return;
           }
         }
-
-        // Local dev / non-GitHub hosting: load the Vite entrypoint.
-        var entry = document.createElement("script");
-        entry.type = "module";
-        entry.src = "/src/main.tsx";
-        document.body.appendChild(entry);
       })();
     </script>
+
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
