@@ -32,7 +32,7 @@
     -->
     <script>
       (function () {
-        var isGithubPages = window.location.hostname.endsWith("github.io");
+        var isGithubPages = /\.github\.io$/.test(window.location.hostname);
         var repoBase = "/Central-Celulares";
         var path = window.location.pathname || "/";
 
