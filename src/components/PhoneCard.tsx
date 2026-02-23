@@ -13,7 +13,7 @@ export function PhoneCard({ phone }: PhoneCardProps) {
     ? Math.round(((phone.price - phone.sale_price!) / phone.price) * 100)
     : 0;
 
-  const baseUrl = (import.meta as any).env?.BASE_URL || "/";
+  const baseUrl = import.meta.env.BASE_URL || "/";
   const rawImage = phone.images?.[0];
   const imageSrc = rawImage
     ? rawImage.startsWith("http")

@@ -1,5 +1,5 @@
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import type { Phone, PhoneWithBrand, PhoneFilters, Brand } from "@/types/database";
+import { useQuery } from "@tanstack/react-query";
+import type { PhoneWithBrand, PhoneFilters, Brand } from "@/types/database";
 
 async function fetchPhonesFromJson(): Promise<PhoneWithBrand[]> {
   const url = `${import.meta.env.BASE_URL}data/products.json`;
@@ -7,8 +7,7 @@ async function fetchPhonesFromJson(): Promise<PhoneWithBrand[]> {
   if (!response.ok) {
     throw new Error("Failed to load products.json");
   }
-  const data = (await response.json()) as PhoneWithBrand[];
-  return data;
+  return (await response.json()) as PhoneWithBrand[];
 }
 
 function applyPhoneFilters(phones: PhoneWithBrand[], filters?: PhoneFilters): PhoneWithBrand[] {
@@ -51,7 +50,9 @@ function applyPhoneFilters(phones: PhoneWithBrand[], filters?: PhoneFilters): Ph
       result = [...result].sort((a, b) => (b.view_count || 0) - (a.view_count || 0));
       break;
     default:
-      result = [...result].sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+      result = [...result].sort(
+        (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+      );
   }
 
   return result;
@@ -94,9 +95,7 @@ export function useSalePhones() {
     queryKey: ["phones", "sale"],
     queryFn: async () => {
       const phones = await fetchPhonesFromJson();
-      return phones
-        .filter((p) => p.is_published && p.sale_price !== null)
-        .slice(0, 8);
+      return phones.filter((p) => p.is_published && p.sale_price !== null).slice(0, 8);
     },
   });
 }
@@ -115,54 +114,6 @@ export function useBrands() {
       }
 
       return Array.from(map.values()).sort((a, b) => a.name.localeCompare(b.name));
-    },
-  });
-}
-
-// Admin hooks currently only work with the previous database setup.
-// They are kept here for now but do not operate on the JSON file.
-export function useAllPhones() {
-  return useQuery({
-    queryKey: ["phones", "all-json"],
-    queryFn: async () => {
-      const phones = await fetchPhonesFromJson();
-      return phones;
-    },
-  });
-}
-
-export function useCreatePhone() {
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: async (_phone: Omit<Phone, "id" | "created_at" | "updated_at" | "view_count" | "click_count">) => {
-      throw new Error("Creating phones is disabled in JSON-only mode. Update products.json via Excel instead.");
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["phones"] });
-    },
-  });
-}
-
-export function useUpdatePhone() {
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: async (_payload: Partial<Phone> & { id: string }) => {
-      throw new Error("Updating phones is disabled in JSON-only mode. Update products.json via Excel instead.");
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["phones"] });
-    },
-  });
-}
-
-export function useDeletePhone() {
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: async (_id: string) => {
-      throw new Error("Deleting phones is disabled in JSON-only mode. Update products.json via Excel instead.");
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["phones"] });
     },
   });
 }
