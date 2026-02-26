@@ -8,25 +8,27 @@
     "storage_options": [
       "128GB"
     ],
-    "display_size": null,
-    "processor": null,
-    "ram": null,
-    "camera": null,
-    "battery": null,
-    "release_year": null,
-    "description": null,
-    "images": [],
+    "display_size": "6.9\" IPS LCD (HD+ 1600×720), hasta 120Hz",
+    "processor": "MediaTek Dimensity 6300 (6nm)",
+    "ram": "4GB",
+    "camera": "Trasera: 50MP principal + auxiliar; Frontal: 8MP",
+    "battery": "6000mAh, 33W carga rápida",
+    "release_year": 2025,
+    "description": "Económico 5G teléfono con gran 6.9\" 120Hz pantalla, Dimensity 6300 rendimiento, y a 6000mAh batería; incluye Xiaomi HyperOS.",
+    "images": [
+      "/images/fotos/p-1.jpg"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-02-23T13:55:55.764Z",
-    "updated_at": "2026-02-23T13:55:55.764Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "xiaomi",
       "name": "Xiaomi",
       "logo_url": null,
-      "created_at": "2026-02-23T13:55:55.764Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -38,25 +40,27 @@
     "storage_options": [
       "128GB"
     ],
-    "display_size": null,
-    "processor": null,
-    "ram": null,
-    "camera": null,
-    "battery": null,
-    "release_year": null,
-    "description": null,
-    "images": [],
+    "display_size": "6.67\" AMOLED (FHD+ 2400×1080), 120Hz",
+    "processor": "MediaTek Helio G99-Ultra (6nm)",
+    "ram": "6GB",
+    "camera": "Trasera: 108MP + 2MP profundidad + 2MP macro; Frontal: 20MP",
+    "battery": "5500mAh, 33W turbo carga",
+    "release_year": 2024,
+    "description": "De gama media buena relación calidad-precio teléfono con 108MP sistema de cámaras, AMOLED 120Hz pantalla, Helio G99-Ultra chipset, y 5500mAh batería; Xiaomi HyperOS.",
+    "images": [
+      "/images/fotos/p-2.jpg"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-02-23T13:55:55.764Z",
-    "updated_at": "2026-02-23T13:55:55.764Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "xiaomi",
       "name": "Xiaomi",
       "logo_url": null,
-      "created_at": "2026-02-23T13:55:55.764Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -68,25 +72,27 @@
     "storage_options": [
       "64GB"
     ],
-    "display_size": null,
-    "processor": null,
-    "ram": null,
-    "camera": null,
-    "battery": null,
-    "release_year": null,
-    "description": null,
-    "images": [],
+    "display_size": "6.88\" IPS LCD (HD+), 120Hz",
+    "processor": "Unisoc T7250",
+    "ram": "4GB",
+    "camera": "Trasera: 32MP; Frontal: 8MP",
+    "battery": "5200mAh, 15W carga",
+    "release_year": 2025,
+    "description": "De entrada teléfono con fluida 120Hz pantalla, Unisoc T7250, y a 5200mAh batería.",
+    "images": [
+      "/images/fotos/p-3.jpg"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-02-23T13:55:55.764Z",
-    "updated_at": "2026-02-23T13:55:55.764Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "xiaomi",
       "name": "Xiaomi",
       "logo_url": null,
-      "created_at": "2026-02-23T13:55:55.764Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -98,25 +104,27 @@
     "storage_options": [
       "32GB"
     ],
-    "display_size": null,
-    "processor": null,
-    "ram": null,
-    "camera": null,
-    "battery": null,
-    "release_year": null,
-    "description": null,
-    "images": [],
+    "display_size": "6.52\" IPS LCD (HD+ 1600×720)",
+    "processor": "MediaTek Helio G36 (12nm)",
+    "ram": "2GB",
+    "camera": "Trasera: 8MP + 0.08MP profundidad; Frontal: 5MP",
+    "battery": "5000mAh, 10W carga",
+    "release_year": 2023,
+    "description": "De entrada Android (Go edition) teléfono con 6.52\" pantalla, Helio G36 chipset, y 5000mAh batería.",
+    "images": [
+      "/images/fotos/p-4.jpg"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-02-23T13:55:55.764Z",
-    "updated_at": "2026-02-23T13:55:55.764Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "xiaomi",
       "name": "Xiaomi",
       "logo_url": null,
-      "created_at": "2026-02-23T13:55:55.764Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -128,25 +136,27 @@
     "storage_options": [
       "128GB"
     ],
-    "display_size": null,
-    "processor": null,
-    "ram": null,
-    "camera": null,
-    "battery": null,
-    "release_year": null,
-    "description": null,
-    "images": [],
+    "display_size": "6.6\" PLS LCD (FHD+ 2408×1080)",
+    "processor": "MediaTek Helio G80",
+    "ram": "4GB",
+    "camera": "Trasera: 50MP + 5MP ultra gran angular + 2MP macro; Frontal: 13MP",
+    "battery": "5000mAh, 15W carga",
+    "release_year": 2023,
+    "description": "Económico Samsung teléfono con gran FHD+ pantalla, triple cámaras, y a 5000mAh batería.",
+    "images": [
+      "/images/fotos/p-5.webp"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-02-23T13:55:55.764Z",
-    "updated_at": "2026-02-23T13:55:55.764Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "samsung",
       "name": "Samsung",
       "logo_url": null,
-      "created_at": "2026-02-23T13:55:55.764Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -158,25 +168,27 @@
     "storage_options": [
       "128GB"
     ],
-    "display_size": null,
-    "processor": null,
-    "ram": null,
-    "camera": null,
-    "battery": null,
-    "release_year": null,
-    "description": null,
-    "images": [],
+    "display_size": "6.1\" Super Retina XDR OLED (2556×1179)",
+    "processor": "Apple A18",
+    "ram": "8GB",
+    "camera": "Trasera: 48MP Fusion + 12MP Ultra gran angular; Frontal: 12MP TrueDepth",
+    "battery": "3561mAh (aprox.), carga rápida; MagSafe inalámbrica",
+    "release_year": 2024,
+    "description": "Apple tope de gama con A18 chip, 6.1\" OLED pantalla, y avanzado doble-sistema de cámaras con 48MP principal; es compatible con Apple Intelligence.",
+    "images": [
+      "/images/fotos/p-6.jpg"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-02-23T13:55:55.764Z",
-    "updated_at": "2026-02-23T13:55:55.764Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "apple",
       "name": "Apple",
       "logo_url": null,
-      "created_at": "2026-02-23T13:55:55.764Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -188,25 +200,27 @@
     "storage_options": [
       "128GB"
     ],
-    "display_size": null,
-    "processor": null,
-    "ram": null,
-    "camera": null,
-    "battery": null,
-    "release_year": null,
-    "description": null,
-    "images": [],
+    "display_size": "6.88\" IPS LCD (HD+), 120Hz",
+    "processor": "Unisoc T7250",
+    "ram": "4GB",
+    "camera": "Trasera: 32MP; Frontal: 8MP",
+    "battery": "5200mAh, 15W carga",
+    "release_year": 2025,
+    "description": "De entrada teléfono con fluida 120Hz pantalla, Unisoc T7250, y a 5200mAh batería.",
+    "images": [
+      "/images/fotos/p-7.jpg"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-02-23T13:55:55.764Z",
-    "updated_at": "2026-02-23T13:55:55.764Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "xiaomi",
       "name": "Xiaomi",
       "logo_url": null,
-      "created_at": "2026-02-23T13:55:55.764Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -218,25 +232,27 @@
     "storage_options": [
       "128GB"
     ],
-    "display_size": null,
-    "processor": null,
-    "ram": null,
-    "camera": null,
-    "battery": null,
-    "release_year": null,
-    "description": null,
-    "images": [],
+    "display_size": "6.7\" PLS LCD (HD+ 720×1600)",
+    "processor": "MediaTek Helio G85 (12nm)",
+    "ram": "4GB",
+    "camera": "Trasera: 50MP + 2MP profundidad; Frontal: 8MP",
+    "battery": "5000mAh, 25W carga",
+    "release_year": 2024,
+    "description": "De entrada Samsung teléfono con gran 6.7\" pantalla, Helio G85 rendimiento, y 5000mAh batería.",
+    "images": [
+      "/images/fotos/p-8.jpg"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-02-23T13:55:55.764Z",
-    "updated_at": "2026-02-23T13:55:55.764Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "samsung",
       "name": "Samsung",
       "logo_url": null,
-      "created_at": "2026-02-23T13:55:55.764Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -248,25 +264,27 @@
     "storage_options": [
       "256GB"
     ],
-    "display_size": null,
-    "processor": null,
+    "display_size": "6.7\" Super AMOLED (FHD+ 1080×2340), 90Hz",
+    "processor": "MediaTek Helio G99 (6nm)",
     "ram": "8GB",
-    "camera": null,
-    "battery": null,
-    "release_year": null,
-    "description": null,
-    "images": [],
+    "camera": "Trasera: 50MP + 5MP ultra gran angular + 2MP macro; Frontal: 13MP",
+    "battery": "5000mAh, 25W carga",
+    "release_year": 2024,
+    "description": "De gama media Samsung teléfono con AMOLED pantalla, Helio G99 chipset, y triple cámaras; soporte de software prolongado.",
+    "images": [
+      "/images/fotos/p-9.webp"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-02-23T13:55:55.764Z",
-    "updated_at": "2026-02-23T13:55:55.764Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "samsung",
       "name": "Samsung",
       "logo_url": null,
-      "created_at": "2026-02-23T13:55:55.764Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -278,25 +296,27 @@
     "storage_options": [
       "256GB"
     ],
-    "display_size": null,
-    "processor": null,
+    "display_size": "6.7\" Super AMOLED (FHD+ 1080×2340), 120Hz",
+    "processor": "Samsung Exynos 1380 (5nm)",
     "ram": "8GB",
-    "camera": null,
-    "battery": null,
-    "release_year": null,
-    "description": null,
-    "images": [],
+    "camera": "Trasera: 50MP + 8MP ultra gran angular + 2MP macro (OIS principal); Frontal: 13MP",
+    "battery": "5000mAh, 25W carga",
+    "release_year": 2025,
+    "description": "Upper De gama media Galaxy A series teléfono con 120Hz AMOLED, Exynos 1380, OIS principal cámara, y 5000mAh batería.",
+    "images": [
+      "/images/fotos/p-10.webp"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-02-23T13:55:55.764Z",
-    "updated_at": "2026-02-23T13:55:55.764Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "samsung",
       "name": "Samsung",
       "logo_url": null,
-      "created_at": "2026-02-23T13:55:55.764Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -308,25 +328,27 @@
     "storage_options": [
       "128GB"
     ],
-    "display_size": null,
-    "processor": null,
-    "ram": null,
-    "camera": null,
-    "battery": null,
-    "release_year": null,
-    "description": null,
-    "images": [],
+    "display_size": "6.7\" Super AMOLED (FHD+ 1080×2340), 90Hz",
+    "processor": "Samsung Exynos 1330 (5nm)",
+    "ram": "4GB",
+    "camera": "Trasera: 50MP (OIS) + 5MP ultra gran angular + 2MP macro; Frontal: 13MP",
+    "battery": "5000mAh, 25W carga rápida",
+    "release_year": 2025,
+    "description": "De entrada 5G Galaxy A series teléfono con a 6.7\" AMOLED 90Hz pantalla, OIS principal cámara, y soporte de software prolongado.",
+    "images": [
+      "/images/fotos/p-11.jpg"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-02-23T13:55:55.764Z",
-    "updated_at": "2026-02-23T13:55:55.764Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "samsung",
       "name": "Samsung",
       "logo_url": null,
-      "created_at": "2026-02-23T13:55:55.764Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -338,25 +360,27 @@
     "storage_options": [
       "128GB"
     ],
-    "display_size": null,
-    "processor": null,
-    "ram": null,
-    "camera": null,
-    "battery": null,
-    "release_year": null,
-    "description": null,
-    "images": [],
+    "display_size": "6.5\" PLS LCD (HD+ 720×1600)",
+    "processor": "Samsung Exynos 850",
+    "ram": "4GB",
+    "camera": "Trasera: 50MP + 2MP profundidad; Frontal: 5MP",
+    "battery": "5000mAh",
+    "release_year": 2022,
+    "description": "De entrada Galaxy A teléfono con 6.5\" HD+ pantalla, 50MP principal cámara, y 5000mAh batería.",
+    "images": [
+      "/images/fotos/p-12.png"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-02-23T13:55:55.764Z",
-    "updated_at": "2026-02-23T13:55:55.764Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "samsung",
       "name": "Samsung",
       "logo_url": null,
-      "created_at": "2026-02-23T13:55:55.764Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -366,25 +390,27 @@
     "price": 790000,
     "sale_price": null,
     "storage_options": [],
-    "display_size": null,
-    "processor": null,
-    "ram": null,
-    "camera": null,
-    "battery": null,
-    "release_year": null,
-    "description": null,
-    "images": [],
+    "display_size": "6.5\" Super AMOLED (FHD+ 1080×2340), 90Hz",
+    "processor": "MediaTek Helio G99 (6nm)",
+    "ram": "4GB / 8GB (varies by version)",
+    "camera": "Trasera: 50MP + 5MP ultra gran angular + 2MP macro; Frontal: 13MP",
+    "battery": "5000mAh, 25W carga rápida",
+    "release_year": 2023,
+    "description": "Económico Samsung teléfono con an AMOLED 90Hz pantalla, sólida batería life, y a versátil triple-cámara setup.",
+    "images": [
+      "/images/fotos/p-13.jpg"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-02-23T13:55:55.764Z",
-    "updated_at": "2026-02-23T13:55:55.764Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "samsung",
       "name": "Samsung",
       "logo_url": null,
-      "created_at": "2026-02-23T13:55:55.764Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -396,25 +422,27 @@
     "storage_options": [
       "256GB"
     ],
-    "display_size": null,
-    "processor": null,
-    "ram": null,
-    "camera": null,
-    "battery": null,
-    "release_year": null,
-    "description": null,
-    "images": [],
+    "display_size": "6.56\" IPS LCD (HD+ 720×1612), 90Hz",
+    "processor": "MediaTek Helio G85",
+    "ram": "8GB (+ up to 8GB extended)",
+    "camera": "Trasera: 50MP principal; Frontal: 32MP",
+    "battery": "5000mAh, 18W carga rápida",
+    "release_year": 2023,
+    "description": "buena relación calidad-precio-focused Tecno teléfono con Helio G85 rendimiento, 8GB RAM (más memory expansion), y a 50MP cámara.",
+    "images": [
+      "/images/fotos/p-14.jpg"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-02-23T13:55:55.764Z",
-    "updated_at": "2026-02-23T13:55:55.764Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "tecno",
       "name": "Tecno",
       "logo_url": null,
-      "created_at": "2026-02-23T13:55:55.764Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -426,25 +454,27 @@
     "storage_options": [
       "256GB"
     ],
-    "display_size": null,
-    "processor": null,
-    "ram": null,
-    "camera": null,
-    "battery": null,
-    "release_year": null,
-    "description": null,
-    "images": [],
+    "display_size": "6.67\" AMOLED (FHD+ 2400×1080), 120Hz",
+    "processor": "MediaTek Dimensity 7300 Ultra (4nm)",
+    "ram": "8GB",
+    "camera": "Trasera: 200MP (OIS) + 8MP ultra gran angular + 2MP macro; Frontal: 20MP",
+    "battery": "5110mAh, 45W carga rápida",
+    "release_year": 2024,
+    "description": "Upper De gama media Redmi Note con brillante 120Hz AMOLED pantalla, Dimensity 7300 Ultra rendimiento, y a 200MP OIS principal cámara.",
+    "images": [
+      "/images/fotos/p-15.jpg"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-02-23T13:55:55.764Z",
-    "updated_at": "2026-02-23T13:55:55.764Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "xiaomi",
       "name": "Xiaomi",
       "logo_url": null,
-      "created_at": "2026-02-23T13:55:55.764Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -454,25 +484,27 @@
     "price": 850000,
     "sale_price": null,
     "storage_options": [],
-    "display_size": null,
-    "processor": null,
-    "ram": null,
-    "camera": null,
-    "battery": null,
-    "release_year": null,
-    "description": null,
-    "images": [],
+    "display_size": "6.7\" Super AMOLED (FHD+ 1080×2340), 90Hz",
+    "processor": "MediaTek Helio G99 (6nm)",
+    "ram": "4GB",
+    "camera": "Trasera: 50MP + 5MP ultra gran angular + 2MP macro; Frontal: 13MP",
+    "battery": "5000mAh, 25W carga",
+    "release_year": 2024,
+    "description": "Galaxy A-series De gama media teléfono (SWAP/reacondicionado) con gran AMOLED pantalla, Helio G99 chipset, y long batería life.",
+    "images": [
+      "/images/fotos/p-16.webp"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-02-23T13:55:55.764Z",
-    "updated_at": "2026-02-23T13:55:55.764Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "samsung",
       "name": "Samsung",
       "logo_url": null,
-      "created_at": "2026-02-23T13:55:55.764Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -484,25 +516,27 @@
     "storage_options": [
       "128GB"
     ],
-    "display_size": null,
-    "processor": null,
-    "ram": null,
-    "camera": null,
-    "battery": null,
-    "release_year": null,
-    "description": null,
-    "images": [],
+    "display_size": "6.1\" Liquid Retina IPS LCD (1792×828)",
+    "processor": "Apple A13 Bionic",
+    "ram": "4GB",
+    "camera": "Trasera: 12MP gran angular + 12MP ultra gran angular; Frontal: 12MP TrueDepth",
+    "battery": "3110mAh (aprox.), carga rápida; Qi inalámbrica",
+    "release_year": 2019,
+    "description": "iPhone 11 (usado/reacondicionado) con A13 Bionic, doble 12MP cámaras, y 6.1\" Liquid Retina pantalla.",
+    "images": [
+      "/images/fotos/p-17.jpg"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-02-23T13:55:55.764Z",
-    "updated_at": "2026-02-23T13:55:55.764Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "apple",
       "name": "Apple",
       "logo_url": null,
-      "created_at": "2026-02-23T13:55:55.764Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -514,25 +548,27 @@
     "storage_options": [
       "128GB"
     ],
-    "display_size": null,
-    "processor": null,
-    "ram": null,
-    "camera": null,
-    "battery": null,
-    "release_year": null,
-    "description": null,
-    "images": [],
+    "display_size": "6.1\" Liquid Retina IPS LCD (1792×828)",
+    "processor": "Apple A12 Bionic",
+    "ram": "3GB",
+    "camera": "Trasera: 12MP gran angular; Frontal: 7MP TrueDepth",
+    "battery": "2942mAh (aprox.), carga rápida; Qi inalámbrica",
+    "release_year": 2018,
+    "description": "iPhone XR con A12 Bionic, 6.1\" Liquid Retina pantalla, y reliable single-sistema de cámaras.",
+    "images": [
+      "/images/fotos/p-18.jpeg"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-02-23T13:55:55.764Z",
-    "updated_at": "2026-02-23T13:55:55.764Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "apple",
       "name": "Apple",
       "logo_url": null,
-      "created_at": "2026-02-23T13:55:55.764Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -542,25 +578,27 @@
     "price": 140000,
     "sale_price": null,
     "storage_options": [],
-    "display_size": null,
-    "processor": null,
-    "ram": null,
-    "camera": null,
-    "battery": null,
-    "release_year": null,
-    "description": null,
-    "images": [],
+    "display_size": "1.8\" TFT",
+    "processor": "Unisoc 6531F (feature phone)",
+    "ram": "4MB",
+    "camera": "No camera",
+    "battery": "800mAh",
+    "release_year": 2018,
+    "description": "Basic feature teléfono focused on calls y SMS con long standby time y a compacto 1.8\" pantalla.",
+    "images": [
+      "/images/fotos/p-19.webp"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-02-23T13:55:55.764Z",
-    "updated_at": "2026-02-23T13:55:55.764Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "nokia",
       "name": "Nokia",
       "logo_url": null,
-      "created_at": "2026-02-23T13:55:55.764Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -572,25 +610,27 @@
     "storage_options": [
       "64GB"
     ],
-    "display_size": null,
-    "processor": null,
-    "ram": null,
-    "camera": null,
-    "battery": null,
-    "release_year": null,
-    "description": null,
-    "images": [],
+    "display_size": "5.8\" Super Retina XDR OLED (2436×1125)",
+    "processor": "Apple A13 Bionic",
+    "ram": "4GB",
+    "camera": "Trasera: 12MP gran angular + 12MP ultra gran angular + 12MP teleobjetivo; Frontal: 12MP TrueDepth",
+    "battery": "3046mAh (aprox.), carga rápida; Qi inalámbrica",
+    "release_year": 2019,
+    "description": "iPhone 11 Pro (usado/reacondicionado) con triple-sistema de cámaras, OLED pantalla, y A13 Bionic rendimiento.",
+    "images": [
+      "/images/fotos/p-20.jpg"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-02-23T13:55:55.764Z",
-    "updated_at": "2026-02-23T13:55:55.764Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "apple",
       "name": "Apple",
       "logo_url": null,
-      "created_at": "2026-02-23T13:55:55.764Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -600,25 +640,27 @@
     "price": 1550000,
     "sale_price": null,
     "storage_options": [],
-    "display_size": null,
-    "processor": null,
-    "ram": null,
-    "camera": null,
-    "battery": null,
-    "release_year": null,
-    "description": null,
-    "images": [],
+    "display_size": "6.7\" Super AMOLED Plus (FHD+ 1080×2400), 60Hz",
+    "processor": "Qualcomm Snapdragon 865+ (7nm+) / Exynos 990 (7nm+)",
+    "ram": "8GB",
+    "camera": "Trasera: 12MP gran angular + 64MP teleobjetivo + 12MP ultra gran angular; Frontal: 10MP",
+    "battery": "4300mAh, 25W carga rápida; carga inalámbrica",
+    "release_year": 2020,
+    "description": "Premium Samsung tope de gama (SWAP/reacondicionado) con S Pen support, powerful 5G rendimiento, y a versátil triple-sistema de cámaras.",
+    "images": [
+      "/images/fotos/p-21.webp"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-02-23T13:55:55.764Z",
-    "updated_at": "2026-02-23T13:55:55.764Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "samsung",
       "name": "Samsung",
       "logo_url": null,
-      "created_at": "2026-02-23T13:55:55.764Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -630,25 +672,27 @@
     "storage_options": [
       "64GB"
     ],
-    "display_size": null,
-    "processor": null,
-    "ram": null,
-    "camera": null,
-    "battery": null,
-    "release_year": null,
-    "description": null,
-    "images": [],
+    "display_size": "6.6\" PLS LCD (FHD+ 1080×2408)",
+    "processor": "Samsung Exynos 850 (8nm)",
+    "ram": "4GB",
+    "camera": "Trasera: 50MP + 5MP ultra gran angular + 2MP macro + 2MP profundidad; Frontal: 8MP",
+    "battery": "5000mAh, 15W carga",
+    "release_year": 2022,
+    "description": "De entrada Samsung teléfono con gran FHD+ screen, 50MP principal cámara, y a 5000mAh batería.",
+    "images": [
+      "/images/fotos/p-22.jpg"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-02-23T13:55:55.764Z",
-    "updated_at": "2026-02-23T13:55:55.764Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "samsung",
       "name": "Samsung",
       "logo_url": null,
-      "created_at": "2026-02-23T13:55:55.764Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -660,25 +704,27 @@
     "storage_options": [
       "128GB"
     ],
-    "display_size": null,
-    "processor": null,
-    "ram": null,
-    "camera": null,
-    "battery": null,
-    "release_year": null,
-    "description": null,
-    "images": [],
+    "display_size": "6.6\" IPS LCD (HD+), 90Hz",
+    "processor": "MediaTek Helio G37",
+    "ram": "8GB",
+    "camera": "Trasera: 50MP principal + profundidad; Frontal: 8MP",
+    "battery": "5000mAh, 18W carga rápida",
+    "release_year": 2023,
+    "description": "Económico Tecno Spark series teléfono con a 90Hz pantalla, Helio G37 chipset, y a 50MP principal cámara.",
+    "images": [
+      "/images/fotos/p-23.webp"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-02-23T13:55:55.764Z",
-    "updated_at": "2026-02-23T13:55:55.764Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "tecno",
       "name": "Tecno",
       "logo_url": null,
-      "created_at": "2026-02-23T13:55:55.764Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -688,25 +734,27 @@
     "price": 140000,
     "sale_price": null,
     "storage_options": [],
-    "display_size": null,
-    "processor": null,
-    "ram": null,
-    "camera": null,
-    "battery": null,
-    "release_year": null,
-    "description": null,
-    "images": [],
+    "display_size": "2.4\" TFT",
+    "processor": "Feature phone chipset",
+    "ram": "32MB",
+    "camera": "No camera",
+    "battery": "1000mAh",
+    "release_year": 2015,
+    "description": "Simple feature teléfono for calls y SMS con long standby time y doble-SIM support.",
+    "images": [
+      "/images/fotos/p-24.webp"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-02-23T13:55:55.764Z",
-    "updated_at": "2026-02-23T13:55:55.764Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "lg",
       "name": "LG",
       "logo_url": null,
-      "created_at": "2026-02-23T13:55:55.764Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -718,25 +766,27 @@
     "storage_options": [
       "128GB"
     ],
-    "display_size": null,
-    "processor": null,
-    "ram": null,
-    "camera": null,
-    "battery": null,
-    "release_year": null,
-    "description": null,
-    "images": [],
+    "display_size": "6.56\" TFT LCD (HD+ 720×1612), 90Hz",
+    "processor": "MediaTek Helio G36",
+    "ram": "4GB",
+    "camera": "Trasera: 50MP principal + profundidad; Frontal: 5MP",
+    "battery": "5200mAh",
+    "release_year": 2024,
+    "description": "Económico Honor teléfono con a fluida 90Hz pantalla, 50MP principal cámara, y a gran 5200mAh batería.",
+    "images": [
+      "/images/fotos/p-25.jpg"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-02-23T13:55:55.764Z",
-    "updated_at": "2026-02-23T13:55:55.764Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "honor",
       "name": "Honor",
       "logo_url": null,
-      "created_at": "2026-02-23T13:55:55.764Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -748,25 +798,27 @@
     "storage_options": [
       "256GB"
     ],
-    "display_size": null,
-    "processor": null,
-    "ram": null,
-    "camera": null,
-    "battery": null,
-    "release_year": null,
-    "description": null,
-    "images": [],
+    "display_size": "6.9\" IPS LCD (HD+ 1600×720), hasta 120Hz",
+    "processor": "MediaTek Dimensity 6300 (6nm)",
+    "ram": "4GB",
+    "camera": "Trasera: 50MP principal + auxiliar; Frontal: 8MP",
+    "battery": "6000mAh, 33W carga rápida",
+    "release_year": 2025,
+    "description": "Económico 5G teléfono con gran 6.9\" 120Hz pantalla, Dimensity 6300 rendimiento, y a 6000mAh batería; incluye Xiaomi HyperOS.",
+    "images": [
+      "/images/fotos/p-26.jpg"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-02-23T13:55:55.764Z",
-    "updated_at": "2026-02-23T13:55:55.764Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "xiaomi",
       "name": "Xiaomi",
       "logo_url": null,
-      "created_at": "2026-02-23T13:55:55.764Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -778,25 +830,27 @@
     "storage_options": [
       "64GB"
     ],
-    "display_size": null,
-    "processor": null,
-    "ram": null,
-    "camera": null,
-    "battery": null,
-    "release_year": null,
-    "description": null,
-    "images": [],
+    "display_size": "6.7\" PLS LCD (HD+ 720×1600)",
+    "processor": "MediaTek Helio G85 (12nm)",
+    "ram": "4GB",
+    "camera": "Trasera: 50MP + 2MP profundidad; Frontal: 8MP",
+    "battery": "5000mAh, 25W carga",
+    "release_year": 2024,
+    "description": "De entrada Samsung teléfono con gran 6.7\" pantalla, Helio G85 rendimiento, y 5000mAh batería.",
+    "images": [
+      "/images/fotos/p-27.jpg"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-02-23T13:55:55.764Z",
-    "updated_at": "2026-02-23T13:55:55.764Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "samsung",
       "name": "Samsung",
       "logo_url": null,
-      "created_at": "2026-02-23T13:55:55.764Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -808,25 +862,27 @@
     "storage_options": [
       "128GB"
     ],
-    "display_size": null,
-    "processor": null,
-    "ram": null,
-    "camera": null,
-    "battery": null,
-    "release_year": null,
-    "description": null,
-    "images": [],
+    "display_size": "6.7\" Super AMOLED (FHD+ 1080×2340), 90Hz",
+    "processor": "MediaTek Helio G99 (6nm)",
+    "ram": "6GB",
+    "camera": "Trasera: 50MP + 5MP ultra gran angular + 2MP macro; Frontal: 13MP",
+    "battery": "5000mAh, 25W carga",
+    "release_year": 2024,
+    "description": "De gama media Samsung teléfono con AMOLED pantalla, Helio G99 chipset, y triple cámaras; soporte de software prolongado.",
+    "images": [
+      "/images/fotos/p-28.jpg"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-02-23T13:55:55.764Z",
-    "updated_at": "2026-02-23T13:55:55.764Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "samsung",
       "name": "Samsung",
       "logo_url": null,
-      "created_at": "2026-02-23T13:55:55.764Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -836,25 +892,27 @@
     "price": 3690000,
     "sale_price": null,
     "storage_options": [],
-    "display_size": null,
-    "processor": null,
-    "ram": null,
-    "camera": null,
-    "battery": null,
-    "release_year": null,
-    "description": null,
-    "images": [],
+    "display_size": "6.7\" Dynamic AMOLED 2X (FHD+), 120Hz",
+    "processor": "Samsung Exynos 2400e",
+    "ram": "8GB",
+    "camera": "Trasera: 50MP (OIS) + 8MP teleobjetivo (3x) + 12MP ultra gran angular; Frontal: 10MP",
+    "battery": "4700mAh, 25W carga rápida; carga inalámbrica",
+    "release_year": 2024,
+    "description": "Fan Edition tope de gama con a 120Hz AMOLED pantalla, tope de gama-class rendimiento, y a versátil sistema de cámaras con 3x teleobjetivo.",
+    "images": [
+      "/images/fotos/p-29.jpg"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-02-23T13:55:55.764Z",
-    "updated_at": "2026-02-23T13:55:55.764Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "samsung",
       "name": "Samsung",
       "logo_url": null,
-      "created_at": "2026-02-23T13:55:55.764Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -864,25 +922,27 @@
     "price": 2550000,
     "sale_price": null,
     "storage_options": [],
-    "display_size": null,
-    "processor": null,
-    "ram": null,
-    "camera": null,
-    "battery": null,
-    "release_year": null,
-    "description": null,
-    "images": [],
+    "display_size": "6.4\" Dynamic AMOLED 2X (FHD+), 120Hz",
+    "processor": "Samsung Exynos 2200 / Qualcomm Snapdragon 8 Gen 1",
+    "ram": "8GB",
+    "camera": "Trasera: 50MP (OIS) + 8MP teleobjetivo (3x) + 12MP ultra gran angular; Frontal: 10MP",
+    "battery": "4500mAh, 25W carga rápida; carga inalámbrica",
+    "release_year": 2023,
+    "description": "Fan Edition tope de gama (SWAP/reacondicionado) con 120Hz AMOLED, strong rendimiento, y teleobjetivo cámara for 3x zoom.",
+    "images": [
+      "/images/fotos/p-30.webp"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-02-23T13:55:55.764Z",
-    "updated_at": "2026-02-23T13:55:55.764Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "samsung",
       "name": "Samsung",
       "logo_url": null,
-      "created_at": "2026-02-23T13:55:55.764Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -894,25 +954,27 @@
     "storage_options": [
       "128GB"
     ],
-    "display_size": null,
-    "processor": null,
-    "ram": null,
-    "camera": null,
-    "battery": null,
-    "release_year": null,
-    "description": null,
-    "images": [],
+    "display_size": "6.1\" Super Retina XDR OLED (2556×1179)",
+    "processor": "Apple A16 Bionic",
+    "ram": "6GB",
+    "camera": "Trasera: 48MP gran angular + 12MP ultra gran angular; Frontal: 12MP TrueDepth",
+    "battery": "3349mAh (aprox.), carga rápida; MagSafe inalámbrica",
+    "release_year": 2023,
+    "description": "iPhone 15 (SWAP/reacondicionado) con A16 Bionic, 48MP principal cámara, y a 6.1\" OLED pantalla.",
+    "images": [
+      "/images/fotos/p-31.webp"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-02-23T13:55:55.764Z",
-    "updated_at": "2026-02-23T13:55:55.764Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "apple",
       "name": "Apple",
       "logo_url": null,
-      "created_at": "2026-02-23T13:55:55.764Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -924,25 +986,27 @@
     "storage_options": [
       "128GB"
     ],
-    "display_size": null,
-    "processor": null,
-    "ram": null,
-    "camera": null,
-    "battery": null,
-    "release_year": null,
-    "description": null,
-    "images": [],
+    "display_size": "6.1\" Super Retina XDR OLED (2532×1170)",
+    "processor": "Apple A14 Bionic",
+    "ram": "4GB",
+    "camera": "Trasera: 12MP gran angular + 12MP ultra gran angular; Frontal: 12MP TrueDepth",
+    "battery": "2815mAh (aprox.), carga rápida; MagSafe inalámbrica",
+    "release_year": 2020,
+    "description": "iPhone 12 (SWAP/reacondicionado) con 5G, A14 Bionic, OLED pantalla, y doble 12MP cámaras.",
+    "images": [
+      "/images/fotos/p-32.jpg"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-02-23T13:55:55.764Z",
-    "updated_at": "2026-02-23T13:55:55.764Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "apple",
       "name": "Apple",
       "logo_url": null,
-      "created_at": "2026-02-23T13:55:55.764Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -954,25 +1018,27 @@
     "storage_options": [
       "128GB"
     ],
-    "display_size": null,
-    "processor": null,
-    "ram": null,
-    "camera": null,
-    "battery": null,
-    "release_year": null,
-    "description": null,
-    "images": [],
+    "display_size": "6.1\" Super Retina XDR OLED (2532×1170), 120Hz (ProMotion)",
+    "processor": "Apple A15 Bionic",
+    "ram": "6GB",
+    "camera": "Trasera: 12MP gran angular + 12MP ultra gran angular + 12MP teleobjetivo (3x); Frontal: 12MP TrueDepth",
+    "battery": "3095mAh (aprox.), carga rápida; MagSafe inalámbrica",
+    "release_year": 2021,
+    "description": "iPhone 13 Pro (SWAP/reacondicionado) con ProMotion 120Hz pantalla y triple-sistema de cámaras con 3x optical zoom.",
+    "images": [
+      "/images/fotos/p-33.jpg"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-02-23T13:55:55.764Z",
-    "updated_at": "2026-02-23T13:55:55.764Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "apple",
       "name": "Apple",
       "logo_url": null,
-      "created_at": "2026-02-23T13:55:55.764Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -984,25 +1050,27 @@
     "storage_options": [
       "256GB"
     ],
-    "display_size": null,
-    "processor": null,
-    "ram": null,
-    "camera": null,
-    "battery": null,
-    "release_year": null,
-    "description": null,
-    "images": [],
+    "display_size": "6.1\" Super Retina XDR OLED (2556×1179), 120Hz (ProMotion)",
+    "processor": "Apple A16 Bionic",
+    "ram": "6GB",
+    "camera": "Trasera: 48MP principal + 12MP ultra gran angular + 12MP teleobjetivo (3x); Frontal: 12MP TrueDepth",
+    "battery": "3200mAh (aprox.), carga rápida; MagSafe inalámbrica",
+    "release_year": 2022,
+    "description": "iPhone 14 Pro (SWAP/reacondicionado) con Dynamic Island, A16 Bionic, y 48MP principal cámara más 3x teleobjetivo.",
+    "images": [
+      "/images/fotos/p-34.jpg"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-02-23T13:55:55.764Z",
-    "updated_at": "2026-02-23T13:55:55.764Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "apple",
       "name": "Apple",
       "logo_url": null,
-      "created_at": "2026-02-23T13:55:55.764Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -1014,25 +1082,27 @@
     "storage_options": [
       "128GB"
     ],
-    "display_size": null,
-    "processor": null,
-    "ram": null,
-    "camera": null,
-    "battery": null,
-    "release_year": null,
-    "description": null,
-    "images": [],
+    "display_size": "6.7\" Super Retina XDR OLED (2778×1284), 120Hz (ProMotion)",
+    "processor": "Apple A15 Bionic",
+    "ram": "6GB",
+    "camera": "Trasera: 12MP gran angular + 12MP ultra gran angular + 12MP teleobjetivo (3x); Frontal: 12MP TrueDepth",
+    "battery": "4352mAh (aprox.), carga rápida; MagSafe inalámbrica",
+    "release_year": 2021,
+    "description": "iPhone 13 Pro Max (SWAP/reacondicionado) con gran 6.7\" 120Hz pantalla y triple cámaras incluyendo 3x optical zoom.",
+    "images": [
+      "/images/fotos/p-35.jpg"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-02-23T13:55:55.764Z",
-    "updated_at": "2026-02-23T13:55:55.764Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "apple",
       "name": "Apple",
       "logo_url": null,
-      "created_at": "2026-02-23T13:55:55.764Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -1044,25 +1114,27 @@
     "storage_options": [
       "256GB"
     ],
-    "display_size": null,
-    "processor": null,
+    "display_size": "6.2\" Dynamic LTPO AMOLED 2X (FHD+ 2340×1080), 1–120Hz",
+    "processor": "Snapdragon 8 Elite for Galaxy (3nm)",
     "ram": "12GB",
-    "camera": null,
-    "battery": null,
-    "release_year": null,
-    "description": null,
-    "images": [],
+    "camera": "Trasera: 50MP gran angular (OIS) + 12MP ultra gran angular + 10MP teleobjetivo (3x, OIS); Frontal: 12MP",
+    "battery": "4000mAh, 25W por cable; carga inalámbrica",
+    "release_year": 2025,
+    "description": "compacto 2025 Samsung tope de gama con Snapdragon 8 Elite for Galaxy, 120Hz AMOLED pantalla, y triple-sistema de cámaras con 3x teleobjetivo.",
+    "images": [
+      "/images/fotos/p-36.jpg"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-02-23T13:55:55.764Z",
-    "updated_at": "2026-02-23T13:55:55.764Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "samsung",
       "name": "Samsung",
       "logo_url": null,
-      "created_at": "2026-02-23T13:55:55.764Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -1074,25 +1146,27 @@
     "storage_options": [
       "256GB"
     ],
-    "display_size": null,
-    "processor": null,
+    "display_size": "6.7\" Dynamic LTPO AMOLED 2X (QHD+ 3120×1440), 1–120Hz",
+    "processor": "Snapdragon 8 Elite for Galaxy (3nm)",
     "ram": "12GB",
-    "camera": null,
-    "battery": null,
-    "release_year": null,
-    "description": null,
-    "images": [],
+    "camera": "Trasera: 50MP gran angular (OIS) + 12MP ultra gran angular + 10MP teleobjetivo (3x, OIS); Frontal: 12MP",
+    "battery": "4900mAh, 45W por cable; carga inalámbrica",
+    "release_year": 2025,
+    "description": "gran-screen 2025 Samsung tope de gama con QHD+ 120Hz AMOLED, Snapdragon 8 Elite for Galaxy, y a versátil triple-cámara setup.",
+    "images": [
+      "/images/fotos/p-37.jpg"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-02-23T13:55:55.764Z",
-    "updated_at": "2026-02-23T13:55:55.764Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "samsung",
       "name": "Samsung",
       "logo_url": null,
-      "created_at": "2026-02-23T13:55:55.764Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -1104,25 +1178,27 @@
     "storage_options": [
       "512GB"
     ],
-    "display_size": null,
-    "processor": null,
+    "display_size": "6.7\" Dynamic LTPO AMOLED 2X (QHD+ 3120×1440), 1–120Hz",
+    "processor": "Snapdragon 8 Elite for Galaxy (3nm)",
     "ram": "12GB",
-    "camera": null,
-    "battery": null,
-    "release_year": null,
-    "description": null,
-    "images": [],
+    "camera": "Trasera: 50MP gran angular (OIS) + 12MP ultra gran angular + 10MP teleobjetivo (3x, OIS); Frontal: 12MP",
+    "battery": "4900mAh, 45W por cable; carga inalámbrica",
+    "release_year": 2025,
+    "description": "Galaxy S25+ con 512GB storage: QHD+ 120Hz AMOLED, Snapdragon 8 Elite for Galaxy, y triple rear cámaras con 3x teleobjetivo.",
+    "images": [
+      "/images/fotos/p-38.jpg"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-02-23T13:55:55.764Z",
-    "updated_at": "2026-02-23T13:55:55.764Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "samsung",
       "name": "Samsung",
       "logo_url": null,
-      "created_at": "2026-02-23T13:55:55.764Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -1134,25 +1210,27 @@
     "storage_options": [
       "256GB"
     ],
-    "display_size": null,
-    "processor": null,
+    "display_size": "6.9\" Dynamic LTPO AMOLED 2X (QHD+ 3120×1440), 1–120Hz",
+    "processor": "Snapdragon 8 Elite for Galaxy (3nm)",
     "ram": "12GB",
-    "camera": null,
-    "battery": null,
-    "release_year": null,
-    "description": null,
-    "images": [],
+    "camera": "Trasera: 200MP gran angular (OIS) + 50MP periscópico (5x, OIS) + 10MP teleobjetivo (3x, OIS) + 50MP ultra gran angular; Frontal: 12MP",
+    "battery": "5000mAh, 45W por cable; carga inalámbrica",
+    "release_year": 2025,
+    "description": "de primer nivel Samsung tope de gama con S Pen, 6.9\" QHD+ 120Hz AMOLED, Snapdragon 8 Elite for Galaxy, y a 200MP quad-sistema de cámaras.",
+    "images": [
+      "/images/fotos/p-39.jpg"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-02-23T13:55:55.764Z",
-    "updated_at": "2026-02-23T13:55:55.764Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "samsung",
       "name": "Samsung",
       "logo_url": null,
-      "created_at": "2026-02-23T13:55:55.764Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -1164,25 +1242,27 @@
     "storage_options": [
       "512GB"
     ],
-    "display_size": null,
-    "processor": null,
+    "display_size": "6.9\" Dynamic LTPO AMOLED 2X (QHD+ 3120×1440), 1–120Hz",
+    "processor": "Snapdragon 8 Elite for Galaxy (3nm)",
     "ram": "12GB",
-    "camera": null,
-    "battery": null,
-    "release_year": null,
-    "description": null,
-    "images": [],
+    "camera": "Trasera: 200MP gran angular (OIS) + 50MP periscópico (5x, OIS) + 10MP teleobjetivo (3x, OIS) + 50MP ultra gran angular; Frontal: 12MP",
+    "battery": "5000mAh, 45W por cable; carga inalámbrica",
+    "release_year": 2025,
+    "description": "Galaxy S25 Ultra con 512GB storage: S Pen tope de gama con 200MP quad cámaras, Snapdragon 8 Elite for Galaxy, y long-lasting 5000mAh batería.",
+    "images": [
+      "/images/fotos/p-40.jpg"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-02-23T13:55:55.764Z",
-    "updated_at": "2026-02-23T13:55:55.764Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "samsung",
       "name": "Samsung",
       "logo_url": null,
-      "created_at": "2026-02-23T13:55:55.764Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -1194,25 +1274,27 @@
     "storage_options": [
       "256GB"
     ],
-    "display_size": null,
-    "processor": null,
+    "display_size": "6.7\" Dynamic AMOLED 2X (FHD+ 2340×1080), 120Hz",
+    "processor": "Samsung Exynos 2400 (4nm)",
     "ram": "8GB",
-    "camera": null,
-    "battery": null,
-    "release_year": null,
-    "description": null,
-    "images": [],
+    "camera": "Trasera: 50MP (OIS) + 12MP ultra gran angular + 8MP teleobjetivo (3x, OIS); Frontal: 12MP",
+    "battery": "4900mAh, 45W por cable; 15W carga inalámbrica",
+    "release_year": 2025,
+    "description": "Fan Edition model bringing tope de gama-like Galaxy AI features con a 6.7\" 120Hz AMOLED pantalla, Exynos 2400 chipset, y triple cámaras incluyendo 3x teleobjetivo.",
+    "images": [
+      "/images/fotos/p-41.jpg"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-02-23T13:55:55.764Z",
-    "updated_at": "2026-02-23T13:55:55.764Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "samsung",
       "name": "Samsung",
       "logo_url": null,
-      "created_at": "2026-02-23T13:55:55.764Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -1224,25 +1306,27 @@
     "storage_options": [
       "512GB"
     ],
-    "display_size": null,
-    "processor": null,
+    "display_size": "6.7\" Dynamic AMOLED 2X (FHD+ 2340×1080), 120Hz",
+    "processor": "Samsung Exynos 2400 (4nm)",
     "ram": "8GB",
-    "camera": null,
-    "battery": null,
-    "release_year": null,
-    "description": null,
-    "images": [],
+    "camera": "Trasera: 50MP (OIS) + 12MP ultra gran angular + 8MP teleobjetivo (3x, OIS); Frontal: 12MP",
+    "battery": "4900mAh, 45W por cable; 15W carga inalámbrica",
+    "release_year": 2025,
+    "description": "Galaxy S25 FE con 512GB storage: 6.7\" 120Hz AMOLED, Exynos 2400, 3x teleobjetivo cámara, y faster 45W carga.",
+    "images": [
+      "/images/fotos/p-42.jpg"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-02-23T13:55:55.764Z",
-    "updated_at": "2026-02-23T13:55:55.764Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "samsung",
       "name": "Samsung",
       "logo_url": null,
-      "created_at": "2026-02-23T13:55:55.764Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -1254,25 +1338,27 @@
     "storage_options": [
       "256GB"
     ],
-    "display_size": null,
-    "processor": null,
+    "display_size": "6.8\" Dynamic LTPO AMOLED 2X (QHD+ 3120×1440), 1–120Hz",
+    "processor": "Qualcomm Snapdragon 8 Gen 3 for Galaxy",
     "ram": "12GB",
-    "camera": null,
-    "battery": null,
-    "release_year": null,
-    "description": null,
-    "images": [],
+    "camera": "Trasera: 200MP (OIS) + 50MP periscópico (5x, OIS) + 10MP teleobjetivo (3x, OIS) + 12MP ultra gran angular; Frontal: 12MP",
+    "battery": "5000mAh, 45W por cable; 15W carga inalámbrica",
+    "release_year": 2024,
+    "description": "Samsung’s 2024 Ultra tope de gama con titanium build, S Pen, 200MP principal cámara, y Snapdragon 8 Gen 3 rendimiento.",
+    "images": [
+      "/images/fotos/p-43.jpg"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-02-23T13:55:55.764Z",
-    "updated_at": "2026-02-23T13:55:55.764Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "samsung",
       "name": "Samsung",
       "logo_url": null,
-      "created_at": "2026-02-23T13:55:55.764Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -1284,25 +1370,27 @@
     "storage_options": [
       "512GB"
     ],
-    "display_size": null,
-    "processor": null,
+    "display_size": "6.8\" Dynamic LTPO AMOLED 2X (QHD+ 3120×1440), 1–120Hz",
+    "processor": "Qualcomm Snapdragon 8 Gen 3 for Galaxy",
     "ram": "12GB",
-    "camera": null,
-    "battery": null,
-    "release_year": null,
-    "description": null,
-    "images": [],
+    "camera": "Trasera: 200MP (OIS) + 50MP periscópico (5x, OIS) + 10MP teleobjetivo (3x, OIS) + 12MP ultra gran angular; Frontal: 12MP",
+    "battery": "5000mAh, 45W por cable; 15W carga inalámbrica",
+    "release_year": 2024,
+    "description": "Galaxy S24 Ultra con 512GB storage: de primer nivel Android tope de gama con S Pen, 200MP quad cámaras, y a brillante QHD+ 120Hz pantalla.",
+    "images": [
+      "/images/fotos/p-44.jpg"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-02-23T13:55:55.764Z",
-    "updated_at": "2026-02-23T13:55:55.764Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "samsung",
       "name": "Samsung",
       "logo_url": null,
-      "created_at": "2026-02-23T13:55:55.764Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -1314,25 +1402,27 @@
     "storage_options": [
       "256GB"
     ],
-    "display_size": null,
-    "processor": null,
+    "display_size": "6.8\" Dynamic AMOLED 2X (QHD+ 3088×1440), 1–120Hz",
+    "processor": "Qualcomm Snapdragon 8 Gen 2 for Galaxy",
     "ram": "12GB",
-    "camera": null,
-    "battery": null,
-    "release_year": null,
-    "description": null,
-    "images": [],
+    "camera": "Trasera: 200MP (OIS) + 10MP periscópico (10x, OIS) + 10MP teleobjetivo (3x, OIS) + 12MP ultra gran angular; Frontal: 12MP",
+    "battery": "5000mAh, 45W por cable; carga inalámbrica",
+    "release_year": 2023,
+    "description": "Samsung 2023 Ultra tope de gama con S Pen, Snapdragon 8 Gen 2 for Galaxy, y versátil 200MP quad-cámara setup incluyendo 10x optical zoom.",
+    "images": [
+      "/images/fotos/p-45.webp"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-02-23T13:55:55.764Z",
-    "updated_at": "2026-02-23T13:55:55.764Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "samsung",
       "name": "Samsung",
       "logo_url": null,
-      "created_at": "2026-02-23T13:55:55.764Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -1344,25 +1434,27 @@
     "storage_options": [
       "128GB"
     ],
-    "display_size": null,
-    "processor": null,
-    "ram": null,
-    "camera": null,
-    "battery": null,
-    "release_year": null,
-    "description": null,
-    "images": [],
+    "display_size": "6.3\" Super Retina XDR OLED (2622×1206), 1–120Hz (ProMotion)",
+    "processor": "Apple A18 Pro",
+    "ram": "8GB",
+    "camera": "Trasera: 48MP Fusion + 48MP Ultra gran angular + 12MP 5x teleobjetivo; Frontal: 12MP TrueDepth",
+    "battery": "3582mAh",
+    "release_year": 2024,
+    "description": "iPhone 16 Pro (eSIM, SWAP/reacondicionado) con 6.3\" 120Hz OLED pantalla, A18 Pro chip, y pro triple-sistema de cámaras incluyendo 5x teleobjetivo.",
+    "images": [
+      "/images/fotos/p-46.jpg"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-02-23T13:55:55.764Z",
-    "updated_at": "2026-02-23T13:55:55.764Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "apple",
       "name": "Apple",
       "logo_url": null,
-      "created_at": "2026-02-23T13:55:55.764Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -1374,25 +1466,27 @@
     "storage_options": [
       "256GB"
     ],
-    "display_size": null,
-    "processor": null,
-    "ram": null,
-    "camera": null,
-    "battery": null,
-    "release_year": null,
-    "description": null,
-    "images": [],
+    "display_size": "6.9\" Super Retina XDR OLED (2868×1320), 1–120Hz (ProMotion)",
+    "processor": "Apple A18 Pro",
+    "ram": "8GB",
+    "camera": "Trasera: 48MP Fusion + 48MP Ultra gran angular + 12MP 5x teleobjetivo; Frontal: 12MP TrueDepth",
+    "battery": "4685mAh",
+    "release_year": 2024,
+    "description": "iPhone 16 Pro Max (eSIM, SWAP/reacondicionado) con gran 6.9\" 120Hz OLED pantalla, A18 Pro chip, y pro sistema de cámaras con 5x teleobjetivo.",
+    "images": [
+      "/images/fotos/p-47.jpg"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-02-23T13:55:55.764Z",
-    "updated_at": "2026-02-23T13:55:55.764Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "apple",
       "name": "Apple",
       "logo_url": null,
-      "created_at": "2026-02-23T13:55:55.764Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -1404,25 +1498,27 @@
     "storage_options": [
       "128GB"
     ],
-    "display_size": null,
-    "processor": null,
-    "ram": null,
-    "camera": null,
-    "battery": null,
-    "release_year": null,
-    "description": null,
-    "images": [],
+    "display_size": "6.1\" Super Retina XDR OLED (2556×1179), 1–120Hz (ProMotion)",
+    "processor": "Apple A17 Pro",
+    "ram": "8GB",
+    "camera": "Trasera: 48MP principal + 12MP ultra gran angular + 12MP teleobjetivo (3x); Frontal: 12MP TrueDepth",
+    "battery": "3274mAh",
+    "release_year": 2023,
+    "description": "iPhone 15 Pro (eSIM, SWAP/reacondicionado) con titanium design, A17 Pro chip, y triple-sistema de cámaras con 3x optical zoom.",
+    "images": [
+      "/images/fotos/p-48.jpg"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-02-23T13:55:55.764Z",
-    "updated_at": "2026-02-23T13:55:55.764Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "apple",
       "name": "Apple",
       "logo_url": null,
-      "created_at": "2026-02-23T13:55:55.764Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -1434,25 +1530,27 @@
     "storage_options": [
       "256GB"
     ],
-    "display_size": null,
-    "processor": null,
-    "ram": null,
-    "camera": null,
-    "battery": null,
-    "release_year": null,
-    "description": null,
-    "images": [],
+    "display_size": "6.1\" Super Retina XDR OLED (2556×1179), 1–120Hz (ProMotion)",
+    "processor": "Apple A17 Pro",
+    "ram": "8GB",
+    "camera": "Trasera: 48MP principal + 12MP ultra gran angular + 12MP teleobjetivo (3x); Frontal: 12MP TrueDepth",
+    "battery": "3274mAh",
+    "release_year": 2023,
+    "description": "iPhone 15 Pro 256GB (eSIM, SWAP/reacondicionado) con titanium build, A17 Pro rendimiento, y pro cámaras incluyendo 3x teleobjetivo.",
+    "images": [
+      "/images/fotos/p-49.jpg"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-02-23T13:55:55.764Z",
-    "updated_at": "2026-02-23T13:55:55.764Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "apple",
       "name": "Apple",
       "logo_url": null,
-      "created_at": "2026-02-23T13:55:55.764Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -1464,25 +1562,27 @@
     "storage_options": [
       "512GB"
     ],
-    "display_size": null,
-    "processor": null,
+    "display_size": "6.36\" LTPO OLED (1200×2670), 1–120Hz",
+    "processor": "Qualcomm Snapdragon 8 Elite",
     "ram": "12GB",
-    "camera": null,
-    "battery": null,
-    "release_year": null,
-    "description": null,
-    "images": [],
+    "camera": "Trasera: 50MP principal + 50MP ultra gran angular + 50MP teleobjetivo (3x, Leica); Frontal: 32MP",
+    "battery": "5240mAh, 90W por cable, 50W inalámbrica",
+    "release_year": 2025,
+    "description": "compacto Xiaomi tope de gama con Snapdragon 8 Elite rendimiento, Leica triple 50MP cámaras, y rápida 90W carga.",
+    "images": [
+      "/images/fotos/p-50.jpg"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-02-23T13:55:55.764Z",
-    "updated_at": "2026-02-23T13:55:55.764Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "xiaomi",
       "name": "Xiaomi",
       "logo_url": null,
-      "created_at": "2026-02-23T13:55:55.764Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -1494,25 +1594,27 @@
     "storage_options": [
       "512GB"
     ],
-    "display_size": null,
-    "processor": null,
+    "display_size": "6.73\" LTPO AMOLED (QHD+), 1–120Hz",
+    "processor": "Qualcomm Snapdragon 8 Elite",
     "ram": "16GB",
-    "camera": null,
-    "battery": null,
-    "release_year": null,
-    "description": null,
-    "images": [],
+    "camera": "Trasera: 50MP principal (1\" sensor, OIS) + 50MP ultra gran angular + 50MP teleobjetivo + 200MP periscópico teleobjetivo; Frontal: 32MP",
+    "battery": "5500mAh, 90W por cable, 50W inalámbrica",
+    "release_year": 2025,
+    "description": "Ultra-premium Xiaomi tope de gama con gran QHD+ 120Hz pantalla, Snapdragon 8 Elite rendimiento, y a pro-grade Leica-style multi-cámara setup.",
+    "images": [
+      "/images/fotos/p-51.jpg"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-02-23T13:55:55.764Z",
-    "updated_at": "2026-02-23T13:55:55.764Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "xiaomi",
       "name": "Xiaomi",
       "logo_url": null,
-      "created_at": "2026-02-23T13:55:55.764Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -1524,25 +1626,27 @@
     "storage_options": [
       "512GB"
     ],
-    "display_size": null,
-    "processor": null,
+    "display_size": "6.67\" AMOLED (FHD+), hasta 144Hz",
+    "processor": "MediaTek Dimensity 8400",
     "ram": "12GB",
-    "camera": null,
-    "battery": null,
-    "release_year": null,
-    "description": null,
-    "images": [],
+    "camera": "Trasera: 50MP principal (OIS) + 13MP ultra gran angular + 50MP teleobjetivo; Frontal: 32MP",
+    "battery": "5000mAh, 67W carga rápida",
+    "release_year": 2025,
+    "description": "High-buena relación calidad-precio Xiaomi T-series teléfono con rápida 144Hz AMOLED pantalla, strong Dimensity rendimiento, y a equilibrado triple-sistema de cámaras.",
+    "images": [
+      "/images/fotos/p-52.jpg"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-02-23T13:55:55.764Z",
-    "updated_at": "2026-02-23T13:55:55.764Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "xiaomi",
       "name": "Xiaomi",
       "logo_url": null,
-      "created_at": "2026-02-23T13:55:55.764Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -1554,25 +1658,27 @@
     "storage_options": [
       "512GB"
     ],
-    "display_size": null,
-    "processor": null,
+    "display_size": "6.67\" AMOLED (FHD+), hasta 144Hz",
+    "processor": "MediaTek Dimensity 9400",
     "ram": "12GB",
-    "camera": null,
-    "battery": null,
-    "release_year": null,
-    "description": null,
-    "images": [],
+    "camera": "Trasera: 50MP principal (OIS) + 50MP ultra gran angular + 50MP teleobjetivo; Frontal: 32MP",
+    "battery": "5000mAh, 120W por cable, 50W inalámbrica",
+    "release_year": 2025,
+    "description": "Xiaomi 15T Pro focuses on tope de gama rendimiento y carga rápida, pairing a high-refresh AMOLED pantalla con a versátil triple-cámara setup.",
+    "images": [
+      "/images/fotos/p-53.jpg"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-02-23T13:55:55.764Z",
-    "updated_at": "2026-02-23T13:55:55.764Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "xiaomi",
       "name": "Xiaomi",
       "logo_url": null,
-      "created_at": "2026-02-23T13:55:55.764Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -1584,25 +1690,27 @@
     "storage_options": [
       "1024GB"
     ],
-    "display_size": null,
-    "processor": null,
+    "display_size": "6.67\" AMOLED (FHD+), hasta 144Hz",
+    "processor": "MediaTek Dimensity 9400",
     "ram": "12GB",
-    "camera": null,
-    "battery": null,
-    "release_year": null,
-    "description": null,
-    "images": [],
+    "camera": "Trasera: 50MP principal (OIS) + 50MP ultra gran angular + 50MP teleobjetivo; Frontal: 32MP",
+    "battery": "5000mAh, 120W por cable, 50W inalámbrica",
+    "release_year": 2025,
+    "description": "Xiaomi 15T Pro con 1TB storage: tope de gama-class rendimiento, 144Hz AMOLED pantalla, y muy rápida 120W carga.",
+    "images": [
+      "/images/fotos/p-54.jpg"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-02-23T13:55:55.764Z",
-    "updated_at": "2026-02-23T13:55:55.764Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "xiaomi",
       "name": "Xiaomi",
       "logo_url": null,
-      "created_at": "2026-02-23T13:55:55.764Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -1614,25 +1722,27 @@
     "storage_options": [
       "128GB"
     ],
-    "display_size": null,
-    "processor": null,
+    "display_size": "6.67\" AMOLED (FHD+), 120Hz",
+    "processor": "Qualcomm Snapdragon 7s Gen 3",
     "ram": "6GB",
-    "camera": null,
-    "battery": null,
-    "release_year": null,
-    "description": null,
-    "images": [],
+    "camera": "Trasera: 108MP principal + 8MP ultra gran angular + 2MP macro; Frontal: 16MP",
+    "battery": "5110mAh, 45W carga rápida",
+    "release_year": 2025,
+    "description": "Redmi Note De gama media teléfono offering a fluida 120Hz AMOLED pantalla, a high-resolution principal cámara, y strong batería life.",
+    "images": [
+      "/images/fotos/p-55.jpg"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-02-23T13:55:55.764Z",
-    "updated_at": "2026-02-23T13:55:55.764Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "xiaomi",
       "name": "Xiaomi",
       "logo_url": null,
-      "created_at": "2026-02-23T13:55:55.764Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -1644,25 +1754,27 @@
     "storage_options": [
       "256GB"
     ],
-    "display_size": null,
-    "processor": null,
+    "display_size": "6.67\" AMOLED (FHD+), 120Hz",
+    "processor": "Qualcomm Snapdragon 7s Gen 3",
     "ram": "8GB",
-    "camera": null,
-    "battery": null,
-    "release_year": null,
-    "description": null,
-    "images": [],
+    "camera": "Trasera: 108MP principal + 8MP ultra gran angular + 2MP macro; Frontal: 16MP",
+    "battery": "5110mAh, 45W carga rápida",
+    "release_year": 2025,
+    "description": "Redmi Note De gama media teléfono con 8GB RAM, 120Hz AMOLED pantalla, y a high-resolution 108MP principal cámara.",
+    "images": [
+      "/images/fotos/p-56.jpg"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-02-23T13:55:55.764Z",
-    "updated_at": "2026-02-23T13:55:55.764Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "xiaomi",
       "name": "Xiaomi",
       "logo_url": null,
-      "created_at": "2026-02-23T13:55:55.764Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -1674,25 +1786,27 @@
     "storage_options": [
       "256GB"
     ],
-    "display_size": null,
-    "processor": null,
+    "display_size": "6.67\" AMOLED (FHD+), 120Hz",
+    "processor": "MediaTek Dimensity 7300",
     "ram": "8GB",
-    "camera": null,
-    "battery": null,
-    "release_year": null,
-    "description": null,
-    "images": [],
+    "camera": "Trasera: 108MP principal (OIS) + 8MP ultra gran angular + 2MP macro; Frontal: 16MP",
+    "battery": "5110mAh, 67W carga rápida",
+    "release_year": 2025,
+    "description": "5G version of Redmi Note con Dimensity rendimiento, fluida 120Hz AMOLED pantalla, y strong batería life con faster carga.",
+    "images": [
+      "/images/fotos/p-57.jpg"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-02-23T13:55:55.764Z",
-    "updated_at": "2026-02-23T13:55:55.764Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "xiaomi",
       "name": "Xiaomi",
       "logo_url": null,
-      "created_at": "2026-02-23T13:55:55.764Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -1704,25 +1818,27 @@
     "storage_options": [
       "256GB"
     ],
-    "display_size": null,
-    "processor": null,
+    "display_size": "6.67\" AMOLED (FHD+), 120Hz",
+    "processor": "Qualcomm Snapdragon 7+ Gen 3",
     "ram": "8GB",
-    "camera": null,
-    "battery": null,
-    "release_year": null,
-    "description": null,
-    "images": [],
+    "camera": "Trasera: 200MP (OIS) + 8MP ultra gran angular + 2MP macro; Frontal: 20MP",
+    "battery": "5110mAh, 67W carga rápida",
+    "release_year": 2025,
+    "description": "Redmi Note Pro model con upgraded rendimiento y a high-resolution 200MP OIS principal cámara paired con 120Hz AMOLED.",
+    "images": [
+      "/images/fotos/p-58.jpg"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-02-23T13:55:55.764Z",
-    "updated_at": "2026-02-23T13:55:55.764Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "xiaomi",
       "name": "Xiaomi",
       "logo_url": null,
-      "created_at": "2026-02-23T13:55:55.764Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -1734,25 +1850,27 @@
     "storage_options": [
       "256GB"
     ],
-    "display_size": null,
-    "processor": null,
+    "display_size": "6.67\" AMOLED (FHD+), 120Hz",
+    "processor": "MediaTek Dimensity 8300",
     "ram": "8GB",
-    "camera": null,
-    "battery": null,
-    "release_year": null,
-    "description": null,
-    "images": [],
+    "camera": "Trasera: 200MP (OIS) + 8MP ultra gran angular + 2MP macro; Frontal: 20MP",
+    "battery": "5110mAh, 67W carga rápida",
+    "release_year": 2025,
+    "description": "5G Pro variant con Dimensity chipset, 200MP OIS principal cámara, y fluida 120Hz AMOLED pantalla.",
+    "images": [
+      "/images/fotos/p-59.jpg"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-02-23T13:55:55.764Z",
-    "updated_at": "2026-02-23T13:55:55.764Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "xiaomi",
       "name": "Xiaomi",
       "logo_url": null,
-      "created_at": "2026-02-23T13:55:55.764Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -1764,25 +1882,27 @@
     "storage_options": [
       "512GB"
     ],
-    "display_size": null,
-    "processor": null,
+    "display_size": "6.67\" AMOLED (FHD+), 120Hz",
+    "processor": "Qualcomm Snapdragon 8s Gen 3",
     "ram": "12GB",
-    "camera": null,
-    "battery": null,
-    "release_year": null,
-    "description": null,
-    "images": [],
+    "camera": "Trasera: 200MP (OIS) + 50MP ultra gran angular + 50MP teleobjetivo; Frontal: 20MP",
+    "battery": "5500mAh, 120W carga rápida",
+    "release_year": 2025,
+    "description": "principal Redmi Note Pro+ model con tope de gama-level rendimiento, 200MP OIS cámara, y muy rápida 120W carga.",
+    "images": [
+      "/images/fotos/p-60.jpg"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-02-23T13:55:55.764Z",
-    "updated_at": "2026-02-23T13:55:55.764Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "xiaomi",
       "name": "Xiaomi",
       "logo_url": null,
-      "created_at": "2026-02-23T13:55:55.764Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -1794,25 +1914,27 @@
     "storage_options": [
       "256GB"
     ],
-    "display_size": null,
-    "processor": null,
+    "display_size": "6.56\" TFT LCD (HD+ 720×1612), 90Hz",
+    "processor": "MediaTek Helio G85",
     "ram": "6GB",
-    "camera": null,
-    "battery": null,
-    "release_year": null,
-    "description": null,
-    "images": [],
+    "camera": "Trasera: 50MP principal + profundidad; Frontal: 8MP",
+    "battery": "5200mAh",
+    "release_year": 2024,
+    "description": "Económico Honor teléfono con a fluida 90Hz pantalla, gran batería, y a capable 50MP principal cámara.",
+    "images": [
+      "/images/fotos/p-61.jpg"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-02-23T13:55:55.764Z",
-    "updated_at": "2026-02-23T13:55:55.764Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "honor",
       "name": "Honor",
       "logo_url": null,
-      "created_at": "2026-02-23T13:55:55.764Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -1824,25 +1946,27 @@
     "storage_options": [
       "128GB"
     ],
-    "display_size": null,
-    "processor": null,
+    "display_size": "6.56\" TFT LCD (HD+ 720×1612), 90Hz",
+    "processor": "MediaTek Helio G36",
     "ram": "4GB",
-    "camera": null,
-    "battery": null,
-    "release_year": null,
-    "description": null,
-    "images": [],
+    "camera": "Trasera: 50MP principal + profundidad; Frontal: 5MP",
+    "battery": "5200mAh",
+    "release_year": 2024,
+    "description": "De entrada Honor smartphone con 90Hz pantalla, 50MP principal cámara, y long batería life.",
+    "images": [
+      "/images/fotos/p-62.jpg"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-02-23T13:55:55.764Z",
-    "updated_at": "2026-02-23T13:55:55.764Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "honor",
       "name": "Honor",
       "logo_url": null,
-      "created_at": "2026-02-23T13:55:55.764Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -1854,25 +1978,27 @@
     "storage_options": [
       "128GB"
     ],
-    "display_size": null,
-    "processor": null,
+    "display_size": "6.6\" IPS LCD (HD+), 90Hz",
+    "processor": "Unisoc T606",
     "ram": "4GB",
-    "camera": null,
-    "battery": null,
-    "release_year": null,
-    "description": null,
-    "images": [],
+    "camera": "Trasera: 50MP principal + 2MP profundidad; Frontal: 8MP",
+    "battery": "5000mAh, 18W carga",
+    "release_year": 2024,
+    "description": "buena relación calidad-precio teléfono con gran pantalla, decent everyday rendimiento, y a gran 5000mAh batería.",
+    "images": [
+      "/images/fotos/p-63.jpg"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-02-23T13:55:55.764Z",
-    "updated_at": "2026-02-23T13:55:55.764Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "unnecto",
       "name": "Unnecto",
       "logo_url": null,
-      "created_at": "2026-02-23T13:55:55.764Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -1884,25 +2010,27 @@
     "storage_options": [
       "256GB"
     ],
-    "display_size": null,
-    "processor": null,
+    "display_size": "6.7\" IPS LCD (FHD+), 120Hz",
+    "processor": "MediaTek Dimensity 7050",
     "ram": "6GB",
-    "camera": null,
-    "battery": null,
-    "release_year": null,
-    "description": null,
-    "images": [],
+    "camera": "Trasera: 64MP principal + 8MP ultra gran angular + 2MP macro; Frontal: 16MP",
+    "battery": "5000mAh, 33W carga rápida",
+    "release_year": 2024,
+    "description": "rendimiento-focused Unnecto teléfono con 120Hz pantalla, 5G-capable chipset, y carga rápida.",
+    "images": [
+      "/images/fotos/p-64.jpg"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-02-23T13:55:55.764Z",
-    "updated_at": "2026-02-23T13:55:55.764Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "unnecto",
       "name": "Unnecto",
       "logo_url": null,
-      "created_at": "2026-02-23T13:55:55.764Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   }
 ]

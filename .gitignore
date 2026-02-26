@@ -25,3 +25,13 @@ dist-ssr
 
 # Local Excel backups
 data/products.backup*.xlsx
+data/products.bak.xlsx
+data/products.before-*.xlsx
+
+# Local working assets / sources
+/Fotos/
+
+# Debug exports (generated during data prep)
+data/model-images.json
+data/spec-fields.json
+data/products.csv
