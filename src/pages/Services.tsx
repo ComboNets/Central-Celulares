@@ -1,5 +1,4 @@
 import { Navbar } from "@/components/Navbar";
-import logo from "/central-celulares-logo.png";
 
 export default function Services() {
   return (

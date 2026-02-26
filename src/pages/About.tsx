@@ -1,5 +1,4 @@
 import { Navbar } from "@/components/Navbar";
-import logo from "/central-celulares-logo.png";
 import { MapPin, PhoneCall, Clock, Mail } from "lucide-react";
 
 export default function About() {

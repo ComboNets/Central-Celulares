@@ -1,6 +1,5 @@
 import { Search, Menu, X } from "lucide-react";
 import { Link } from "react-router-dom";
-import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import logo from "/central-celulares-logo.png";
 
