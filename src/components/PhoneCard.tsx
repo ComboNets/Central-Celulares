@@ -2,7 +2,7 @@ import type { KeyboardEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import type { PhoneWithBrand } from "@/types/database";
+import type { PhoneWithBrand } from "@/types/products";
 
 interface PhoneCardProps {
   phone: PhoneWithBrand;

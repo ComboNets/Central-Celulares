@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import type { PhoneWithBrand, PhoneFilters, Brand } from "@/types/database";
+import type { PhoneWithBrand, PhoneFilters, Brand } from "@/types/products";
 
 async function fetchPhonesFromJson(): Promise<PhoneWithBrand[]> {
   const url = `${import.meta.env.BASE_URL}data/products.json`;

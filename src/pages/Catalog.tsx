@@ -8,7 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Search, SlidersHorizontal, X } from "lucide-react";
 import { useState } from "react";
-import type { PhoneFilters } from "@/types/database";
+import type { PhoneFilters } from "@/types/products";
 
 export default function Catalog() {
   const [filters, setFilters] = useState<PhoneFilters>({});

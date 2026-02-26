@@ -28,8 +28,11 @@ data/products.backup*.xlsx
 data/products.bak.xlsx
 data/products.before-*.xlsx
 
+# Local env (do not commit secrets)
+.env
+
 # Local working assets / sources
-/Fotos/
+/assets-src/
 
 # Debug exports (generated during data prep)
 data/model-images.json

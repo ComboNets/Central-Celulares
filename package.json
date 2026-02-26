@@ -10,7 +10,9 @@
     "build:gh": "vite build && node scripts/copy-404.mjs",
     "lint": "eslint .",
     "preview": "vite preview",
-    "sync:products": "node scripts/update-products-from-excel.mjs"
+    "sync:products": "node scripts/update-products-from-excel.mjs",
+    "sync:images": "node scripts/link-fotos-to-products.mjs",
+    "translate:es": "node scripts/translate-products-to-spanish.mjs && npm run sync:products"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",

@@ -3,7 +3,7 @@ import path from "node:path";
 import xlsx from "xlsx";
 
 const EXCEL_PATH = path.resolve("data", "products.xlsx");
-const FOTOS_DIR = path.resolve("Fotos");
+const FOTOS_DIR = path.resolve("assets-src");
 const PUBLIC_OUT_DIR = path.resolve("public", "images", "fotos");
 const DOCS_OUT_DIR = path.resolve("docs", "images", "fotos");
 
@@ -151,7 +151,7 @@ async function main() {
 
     let chosenPath = null;
 
-    // 1) Prefer exact model match at Fotos root
+    // 1) Prefer exact model match at assets-src root
     const rootCandidates = rootImagesByBase.get(key) ?? [];
     if (rootCandidates.length > 0) {
       let best = null;
@@ -276,6 +276,6 @@ async function main() {
 }
 
 main().catch((err) => {
-  console.error("Failed to link Fotos images:", err);
+  console.error("Failed to link assets-src images:", err);
   process.exit(1);
 });
