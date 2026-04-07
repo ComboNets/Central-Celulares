@@ -22,13 +22,13 @@
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-04-07T17:56:57.674Z",
-    "updated_at": "2026-04-07T17:56:57.674Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "xiaomi",
       "name": "Xiaomi",
       "logo_url": null,
-      "created_at": "2026-04-07T17:56:57.674Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -54,13 +54,13 @@
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-04-07T17:56:57.674Z",
-    "updated_at": "2026-04-07T17:56:57.674Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "xiaomi",
       "name": "Xiaomi",
       "logo_url": null,
-      "created_at": "2026-04-07T17:56:57.674Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -86,13 +86,13 @@
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-04-07T17:56:57.674Z",
-    "updated_at": "2026-04-07T17:56:57.674Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "xiaomi",
       "name": "Xiaomi",
       "logo_url": null,
-      "created_at": "2026-04-07T17:56:57.674Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -118,13 +118,13 @@
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-04-07T17:56:57.674Z",
-    "updated_at": "2026-04-07T17:56:57.674Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "xiaomi",
       "name": "Xiaomi",
       "logo_url": null,
-      "created_at": "2026-04-07T17:56:57.674Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -150,13 +150,13 @@
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-04-07T17:56:57.674Z",
-    "updated_at": "2026-04-07T17:56:57.674Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "samsung",
       "name": "Samsung",
       "logo_url": null,
-      "created_at": "2026-04-07T17:56:57.674Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -182,13 +182,13 @@
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-04-07T17:56:57.674Z",
-    "updated_at": "2026-04-07T17:56:57.674Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "apple",
       "name": "Apple",
       "logo_url": null,
-      "created_at": "2026-04-07T17:56:57.674Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -214,13 +214,13 @@
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-04-07T17:56:57.674Z",
-    "updated_at": "2026-04-07T17:56:57.674Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "xiaomi",
       "name": "Xiaomi",
       "logo_url": null,
-      "created_at": "2026-04-07T17:56:57.674Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -246,13 +246,13 @@
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-04-07T17:56:57.674Z",
-    "updated_at": "2026-04-07T17:56:57.674Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "samsung",
       "name": "Samsung",
       "logo_url": null,
-      "created_at": "2026-04-07T17:56:57.674Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -278,13 +278,13 @@
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-04-07T17:56:57.674Z",
-    "updated_at": "2026-04-07T17:56:57.674Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "samsung",
       "name": "Samsung",
       "logo_url": null,
-      "created_at": "2026-04-07T17:56:57.674Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -303,18 +303,20 @@
     "battery": "5000mAh, 25W carga",
     "release_year": 2025,
     "description": "Upper De gama media Galaxy A series teléfono con 120Hz AMOLED, Exynos 1380, OIS principal cámara, y 5000mAh batería.",
-    "images": [],
+    "images": [
+      "/images/fotos/p-10.webp"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-04-07T17:56:57.674Z",
-    "updated_at": "2026-04-07T17:56:57.674Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "samsung",
       "name": "Samsung",
       "logo_url": null,
-      "created_at": "2026-04-07T17:56:57.674Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -340,13 +342,13 @@
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-04-07T17:56:57.674Z",
-    "updated_at": "2026-04-07T17:56:57.674Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "samsung",
       "name": "Samsung",
       "logo_url": null,
-      "created_at": "2026-04-07T17:56:57.674Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -372,13 +374,13 @@
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-04-07T17:56:57.674Z",
-    "updated_at": "2026-04-07T17:56:57.674Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "samsung",
       "name": "Samsung",
       "logo_url": null,
-      "created_at": "2026-04-07T17:56:57.674Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -402,13 +404,13 @@
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-04-07T17:56:57.674Z",
-    "updated_at": "2026-04-07T17:56:57.674Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "samsung",
       "name": "Samsung",
       "logo_url": null,
-      "created_at": "2026-04-07T17:56:57.674Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -434,13 +436,13 @@
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-04-07T17:56:57.674Z",
-    "updated_at": "2026-04-07T17:56:57.674Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "tecno",
       "name": "Tecno",
       "logo_url": null,
-      "created_at": "2026-04-07T17:56:57.674Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -466,13 +468,13 @@
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-04-07T17:56:57.674Z",
-    "updated_at": "2026-04-07T17:56:57.674Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "xiaomi",
       "name": "Xiaomi",
       "logo_url": null,
-      "created_at": "2026-04-07T17:56:57.674Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -489,18 +491,20 @@
     "battery": "5000mAh, 25W carga",
     "release_year": 2024,
     "description": "Galaxy A-series De gama media teléfono (SWAP/reacondicionado) con gran AMOLED pantalla, Helio G99 chipset, y long batería life.",
-    "images": [],
+    "images": [
+      "/images/fotos/p-16.webp"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-04-07T17:56:57.674Z",
-    "updated_at": "2026-04-07T17:56:57.674Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "samsung",
       "name": "Samsung",
       "logo_url": null,
-      "created_at": "2026-04-07T17:56:57.674Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -526,13 +530,13 @@
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-04-07T17:56:57.674Z",
-    "updated_at": "2026-04-07T17:56:57.674Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "apple",
       "name": "Apple",
       "logo_url": null,
-      "created_at": "2026-04-07T17:56:57.674Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -558,13 +562,13 @@
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-04-07T17:56:57.674Z",
-    "updated_at": "2026-04-07T17:56:57.674Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "apple",
       "name": "Apple",
       "logo_url": null,
-      "created_at": "2026-04-07T17:56:57.674Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -588,13 +592,13 @@
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-04-07T17:56:57.674Z",
-    "updated_at": "2026-04-07T17:56:57.674Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "nokia",
       "name": "Nokia",
       "logo_url": null,
-      "created_at": "2026-04-07T17:56:57.674Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -620,13 +624,13 @@
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-04-07T17:56:57.674Z",
-    "updated_at": "2026-04-07T17:56:57.674Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "apple",
       "name": "Apple",
       "logo_url": null,
-      "created_at": "2026-04-07T17:56:57.674Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -650,13 +654,13 @@
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-04-07T17:56:57.674Z",
-    "updated_at": "2026-04-07T17:56:57.674Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "samsung",
       "name": "Samsung",
       "logo_url": null,
-      "created_at": "2026-04-07T17:56:57.674Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -682,13 +686,13 @@
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-04-07T17:56:57.674Z",
-    "updated_at": "2026-04-07T17:56:57.674Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "samsung",
       "name": "Samsung",
       "logo_url": null,
-      "created_at": "2026-04-07T17:56:57.674Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -714,13 +718,13 @@
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-04-07T17:56:57.674Z",
-    "updated_at": "2026-04-07T17:56:57.674Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "tecno",
       "name": "Tecno",
       "logo_url": null,
-      "created_at": "2026-04-07T17:56:57.674Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -744,13 +748,13 @@
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-04-07T17:56:57.674Z",
-    "updated_at": "2026-04-07T17:56:57.674Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "lg",
       "name": "LG",
       "logo_url": null,
-      "created_at": "2026-04-07T17:56:57.674Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -776,13 +780,13 @@
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-04-07T17:56:57.674Z",
-    "updated_at": "2026-04-07T17:56:57.674Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "honor",
       "name": "Honor",
       "logo_url": null,
-      "created_at": "2026-04-07T17:56:57.674Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -801,18 +805,20 @@
     "battery": "6000mAh, 33W carga rápida",
     "release_year": 2025,
     "description": "Económico 5G teléfono con gran 6.9\" 120Hz pantalla, Dimensity 6300 rendimiento, y a 6000mAh batería; incluye Xiaomi HyperOS.",
-    "images": [],
+    "images": [
+      "/images/fotos/p-26.jpg"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-04-07T17:56:57.674Z",
-    "updated_at": "2026-04-07T17:56:57.674Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "xiaomi",
       "name": "Xiaomi",
       "logo_url": null,
-      "created_at": "2026-04-07T17:56:57.674Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -838,13 +844,13 @@
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-04-07T17:56:57.674Z",
-    "updated_at": "2026-04-07T17:56:57.674Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "samsung",
       "name": "Samsung",
       "logo_url": null,
-      "created_at": "2026-04-07T17:56:57.674Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -870,13 +876,13 @@
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-04-07T17:56:57.674Z",
-    "updated_at": "2026-04-07T17:56:57.674Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "samsung",
       "name": "Samsung",
       "logo_url": null,
-      "created_at": "2026-04-07T17:56:57.674Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -900,13 +906,13 @@
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-04-07T17:56:57.674Z",
-    "updated_at": "2026-04-07T17:56:57.674Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "samsung",
       "name": "Samsung",
       "logo_url": null,
-      "created_at": "2026-04-07T17:56:57.674Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -930,13 +936,13 @@
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-04-07T17:56:57.674Z",
-    "updated_at": "2026-04-07T17:56:57.674Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "samsung",
       "name": "Samsung",
       "logo_url": null,
-      "created_at": "2026-04-07T17:56:57.674Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -962,13 +968,13 @@
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-04-07T17:56:57.674Z",
-    "updated_at": "2026-04-07T17:56:57.674Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "apple",
       "name": "Apple",
       "logo_url": null,
-      "created_at": "2026-04-07T17:56:57.674Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -994,13 +1000,13 @@
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-04-07T17:56:57.674Z",
-    "updated_at": "2026-04-07T17:56:57.674Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "apple",
       "name": "Apple",
       "logo_url": null,
-      "created_at": "2026-04-07T17:56:57.674Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -1019,18 +1025,20 @@
     "battery": "3095mAh (aprox.), carga rápida; MagSafe inalámbrica",
     "release_year": 2021,
     "description": "iPhone 13 Pro (SWAP/reacondicionado) con ProMotion 120Hz pantalla y triple-sistema de cámaras con 3x optical zoom.",
-    "images": [],
+    "images": [
+      "/images/fotos/p-33.jpg"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-04-07T17:56:57.674Z",
-    "updated_at": "2026-04-07T17:56:57.674Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "apple",
       "name": "Apple",
       "logo_url": null,
-      "created_at": "2026-04-07T17:56:57.674Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -1056,13 +1064,13 @@
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-04-07T17:56:57.674Z",
-    "updated_at": "2026-04-07T17:56:57.674Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "apple",
       "name": "Apple",
       "logo_url": null,
-      "created_at": "2026-04-07T17:56:57.674Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -1088,13 +1096,13 @@
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-04-07T17:56:57.674Z",
-    "updated_at": "2026-04-07T17:56:57.674Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "apple",
       "name": "Apple",
       "logo_url": null,
-      "created_at": "2026-04-07T17:56:57.674Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -1120,13 +1128,13 @@
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-04-07T17:56:57.674Z",
-    "updated_at": "2026-04-07T17:56:57.674Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "samsung",
       "name": "Samsung",
       "logo_url": null,
-      "created_at": "2026-04-07T17:56:57.674Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -1145,18 +1153,20 @@
     "battery": "4900mAh, 45W por cable; carga inalámbrica",
     "release_year": 2025,
     "description": "gran-screen 2025 Samsung tope de gama con QHD+ 120Hz AMOLED, Snapdragon 8 Elite for Galaxy, y a versátil triple-cámara setup.",
-    "images": [],
+    "images": [
+      "/images/fotos/p-37.jpg"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-04-07T17:56:57.674Z",
-    "updated_at": "2026-04-07T17:56:57.674Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "samsung",
       "name": "Samsung",
       "logo_url": null,
-      "created_at": "2026-04-07T17:56:57.674Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -1175,18 +1185,20 @@
     "battery": "4900mAh, 45W por cable; carga inalámbrica",
     "release_year": 2025,
     "description": "Galaxy S25+ con 512GB storage: QHD+ 120Hz AMOLED, Snapdragon 8 Elite for Galaxy, y triple rear cámaras con 3x teleobjetivo.",
-    "images": [],
+    "images": [
+      "/images/fotos/p-38.jpg"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-04-07T17:56:57.674Z",
-    "updated_at": "2026-04-07T17:56:57.674Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "samsung",
       "name": "Samsung",
       "logo_url": null,
-      "created_at": "2026-04-07T17:56:57.674Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -1212,13 +1224,13 @@
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-04-07T17:56:57.674Z",
-    "updated_at": "2026-04-07T17:56:57.674Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "samsung",
       "name": "Samsung",
       "logo_url": null,
-      "created_at": "2026-04-07T17:56:57.674Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -1237,18 +1249,20 @@
     "battery": "5000mAh, 45W por cable; carga inalámbrica",
     "release_year": 2025,
     "description": "Galaxy S25 Ultra con 512GB storage: S Pen tope de gama con 200MP quad cámaras, Snapdragon 8 Elite for Galaxy, y long-lasting 5000mAh batería.",
-    "images": [],
+    "images": [
+      "/images/fotos/p-40.jpg"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-04-07T17:56:57.674Z",
-    "updated_at": "2026-04-07T17:56:57.674Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "samsung",
       "name": "Samsung",
       "logo_url": null,
-      "created_at": "2026-04-07T17:56:57.674Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -1274,13 +1288,13 @@
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-04-07T17:56:57.674Z",
-    "updated_at": "2026-04-07T17:56:57.674Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "samsung",
       "name": "Samsung",
       "logo_url": null,
-      "created_at": "2026-04-07T17:56:57.674Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -1299,18 +1313,20 @@
     "battery": "4900mAh, 45W por cable; 15W carga inalámbrica",
     "release_year": 2025,
     "description": "Galaxy S25 FE con 512GB storage: 6.7\" 120Hz AMOLED, Exynos 2400, 3x teleobjetivo cámara, y faster 45W carga.",
-    "images": [],
+    "images": [
+      "/images/fotos/p-42.jpg"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-04-07T17:56:57.674Z",
-    "updated_at": "2026-04-07T17:56:57.674Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "samsung",
       "name": "Samsung",
       "logo_url": null,
-      "created_at": "2026-04-07T17:56:57.674Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -1336,13 +1352,13 @@
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-04-07T17:56:57.674Z",
-    "updated_at": "2026-04-07T17:56:57.674Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "samsung",
       "name": "Samsung",
       "logo_url": null,
-      "created_at": "2026-04-07T17:56:57.674Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -1368,13 +1384,13 @@
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-04-07T17:56:57.674Z",
-    "updated_at": "2026-04-07T17:56:57.674Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "samsung",
       "name": "Samsung",
       "logo_url": null,
-      "created_at": "2026-04-07T17:56:57.674Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -1400,13 +1416,13 @@
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-04-07T17:56:57.674Z",
-    "updated_at": "2026-04-07T17:56:57.674Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "samsung",
       "name": "Samsung",
       "logo_url": null,
-      "created_at": "2026-04-07T17:56:57.674Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -1432,13 +1448,13 @@
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-04-07T17:56:57.674Z",
-    "updated_at": "2026-04-07T17:56:57.674Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "apple",
       "name": "Apple",
       "logo_url": null,
-      "created_at": "2026-04-07T17:56:57.674Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -1464,13 +1480,13 @@
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-04-07T17:56:57.674Z",
-    "updated_at": "2026-04-07T17:56:57.674Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "apple",
       "name": "Apple",
       "logo_url": null,
-      "created_at": "2026-04-07T17:56:57.674Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -1496,13 +1512,13 @@
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-04-07T17:56:57.674Z",
-    "updated_at": "2026-04-07T17:56:57.674Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "apple",
       "name": "Apple",
       "logo_url": null,
-      "created_at": "2026-04-07T17:56:57.674Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -1521,18 +1537,20 @@
     "battery": "3274mAh",
     "release_year": 2023,
     "description": "iPhone 15 Pro 256GB (eSIM, SWAP/reacondicionado) con titanium build, A17 Pro rendimiento, y pro cámaras incluyendo 3x teleobjetivo.",
-    "images": [],
+    "images": [
+      "/images/fotos/p-49.jpg"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-04-07T17:56:57.674Z",
-    "updated_at": "2026-04-07T17:56:57.674Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "apple",
       "name": "Apple",
       "logo_url": null,
-      "created_at": "2026-04-07T17:56:57.674Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -1558,13 +1576,13 @@
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-04-07T17:56:57.674Z",
-    "updated_at": "2026-04-07T17:56:57.674Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "xiaomi",
       "name": "Xiaomi",
       "logo_url": null,
-      "created_at": "2026-04-07T17:56:57.674Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -1590,13 +1608,13 @@
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-04-07T17:56:57.674Z",
-    "updated_at": "2026-04-07T17:56:57.674Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "xiaomi",
       "name": "Xiaomi",
       "logo_url": null,
-      "created_at": "2026-04-07T17:56:57.674Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -1622,13 +1640,13 @@
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-04-07T17:56:57.674Z",
-    "updated_at": "2026-04-07T17:56:57.674Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "xiaomi",
       "name": "Xiaomi",
       "logo_url": null,
-      "created_at": "2026-04-07T17:56:57.674Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -1654,13 +1672,13 @@
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-04-07T17:56:57.674Z",
-    "updated_at": "2026-04-07T17:56:57.674Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "xiaomi",
       "name": "Xiaomi",
       "logo_url": null,
-      "created_at": "2026-04-07T17:56:57.674Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -1686,13 +1704,13 @@
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-04-07T17:56:57.674Z",
-    "updated_at": "2026-04-07T17:56:57.674Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "xiaomi",
       "name": "Xiaomi",
       "logo_url": null,
-      "created_at": "2026-04-07T17:56:57.674Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -1718,13 +1736,13 @@
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-04-07T17:56:57.674Z",
-    "updated_at": "2026-04-07T17:56:57.674Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "xiaomi",
       "name": "Xiaomi",
       "logo_url": null,
-      "created_at": "2026-04-07T17:56:57.674Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -1750,13 +1768,13 @@
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-04-07T17:56:57.674Z",
-    "updated_at": "2026-04-07T17:56:57.674Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "xiaomi",
       "name": "Xiaomi",
       "logo_url": null,
-      "created_at": "2026-04-07T17:56:57.674Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -1782,13 +1800,13 @@
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-04-07T17:56:57.674Z",
-    "updated_at": "2026-04-07T17:56:57.674Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "xiaomi",
       "name": "Xiaomi",
       "logo_url": null,
-      "created_at": "2026-04-07T17:56:57.674Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -1814,13 +1832,13 @@
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-04-07T17:56:57.674Z",
-    "updated_at": "2026-04-07T17:56:57.674Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "xiaomi",
       "name": "Xiaomi",
       "logo_url": null,
-      "created_at": "2026-04-07T17:56:57.674Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -1839,18 +1857,20 @@
     "battery": "5110mAh, 67W carga rápida",
     "release_year": 2025,
     "description": "5G Pro variant con Dimensity chipset, 200MP OIS principal cámara, y fluida 120Hz AMOLED pantalla.",
-    "images": [],
+    "images": [
+      "/images/fotos/p-59.jpg"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-04-07T17:56:57.674Z",
-    "updated_at": "2026-04-07T17:56:57.674Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "xiaomi",
       "name": "Xiaomi",
       "logo_url": null,
-      "created_at": "2026-04-07T17:56:57.674Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -1876,13 +1896,13 @@
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-04-07T17:56:57.674Z",
-    "updated_at": "2026-04-07T17:56:57.674Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "xiaomi",
       "name": "Xiaomi",
       "logo_url": null,
-      "created_at": "2026-04-07T17:56:57.674Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -1908,13 +1928,13 @@
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-04-07T17:56:57.674Z",
-    "updated_at": "2026-04-07T17:56:57.674Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "honor",
       "name": "Honor",
       "logo_url": null,
-      "created_at": "2026-04-07T17:56:57.674Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -1933,18 +1953,20 @@
     "battery": "5200mAh",
     "release_year": 2024,
     "description": "De entrada Honor smartphone con 90Hz pantalla, 50MP principal cámara, y long batería life.",
-    "images": [],
+    "images": [
+      "/images/fotos/p-62.jpg"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-04-07T17:56:57.674Z",
-    "updated_at": "2026-04-07T17:56:57.674Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "honor",
       "name": "Honor",
       "logo_url": null,
-      "created_at": "2026-04-07T17:56:57.674Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -1970,13 +1992,13 @@
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-04-07T17:56:57.674Z",
-    "updated_at": "2026-04-07T17:56:57.674Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "unnecto",
       "name": "Unnecto",
       "logo_url": null,
-      "created_at": "2026-04-07T17:56:57.674Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   },
   {
@@ -1995,18 +2017,20 @@
     "battery": "5000mAh, 33W carga rápida",
     "release_year": 2024,
     "description": "rendimiento-focused Unnecto teléfono con 120Hz pantalla, 5G-capable chipset, y carga rápida.",
-    "images": [],
+    "images": [
+      "/images/fotos/p-64.jpg"
+    ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
-    "created_at": "2026-04-07T17:56:57.674Z",
-    "updated_at": "2026-04-07T17:56:57.674Z",
+    "created_at": "2026-02-26T17:51:56.402Z",
+    "updated_at": "2026-02-26T17:51:56.402Z",
     "brand": {
       "id": "unnecto",
       "name": "Unnecto",
       "logo_url": null,
-      "created_at": "2026-04-07T17:56:57.674Z"
+      "created_at": "2026-02-26T17:51:56.402Z"
     }
   }
 ]
