@@ -3,6 +3,7 @@
   "name": "centralcelulares",
   "compatibility_date": "2026-03-20",
   "assets": {
-    "directory": "./docs"
+    "directory": "./docs",
+    "not_found_handling": "single-page-application"
   }
 }
