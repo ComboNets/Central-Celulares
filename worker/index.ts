@@ -436,17 +436,18 @@ function requireAuth(request: Request, env: Env): boolean {
 
 async function handleGetProducts(request: Request, env: Env): Promise<Response> {
   const corsOrigin = getCorsOrigin(request, env);
-  const cfg = getGitHubConfig(env);
-  if (!cfg) {
-    const assetResponse = await env.ASSETS.fetch(new Request(new URL("/data/products.json", request.url)));
-    if (!assetResponse.ok) {
-      return jsonResponse({ error: "Failed to read products from assets." }, 500, corsOrigin);
-    }
-    const products = (await assetResponse.json()) as ProductRecord[];
-    return jsonResponse({ products, sha: null }, 200, corsOrigin);
-  }
 
   try {
+    const cfg = getGitHubConfig(env);
+    if (!cfg) {
+      const fallbackUrl = new URL("/data/products.json", request.url).toString();
+      const assetResponse = await env.ASSETS.fetch(fallbackUrl);
+      if (!assetResponse.ok) {
+        return jsonResponse({ error: "Failed to read products from assets." }, 500, corsOrigin);
+      }
+      const products = (await assetResponse.json()) as ProductRecord[];
+      return jsonResponse({ products, sha: null }, 200, corsOrigin);
+    }
     const { products, sha } = await fetchGitHubProducts(env);
     return jsonResponse({ products, sha }, 200, corsOrigin);
   } catch (error) {
