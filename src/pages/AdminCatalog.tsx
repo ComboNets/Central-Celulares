@@ -10,6 +10,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import type { Brand, PhoneFilters, PhoneWithBrand } from "@/types/products";
 import { Search, SlidersHorizontal, X } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 async function fetchPhonesFromJson(): Promise<PhoneWithBrand[]> {
   const url = `${import.meta.env.BASE_URL}data/products.json`;
@@ -79,10 +80,11 @@ interface AdminPhoneCardProps {
   phone: PhoneWithBrand;
   selected: boolean;
   previewImage?: string;
-  onSelect: () => void;
+  onOpenDetail: () => void;
+  onEdit: () => void;
 }
 
-function AdminPhoneCard({ phone, selected, previewImage, onSelect }: AdminPhoneCardProps) {
+function AdminPhoneCard({ phone, selected, previewImage, onOpenDetail, onEdit }: AdminPhoneCardProps) {
   const hasDiscount = phone.sale_price && phone.sale_price < phone.price;
   const discountPercent = hasDiscount
     ? Math.round(((phone.price - phone.sale_price!) / phone.price) * 100)
@@ -94,13 +96,13 @@ function AdminPhoneCard({ phone, selected, previewImage, onSelect }: AdminPhoneC
       className={`card-hover overflow-hidden group cursor-pointer h-full ${
         selected ? "ring-2 ring-primary border-primary" : ""
       }`}
-      role="button"
+      role="link"
       tabIndex={0}
-      onClick={onSelect}
+      onClick={onOpenDetail}
       onKeyDown={(e) => {
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();
-          onSelect();
+          onOpenDetail();
         }
       }}
     >
@@ -147,6 +149,18 @@ function AdminPhoneCard({ phone, selected, previewImage, onSelect }: AdminPhoneC
             </Badge>
           ))}
         </div>
+        <div className="mt-3">
+          <Button
+            size="sm"
+            variant="outline"
+            onClick={(e) => {
+              e.stopPropagation();
+              onEdit();
+            }}
+          >
+            Editar
+          </Button>
+        </div>
       </CardContent>
     </Card>
   );
@@ -160,6 +174,7 @@ function parseOptionalNumber(value: string): number | null {
 }
 
 export default function AdminCatalog() {
+  const navigate = useNavigate();
   const [filters, setFilters] = useState<PhoneFilters>({});
   const [showFilters, setShowFilters] = useState(false);
   const [draftPhones, setDraftPhones] = useState<PhoneWithBrand[] | null>(null);
@@ -359,7 +374,8 @@ export default function AdminCatalog() {
                       phone={phone}
                       selected={phone.id === selectedPhoneId}
                       previewImage={imagePreviews[phone.id]}
-                      onSelect={() => setSelectedPhoneId(phone.id)}
+                      onOpenDetail={() => navigate(`/phone/${phone.id}`)}
+                      onEdit={() => setSelectedPhoneId(phone.id)}
                     />
                   ))}
                 </div>

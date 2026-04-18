@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import NotFound from "./pages/NotFound";
 import AdminCatalog from "./pages/AdminCatalog";
+import PhoneDetail from "./pages/PhoneDetail";
 
 const queryClient = new QueryClient();
 
@@ -16,7 +17,9 @@ const App = () => (
       <BrowserRouter basename={import.meta.env.BASE_URL}>
         <Routes>
           <Route path="/" element={<AdminCatalog />} />
+          <Route path="/catalog" element={<AdminCatalog />} />
           <Route path="/admin" element={<Navigate to="/" replace />} />
+          <Route path="/phone/:id" element={<PhoneDetail />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
