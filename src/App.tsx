@@ -9,6 +9,7 @@ import PhoneDetail from "./pages/PhoneDetail";
 import NotFound from "./pages/NotFound";
 import About from "./pages/About";
 import Services from "./pages/Services";
+import AdminCatalog from "./pages/AdminCatalog";
 
 const queryClient = new QueryClient();
 
@@ -21,6 +22,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/catalog" element={<Catalog />} />
+          <Route path="/admin" element={<AdminCatalog />} />
           <Route path="/phone/:id" element={<PhoneDetail />} />
           <Route path="/services" element={<Services />} />
           <Route path="/about" element={<About />} />
