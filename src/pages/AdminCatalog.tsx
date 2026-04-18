@@ -40,6 +40,7 @@ interface PublishRequestBody {
     id: string;
     changes: PendingProductChanges;
   }>;
+  imageUploads?: PendingImageUpload[];
   baseSha?: string | null;
 }
 
@@ -51,11 +52,16 @@ interface PublishResponseBody {
   products: PhoneWithBrand[];
 }
 
-const PENDING_PATCHES_STORAGE_KEY = "centralcelulares.admin.pending-patches.v1";
-const PUSH_TOKEN_STORAGE_KEY = "centralcelulares.admin.push-token.v1";
-const SESSION_EDITED_FIELDS_STORAGE_KEY = "centralcelulares.admin.session-edited-fields.v1";
+interface PendingImageUpload {
+  id: string;
+  extension: string;
+  mimeType: string;
+  contentBase64: string;
+}
 
-type SessionEditedFields = Record<string, string[]>;
+const PENDING_PATCHES_STORAGE_KEY = "centralcelulares.admin.pending-patches.v1";
+const PENDING_IMAGE_UPLOADS_STORAGE_KEY = "centralcelulares.admin.pending-image-uploads.v1";
+const PUSH_TOKEN_STORAGE_KEY = "centralcelulares.admin.push-token.v1";
 
 function readStoredPendingPatches(): Record<string, PendingProductChanges> {
   if (typeof window === "undefined") return {};
@@ -74,12 +80,12 @@ function readStoredPushToken(): string {
   return window.localStorage.getItem(PUSH_TOKEN_STORAGE_KEY) || "";
 }
 
-function readSessionEditedFields(): SessionEditedFields {
+function readStoredPendingImageUploads(): Record<string, PendingImageUpload> {
   if (typeof window === "undefined") return {};
   try {
-    const raw = window.sessionStorage.getItem(SESSION_EDITED_FIELDS_STORAGE_KEY);
+    const raw = window.localStorage.getItem(PENDING_IMAGE_UPLOADS_STORAGE_KEY);
     if (!raw) return {};
-    const parsed = JSON.parse(raw) as SessionEditedFields;
+    const parsed = JSON.parse(raw) as Record<string, PendingImageUpload>;
     return parsed && typeof parsed === "object" ? parsed : {};
   } catch {
     return {};
@@ -172,21 +178,16 @@ function resolveImageSrc(rawImage?: string): string | undefined {
 interface AdminPhoneCardProps {
   phone: PhoneWithBrand;
   queued: boolean;
-  editedThisSession: boolean;
   onSelect: () => void;
 }
 
-function AdminPhoneCard({ phone, queued, editedThisSession, onSelect }: AdminPhoneCardProps) {
+function AdminPhoneCard({ phone, queued, onSelect }: AdminPhoneCardProps) {
   const hasDiscount = phone.sale_price && phone.sale_price < phone.price;
   const discountPercent = hasDiscount
     ? Math.round(((phone.price - phone.sale_price!) / phone.price) * 100)
     : 0;
   const imageSrc = resolveImageSrc(phone.images?.[0]);
-  const cardHighlightClass = queued
-    ? "ring-2 ring-primary/70"
-    : editedThisSession
-      ? "ring-2 ring-amber-500/70 bg-amber-100/20"
-      : "";
+  const cardHighlightClass = queued ? "ring-2 ring-primary/70" : "";
 
   return (
     <Card
@@ -218,11 +219,6 @@ function AdminPhoneCard({ phone, queued, editedThisSession, onSelect }: AdminPho
           {phone.is_featured && <span className="featured-badge">Destacado</span>}
           {hasDiscount && <span className="sale-badge">-{discountPercent}%</span>}
           {queued && <span className="rounded px-2 py-1 text-xs font-medium bg-primary text-primary-foreground">En cola</span>}
-          {editedThisSession && (
-            <span className="rounded px-2 py-1 text-xs font-medium bg-amber-300 text-amber-950">
-              Editado sesión
-            </span>
-          )}
         </div>
       </div>
 
@@ -257,8 +253,10 @@ export default function AdminCatalog() {
   const [pendingPatches, setPendingPatches] = useState<Record<string, PendingProductChanges>>(
     readStoredPendingPatches
   );
+  const [pendingImageUploads, setPendingImageUploads] = useState<Record<string, PendingImageUpload>>(
+    readStoredPendingImageUploads
+  );
   const [pushToken, setPushToken] = useState<string>(readStoredPushToken);
-  const [sessionEditedFields] = useState<SessionEditedFields>(readSessionEditedFields);
   const [isPublishing, setIsPublishing] = useState(false);
 
   const { data: sourceData, isLoading, isError } = useQuery({
@@ -272,6 +270,10 @@ export default function AdminCatalog() {
     if (typeof window === "undefined") return;
     window.localStorage.setItem(PENDING_PATCHES_STORAGE_KEY, JSON.stringify(pendingPatches));
   }, [pendingPatches]);
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    window.localStorage.setItem(PENDING_IMAGE_UPLOADS_STORAGE_KEY, JSON.stringify(pendingImageUploads));
+  }, [pendingImageUploads]);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -300,11 +302,11 @@ export default function AdminCatalog() {
     return applyPhoneFilters(sourcePhones, filters);
   }, [sourcePhones, filters]);
 
-  const pendingCount = Object.keys(pendingPatches).length;
-  const editedThisSessionProductIds = useMemo(
-    () => new Set(Object.keys(sessionEditedFields)),
-    [sessionEditedFields]
-  );
+  const queuedProductIds = new Set<string>([
+    ...Object.keys(pendingPatches),
+    ...Object.keys(pendingImageUploads),
+  ]);
+  const pendingCount = queuedProductIds.size;
 
   const handlePushQueuedChanges = async () => {
     if (pendingCount === 0 || isPublishing) return;
@@ -312,6 +314,7 @@ export default function AdminCatalog() {
     try {
       const payload: PublishRequestBody = {
         patches: Object.entries(pendingPatches).map(([id, changes]) => ({ id, changes })),
+        imageUploads: Object.values(pendingImageUploads),
         baseSha: sourceSha,
       };
 
@@ -335,6 +338,7 @@ export default function AdminCatalog() {
 
       const result = (await response.json()) as PublishResponseBody;
       setPendingPatches({});
+      setPendingImageUploads({});
       queryClient.setQueryData<AdminProductsResponse>(["phones", "admin", "raw"], {
         products: result.products,
         sha: result.sha,
@@ -513,8 +517,7 @@ export default function AdminCatalog() {
                     <AdminPhoneCard
                       key={phone.id}
                       phone={phone}
-                      queued={Boolean(pendingPatches[phone.id])}
-                      editedThisSession={editedThisSessionProductIds.has(phone.id)}
+                      queued={queuedProductIds.has(phone.id)}
                       onSelect={() => navigate(`/phone/${phone.id}`)}
                     />
                   ))}

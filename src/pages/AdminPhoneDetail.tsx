@@ -40,6 +40,7 @@ interface PublishRequestBody {
     id: string;
     changes: PendingProductChanges;
   }>;
+  imageUploads?: PendingImageUpload[];
   baseSha?: string | null;
 }
 
@@ -51,12 +52,17 @@ interface PublishResponseBody {
   products: PhoneWithBrand[];
 }
 
-const PENDING_PATCHES_STORAGE_KEY = "centralcelulares.admin.pending-patches.v1";
-const PUSH_TOKEN_STORAGE_KEY = "centralcelulares.admin.push-token.v1";
-const SESSION_EDITED_FIELDS_STORAGE_KEY = "centralcelulares.admin.session-edited-fields.v1";
-const EDITED_FIELD_CLASSNAME = "border-amber-500 bg-amber-100/40 ring-1 ring-amber-400/60";
+interface PendingImageUpload {
+  id: string;
+  extension: string;
+  mimeType: string;
+  contentBase64: string;
+}
 
-type SessionEditedFields = Record<string, string[]>;
+const PENDING_PATCHES_STORAGE_KEY = "centralcelulares.admin.pending-patches.v1";
+const PENDING_IMAGE_UPLOADS_STORAGE_KEY = "centralcelulares.admin.pending-image-uploads.v1";
+const PUSH_TOKEN_STORAGE_KEY = "centralcelulares.admin.push-token.v1";
+const EDITED_FIELD_CLASSNAME = "border-amber-500 bg-amber-100/40 ring-1 ring-amber-400/60";
 
 function readStoredPendingPatches(): Record<string, PendingProductChanges> {
   if (typeof window === "undefined") return {};
@@ -75,16 +81,43 @@ function readStoredPushToken(): string {
   return window.localStorage.getItem(PUSH_TOKEN_STORAGE_KEY) || "";
 }
 
-function readSessionEditedFields(): SessionEditedFields {
+function readStoredPendingImageUploads(): Record<string, PendingImageUpload> {
   if (typeof window === "undefined") return {};
   try {
-    const raw = window.sessionStorage.getItem(SESSION_EDITED_FIELDS_STORAGE_KEY);
+    const raw = window.localStorage.getItem(PENDING_IMAGE_UPLOADS_STORAGE_KEY);
     if (!raw) return {};
-    const parsed = JSON.parse(raw) as SessionEditedFields;
+    const parsed = JSON.parse(raw) as Record<string, PendingImageUpload>;
     return parsed && typeof parsed === "object" ? parsed : {};
   } catch {
     return {};
   }
+}
+
+function inferFileExtension(fileName: string, mimeType: string): string {
+  const fromNameMatch = fileName.toLowerCase().match(/(\.[a-z0-9]+)$/);
+  if (fromNameMatch?.[1]) return fromNameMatch[1];
+  if (mimeType.includes("png")) return ".png";
+  if (mimeType.includes("webp")) return ".webp";
+  if (mimeType.includes("gif")) return ".gif";
+  if (mimeType.includes("jpeg") || mimeType.includes("jpg")) return ".jpg";
+  return ".jpg";
+}
+
+function fileToBase64(file: File): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const result = reader.result;
+      if (typeof result !== "string") {
+        reject(new Error("Failed to read file."));
+        return;
+      }
+      const commaIdx = result.indexOf(",");
+      resolve(commaIdx >= 0 ? result.slice(commaIdx + 1) : result);
+    };
+    reader.onerror = () => reject(reader.error || new Error("Failed to read file."));
+    reader.readAsDataURL(file);
+  });
 }
 
 function arraysEqual(a: string[] | null | undefined, b: string[] | null | undefined): boolean {
@@ -184,8 +217,10 @@ export default function AdminPhoneDetail() {
   const { toast } = useToast();
 
   const [pendingPatches, setPendingPatches] = useState<Record<string, PendingProductChanges>>(readStoredPendingPatches);
+  const [pendingImageUploads, setPendingImageUploads] = useState<Record<string, PendingImageUpload>>(
+    readStoredPendingImageUploads
+  );
   const [pushToken, setPushToken] = useState<string>(readStoredPushToken);
-  const [sessionEditedFields, setSessionEditedFields] = useState<SessionEditedFields>(readSessionEditedFields);
   const [isPublishing, setIsPublishing] = useState(false);
   const [draftPhone, setDraftPhone] = useState<PhoneWithBrand | null>(null);
   const [previewImage, setPreviewImage] = useState<string | null>(null);
@@ -198,16 +233,16 @@ export default function AdminPhoneDetail() {
   const sourceSha = sourceData?.sha ?? null;
 
   const sourcePhone = useMemo(() => sourcePhones.find((phone) => phone.id === id) || null, [sourcePhones, id]);
-  const pendingCount = Object.keys(pendingPatches).length;
+  const queuedProductIds = new Set<string>([
+    ...Object.keys(pendingPatches),
+    ...Object.keys(pendingImageUploads),
+  ]);
+  const pendingCount = queuedProductIds.size;
   const selectedPatch = id ? pendingPatches[id] : undefined;
-  const liveChanges = useMemo(
-    () => (sourcePhone && draftPhone ? buildPendingChanges(sourcePhone, draftPhone) : {}),
-    [sourcePhone, draftPhone]
-  );
-  const editedKeysThisSession = new Set<string>(id ? sessionEditedFields[id] ?? [] : []);
-  const liveChangedKeys = new Set<string>(Object.keys(liveChanges));
+  const selectedUpload = id ? pendingImageUploads[id] : undefined;
+  const selectedPatchKeys = new Set<string>(Object.keys(selectedPatch ?? {}));
   const isFieldEdited = (fieldKey: keyof PendingProductChanges) =>
-    editedKeysThisSession.has(fieldKey) || liveChangedKeys.has(fieldKey);
+    selectedPatchKeys.has(fieldKey);
   const fieldClassName = (fieldKey: keyof PendingProductChanges) =>
     isFieldEdited(fieldKey) ? EDITED_FIELD_CLASSNAME : "";
 
@@ -224,6 +259,10 @@ export default function AdminPhoneDetail() {
     if (typeof window === "undefined") return;
     window.localStorage.setItem(PENDING_PATCHES_STORAGE_KEY, JSON.stringify(pendingPatches));
   }, [pendingPatches]);
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    window.localStorage.setItem(PENDING_IMAGE_UPLOADS_STORAGE_KEY, JSON.stringify(pendingImageUploads));
+  }, [pendingImageUploads]);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -234,10 +273,6 @@ export default function AdminPhoneDetail() {
     }
   }, [pushToken]);
 
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    window.sessionStorage.setItem(SESSION_EDITED_FIELDS_STORAGE_KEY, JSON.stringify(sessionEditedFields));
-  }, [sessionEditedFields]);
 
   useEffect(() => {
     return () => {
@@ -248,14 +283,9 @@ export default function AdminPhoneDetail() {
   const handleSaveLocal = () => {
     if (!id || !draftPhone || !sourcePhone) return;
     const changes = buildPendingChanges(sourcePhone, draftPhone);
-    if (Object.keys(changes).length === 0) {
+    const hasPendingImageUpload = Boolean(pendingImageUploads[id]);
+    if (Object.keys(changes).length === 0 && !hasPendingImageUpload) {
       setPendingPatches((prev) => {
-        if (!prev[id]) return prev;
-        const next = { ...prev };
-        delete next[id];
-        return next;
-      });
-      setSessionEditedFields((prev) => {
         if (!prev[id]) return prev;
         const next = { ...prev };
         delete next[id];
@@ -268,12 +298,21 @@ export default function AdminPhoneDetail() {
       return;
     }
 
+    if (Object.keys(changes).length === 0) {
+      setPendingPatches((prev) => {
+        if (!prev[id]) return prev;
+        const next = { ...prev };
+        delete next[id];
+        return next;
+      });
+      toast({
+        title: "Imagen guardada localmente",
+        description: "La imagen quedó en cola para el próximo Push.",
+      });
+      return;
+    }
+
     setPendingPatches((prev) => ({ ...prev, [id]: changes }));
-    setSessionEditedFields((prev) => {
-      const current = prev[id] ?? [];
-      const merged = Array.from(new Set([...current, ...Object.keys(changes)]));
-      return { ...prev, [id]: merged };
-    });
     toast({
       title: "Cambios guardados localmente",
       description: "Este producto quedó en cola para el próximo Push.",
@@ -289,6 +328,7 @@ export default function AdminPhoneDetail() {
           id: productId,
           changes,
         })),
+        imageUploads: Object.values(pendingImageUploads),
         baseSha: sourceSha,
       };
 
@@ -312,6 +352,7 @@ export default function AdminPhoneDetail() {
 
       const result = (await response.json()) as PublishResponseBody;
       setPendingPatches({});
+      setPendingImageUploads({});
       queryClient.setQueryData<AdminProductsResponse>(["phones", "admin", "raw"], {
         products: result.products,
         sha: result.sha,
@@ -395,11 +436,13 @@ export default function AdminPhoneDetail() {
                 Guardar local
               </Button>
               <span className="text-sm text-muted-foreground">
-                {selectedPatch ? "Este producto está en cola" : "Sin guardar local para este producto"}
+                {selectedPatch || selectedUpload
+                  ? "Este producto está en cola"
+                  : "Sin guardar local para este producto"}
               </span>
-              {editedKeysThisSession.size > 0 ? (
+              {selectedPatch || selectedUpload ? (
                 <span className="text-sm font-medium text-amber-700 bg-amber-100/60 rounded px-2 py-1">
-                  Editado en esta sesión
+                  Cambios en cola
                 </span>
               ) : null}
             </div>
@@ -527,9 +570,15 @@ export default function AdminPhoneDetail() {
                 <Input
                   type="file"
                   accept="image/*"
-                  onChange={(e) => {
+                  onChange={async (e) => {
                     const file = e.target.files?.[0];
-                    if (!file) return;
+                    if (!file || !id) return;
+
+                    const extension = inferFileExtension(file.name, file.type);
+                    const normalizedExtension = extension.startsWith(".")
+                      ? extension.toLowerCase()
+                      : `.${extension.toLowerCase()}`;
+                    const targetImagePath = `/images/fotos/p-${id}${normalizedExtension}`;
                     setPreviewImage((old) => {
                       if (old) URL.revokeObjectURL(old);
                       return URL.createObjectURL(file);
@@ -538,10 +587,28 @@ export default function AdminPhoneDetail() {
                       prev
                         ? {
                             ...prev,
-                            images: [`/images/fotos/${file.name}`, ...(prev.images?.slice(1) || [])],
+                            images: [targetImagePath, ...(prev.images?.slice(1) || [])],
                           }
                         : prev
                     );
+                    try {
+                      const contentBase64 = await fileToBase64(file);
+                      setPendingImageUploads((prev) => ({
+                        ...prev,
+                        [id]: {
+                          id,
+                          extension: normalizedExtension,
+                          mimeType: file.type || "application/octet-stream",
+                          contentBase64,
+                        },
+                      }));
+                    } catch (error) {
+                      toast({
+                        title: "No se pudo leer la imagen",
+                        description: error instanceof Error ? error.message : "Error al procesar el archivo.",
+                        variant: "destructive",
+                      });
+                    }
                   }}
                 />
               </div>

@@ -51,17 +51,55 @@ interface PendingProductChanges {
   brand_name?: string;
 }
 
+interface PendingImageUpload {
+  id: string;
+  extension: string;
+  mimeType?: string;
+  contentBase64: string;
+}
+
 interface PublishRequestBody {
-  patches: Array<{
+  patches?: Array<{
     id: string;
     changes: PendingProductChanges;
   }>;
+  imageUploads?: PendingImageUpload[];
   baseSha?: string | null;
 }
 
 interface GitHubContentResponse {
   sha: string;
   content: string;
+}
+
+interface GitHubRefResponse {
+  object: {
+    sha: string;
+  };
+}
+
+interface GitHubCommitResponse {
+  sha: string;
+  tree: {
+    sha: string;
+  };
+}
+
+interface GitHubBlobResponse {
+  sha: string;
+}
+
+interface GitHubTreeResponse {
+  sha: string;
+}
+
+interface GitHubCreateCommitResponse {
+  sha: string;
+}
+
+interface GitHubFileWrite {
+  path: string;
+  contentBase64: string;
 }
 
 const ALLOWED_CHANGE_KEYS = new Set<keyof PendingProductChanges>([
@@ -81,6 +119,8 @@ const ALLOWED_CHANGE_KEYS = new Set<keyof PendingProductChanges>([
   "is_published",
   "brand_name",
 ]);
+
+const ALLOWED_IMAGE_EXTENSIONS = new Set([".jpg", ".jpeg", ".png", ".webp", ".gif"]);
 
 function jsonResponse(body: unknown, status = 200, corsOrigin = "*"): Response {
   return new Response(JSON.stringify(body), {
@@ -137,6 +177,34 @@ function getGitHubConfig(env: Env) {
   return { token, owner, repo, branch, path };
 }
 
+function buildGitHubHeaders(token: string, extraHeaders?: HeadersInit): HeadersInit {
+  return {
+    Authorization: `Bearer ${token}`,
+    Accept: "application/vnd.github+json",
+    "User-Agent": "centralcelulares-admin-worker",
+    ...(extraHeaders || {}),
+  };
+}
+
+async function githubRequest<T>(
+  cfg: { token: string; owner: string; repo: string },
+  endpoint: string,
+  init?: RequestInit
+): Promise<T> {
+  const response = await fetch(`https://api.github.com/repos/${cfg.owner}/${cfg.repo}${endpoint}`, {
+    ...init,
+    headers: buildGitHubHeaders(cfg.token, init?.headers),
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    const method = init?.method || "GET";
+    throw new Error(`GitHub API ${method} ${endpoint} failed (${response.status}): ${errorText}`);
+  }
+
+  return (await response.json()) as T;
+}
+
 async function fetchGitHubProducts(env: Env): Promise<{
   products: ProductRecord[];
   sha: string;
@@ -151,11 +219,7 @@ async function fetchGitHubProducts(env: Env): Promise<{
   )}?ref=${encodeURIComponent(cfg.branch)}`;
 
   const response = await fetch(url, {
-    headers: {
-      Authorization: `Bearer ${cfg.token}`,
-      Accept: "application/vnd.github+json",
-      "User-Agent": "centralcelulares-admin-worker",
-    },
+    headers: buildGitHubHeaders(cfg.token),
   });
 
   if (!response.ok) {
@@ -271,6 +335,97 @@ function applyValidatedChanges(product: ProductRecord, changes: PendingProductCh
   return next;
 }
 
+function normalizeImageExtension(extension: string): string {
+  const trimmed = extension.trim().toLowerCase();
+  if (!trimmed) throw new Error("image extension is required.");
+  const withDot = trimmed.startsWith(".") ? trimmed : `.${trimmed}`;
+  if (!ALLOWED_IMAGE_EXTENSIONS.has(withDot)) {
+    throw new Error(`Unsupported image extension: ${withDot}`);
+  }
+  return withDot === ".jpeg" ? ".jpg" : withDot;
+}
+
+function sanitizeIdForFileName(id: string): string {
+  const sanitized = id.trim().replace(/[^a-zA-Z0-9_-]/g, "-");
+  if (!sanitized) throw new Error("Invalid product id for image naming.");
+  return sanitized;
+}
+
+async function createGitHubCommitWithFiles(
+  cfg: { token: string; owner: string; repo: string; branch: string },
+  commitMessage: string,
+  files: GitHubFileWrite[]
+): Promise<{ commitSha: string; commitUrl: string }> {
+  const branchRef = await githubRequest<GitHubRefResponse>(
+    cfg,
+    `/git/ref/heads/${encodeURIComponent(cfg.branch)}`
+  );
+  const parentCommitSha = branchRef.object.sha;
+
+  const parentCommit = await githubRequest<GitHubCommitResponse>(cfg, `/git/commits/${parentCommitSha}`);
+  const baseTreeSha = parentCommit.tree.sha;
+
+  const blobShas = await Promise.all(
+    files.map(async (file) => {
+      const blob = await githubRequest<GitHubBlobResponse>(cfg, "/git/blobs", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          content: file.contentBase64,
+          encoding: "base64",
+        }),
+      });
+      return { path: file.path, sha: blob.sha };
+    })
+  );
+
+  const tree = await githubRequest<GitHubTreeResponse>(cfg, "/git/trees", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      base_tree: baseTreeSha,
+      tree: blobShas.map((blob) => ({
+        path: blob.path,
+        mode: "100644",
+        type: "blob",
+        sha: blob.sha,
+      })),
+    }),
+  });
+
+  const commit = await githubRequest<GitHubCreateCommitResponse>(cfg, "/git/commits", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      message: commitMessage,
+      tree: tree.sha,
+      parents: [parentCommitSha],
+    }),
+  });
+
+  await githubRequest<GitHubRefResponse>(cfg, `/git/refs/heads/${encodeURIComponent(cfg.branch)}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      sha: commit.sha,
+      force: false,
+    }),
+  });
+
+  return {
+    commitSha: commit.sha,
+    commitUrl: `https://github.com/${cfg.owner}/${cfg.repo}/commit/${commit.sha}`,
+  };
+}
+
 function requireAuth(request: Request, env: Env): boolean {
   const expected = env.ADMIN_API_TOKEN?.trim();
   if (!expected) return true;
@@ -323,8 +478,11 @@ async function handlePublishProducts(request: Request, env: Env): Promise<Respon
     return jsonResponse({ error: "Invalid JSON body." }, 400, corsOrigin);
   }
 
-  if (!Array.isArray(payload.patches) || payload.patches.length === 0) {
-    return jsonResponse({ error: "patches must be a non-empty array." }, 400, corsOrigin);
+  const patches = Array.isArray(payload.patches) ? payload.patches : [];
+  const imageUploads = Array.isArray(payload.imageUploads) ? payload.imageUploads : [];
+
+  if (patches.length === 0 && imageUploads.length === 0) {
+    return jsonResponse({ error: "patches or imageUploads must contain at least one item." }, 400, corsOrigin);
   }
 
   try {
@@ -341,7 +499,7 @@ async function handlePublishProducts(request: Request, env: Env): Promise<Respon
     }
 
     const nextProducts = [...currentProducts];
-    for (const patch of payload.patches) {
+    for (const patch of patches) {
       if (!patch || typeof patch.id !== "string" || !patch.id.trim()) {
         throw new Error("Each patch requires a valid id.");
       }
@@ -352,50 +510,58 @@ async function handlePublishProducts(request: Request, env: Env): Promise<Respon
       nextProducts[index] = applyValidatedChanges(nextProducts[index], patch.changes || {});
     }
 
-    const content = `${JSON.stringify(nextProducts, null, 2)}\n`;
-    const commitMessage = `chore(products): publish admin changes (${payload.patches.length} updates) at ${new Date().toISOString()}`;
+    const imageFileWrites = new Map<string, string>();
+    for (const upload of imageUploads) {
+      if (!upload || typeof upload.id !== "string" || !upload.id.trim()) {
+        throw new Error("Each image upload requires a valid id.");
+      }
+      if (typeof upload.contentBase64 !== "string" || !upload.contentBase64.trim()) {
+        throw new Error(`Image upload for ${upload.id} is missing contentBase64.`);
+      }
 
-    const updateUrl = `https://api.github.com/repos/${cfg.owner}/${cfg.repo}/contents/${normalizePath(
-      cfg.path
-    )}`;
-    const updateResponse = await fetch(updateUrl, {
-      method: "PUT",
-      headers: {
-        Authorization: `Bearer ${cfg.token}`,
-        Accept: "application/vnd.github+json",
-        "Content-Type": "application/json",
-        "User-Agent": "centralcelulares-admin-worker",
-      },
-      body: JSON.stringify({
-        message: commitMessage,
-        content: encodeBase64Utf8(content),
-        sha: currentSha,
-        branch: cfg.branch,
-      }),
-    });
+      const productIndex = nextProducts.findIndex((p) => String(p.id) === String(upload.id));
+      if (productIndex === -1) {
+        throw new Error(`Product id ${upload.id} not found for image upload.`);
+      }
 
-    if (!updateResponse.ok) {
-      const errorBody = await updateResponse.text();
-      return jsonResponse(
-        {
-          error: `GitHub write failed (${updateResponse.status}): ${errorBody}`,
-        },
-        500,
-        corsOrigin
-      );
+      const extension = normalizeImageExtension(upload.extension || "");
+      const safeId = sanitizeIdForFileName(upload.id);
+      const fileName = `p-${safeId}${extension}`;
+      const publicImagePath = `/images/fotos/${fileName}`;
+      const repoImagePath = `public/images/fotos/${fileName}`;
+
+      const existingTail = Array.isArray(nextProducts[productIndex].images)
+        ? nextProducts[productIndex].images!.slice(1)
+        : [];
+      nextProducts[productIndex].images = [publicImagePath, ...existingTail].filter(Boolean);
+      nextProducts[productIndex].updated_at = new Date().toISOString();
+
+      imageFileWrites.set(repoImagePath, upload.contentBase64.replace(/\s/g, ""));
     }
 
-    const updateData = (await updateResponse.json()) as {
-      content: { sha: string };
-      commit: { sha: string; html_url: string };
-    };
+    const content = `${JSON.stringify(nextProducts, null, 2)}\n`;
+    const commitMessage = `chore(products): publish admin changes (${patches.length} updates, ${imageUploads.length} images) at ${new Date().toISOString()}`;
+
+    const files: GitHubFileWrite[] = [
+      {
+        path: cfg.path,
+        contentBase64: encodeBase64Utf8(content),
+      },
+      ...Array.from(imageFileWrites.entries()).map(([path, contentBase64]) => ({
+        path,
+        contentBase64,
+      })),
+    ];
+
+    const { commitSha, commitUrl } = await createGitHubCommitWithFiles(cfg, commitMessage, files);
+    const refreshedProducts = await fetchGitHubProducts(env);
 
     return jsonResponse(
       {
         ok: true,
-        commitSha: updateData.commit.sha,
-        commitUrl: updateData.commit.html_url,
-        sha: updateData.content.sha,
+        commitSha,
+        commitUrl,
+        sha: refreshedProducts.sha,
         products: nextProducts,
       },
       200,
