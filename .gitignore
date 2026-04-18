@@ -38,3 +38,12 @@ data/products.before-*.xlsx
 data/model-images.json
 data/spec-fields.json
 data/products.csv
+
+# Build output (deploy via wrangler deploy, not git)
+docs/
+
+# Stale lockfile (project uses npm)
+bun.lockb
+
+# Empty top-level folder
+assets/
