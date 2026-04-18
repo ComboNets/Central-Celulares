@@ -3,7 +3,7 @@
     "id": "1",
     "brand_id": "xiaomi",
     "model": "CELULAR XIAOMI REDMI 15 C 128 GB",
-    "price": 840002,
+    "price": 840003,
     "sale_price": null,
     "storage_options": [
       "128GB"
@@ -16,14 +16,14 @@
     "release_year": 2025,
     "description": "Económico 5G teléfono con gran 6.9\" 120Hz pantalla, Dimensity 6300 rendimiento, y a 6000mAh batería; incluye Xiaomi HyperOS.",
     "images": [
-      "/images/fotos/p-1.jpg"
+      "/images/fotos/Gemini_Generated_Image_qjgzqjgzqjgzqjgz.png"
     ],
     "is_featured": false,
     "is_published": true,
     "view_count": 0,
     "click_count": 0,
     "created_at": "2026-04-17T01:37:14.863Z",
-    "updated_at": "2026-04-18T22:35:57.534Z",
+    "updated_at": "2026-04-18T22:59:54.351Z",
     "brand": {
       "id": "xiaomi",
       "name": "Xiaomi",
