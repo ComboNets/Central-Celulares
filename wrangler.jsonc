@@ -1,7 +1,15 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "centralcelulares",
+  "main": "./worker/index.ts",
   "compatibility_date": "2026-03-20",
+  "vars": {
+    "GITHUB_OWNER": "ComboNets",
+    "GITHUB_REPO": "Central-Celulares",
+    "GITHUB_TARGET_BRANCH": "main",
+    "GITHUB_PRODUCTS_PATH": "public/data/products.json",
+    "ALLOWED_ORIGIN": "https://admin.centralcelulares.com.py"
+  },
   "assets": {
     "directory": "./docs",
     "not_found_handling": "single-page-application"

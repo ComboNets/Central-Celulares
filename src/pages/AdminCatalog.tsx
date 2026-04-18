@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Navbar } from "@/components/Navbar";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -11,16 +11,101 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import type { Brand, PhoneFilters, PhoneWithBrand } from "@/types/products";
 import { Search, SlidersHorizontal, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useToast } from "@/hooks/use-toast";
 
-async function fetchPhonesFromJson(): Promise<PhoneWithBrand[]> {
-  const url = `${import.meta.env.BASE_URL}data/products.json`;
-  const response = await fetch(url);
+interface AdminProductsResponse {
+  products: PhoneWithBrand[];
+  sha: string | null;
+}
+
+interface PendingProductChanges {
+  model?: string;
+  price?: number;
+  sale_price?: number | null;
+  storage_options?: string[] | null;
+  display_size?: string | null;
+  processor?: string | null;
+  ram?: string | null;
+  camera?: string | null;
+  battery?: string | null;
+  release_year?: number | null;
+  description?: string | null;
+  images?: string[] | null;
+  is_featured?: boolean;
+  is_published?: boolean;
+  brand_name?: string;
+}
+
+interface PublishRequestBody {
+  patches: Array<{
+    id: string;
+    changes: PendingProductChanges;
+  }>;
+  baseSha?: string | null;
+}
+
+interface PublishResponseBody {
+  ok: boolean;
+  commitSha: string;
+  commitUrl: string;
+  sha: string;
+  products: PhoneWithBrand[];
+}
+
+const PENDING_PATCHES_STORAGE_KEY = "centralcelulares.admin.pending-patches.v1";
+const PUSH_TOKEN_STORAGE_KEY = "centralcelulares.admin.push-token.v1";
+
+function readStoredPendingPatches(): Record<string, PendingProductChanges> {
+  if (typeof window === "undefined") return {};
+  try {
+    const raw = window.localStorage.getItem(PENDING_PATCHES_STORAGE_KEY);
+    if (!raw) return {};
+    const parsed = JSON.parse(raw) as Record<string, PendingProductChanges>;
+    return parsed && typeof parsed === "object" ? parsed : {};
+  } catch {
+    return {};
+  }
+}
+
+function readStoredPushToken(): string {
+  if (typeof window === "undefined") return "";
+  return window.localStorage.getItem(PUSH_TOKEN_STORAGE_KEY) || "";
+}
+
+async function fetchFallbackProductsJson(): Promise<PhoneWithBrand[]> {
+  const fallbackUrl = `${import.meta.env.BASE_URL}data/products.json`;
+  const response = await fetch(fallbackUrl);
   if (!response.ok) {
     throw new Error("Failed to load products.json");
   }
   return (await response.json()) as PhoneWithBrand[];
 }
 
+async function fetchAdminProducts(): Promise<AdminProductsResponse> {
+  try {
+    const response = await fetch("/api/products", {
+      headers: {
+        Accept: "application/json",
+      },
+    });
+    if (response.ok) {
+      const data = (await response.json()) as
+        | AdminProductsResponse
+        | PhoneWithBrand[]
+        | { products?: PhoneWithBrand[]; sha?: string | null };
+      if (Array.isArray(data)) {
+        return { products: data, sha: null };
+      }
+      if (Array.isArray(data.products)) {
+        return { products: data.products, sha: data.sha ?? null };
+      }
+    }
+  } catch {
+    // fall through to static fallback
+  }
+
+  return { products: await fetchFallbackProductsJson(), sha: null };
+}
 function applyPhoneFilters(phones: PhoneWithBrand[], filters?: PhoneFilters): PhoneWithBrand[] {
   let result = phones.filter((p) => p.is_published);
 
@@ -173,25 +258,128 @@ function parseOptionalNumber(value: string): number | null {
   return Number.isNaN(n) ? null : n;
 }
 
+function arraysEqual(a: string[] | null | undefined, b: string[] | null | undefined): boolean {
+  const left = a ?? [];
+  const right = b ?? [];
+  if (left.length !== right.length) return false;
+  return left.every((value, index) => value === right[index]);
+}
+
+function cloneProduct(product: PhoneWithBrand): PhoneWithBrand {
+  return JSON.parse(JSON.stringify(product)) as PhoneWithBrand;
+}
+
+function applyChangesToPhone(phone: PhoneWithBrand, changes: PendingProductChanges): PhoneWithBrand {
+  const next = cloneProduct(phone);
+  if (changes.model !== undefined) next.model = changes.model;
+  if (changes.price !== undefined) next.price = changes.price;
+  if (changes.sale_price !== undefined) next.sale_price = changes.sale_price;
+  if (changes.storage_options !== undefined) next.storage_options = changes.storage_options;
+  if (changes.display_size !== undefined) next.display_size = changes.display_size;
+  if (changes.processor !== undefined) next.processor = changes.processor;
+  if (changes.ram !== undefined) next.ram = changes.ram;
+  if (changes.camera !== undefined) next.camera = changes.camera;
+  if (changes.battery !== undefined) next.battery = changes.battery;
+  if (changes.release_year !== undefined) next.release_year = changes.release_year;
+  if (changes.description !== undefined) next.description = changes.description;
+  if (changes.images !== undefined) next.images = changes.images;
+  if (changes.is_featured !== undefined) next.is_featured = changes.is_featured;
+  if (changes.is_published !== undefined) next.is_published = changes.is_published;
+  if (changes.brand_name !== undefined) {
+    next.brand = { ...next.brand, name: changes.brand_name };
+  }
+  return next;
+}
+
+function applyPendingPatches(
+  phones: PhoneWithBrand[],
+  pendingPatches: Record<string, PendingProductChanges>
+): PhoneWithBrand[] {
+  return phones.map((phone) => {
+    const patch = pendingPatches[phone.id];
+    return patch ? applyChangesToPhone(phone, patch) : phone;
+  });
+}
+
+function buildPendingChanges(base: PhoneWithBrand, draft: PhoneWithBrand): PendingProductChanges {
+  const changes: PendingProductChanges = {};
+
+  if (draft.model !== base.model) changes.model = draft.model;
+  if (draft.price !== base.price) changes.price = draft.price;
+  if (draft.sale_price !== base.sale_price) changes.sale_price = draft.sale_price;
+  if (!arraysEqual(draft.storage_options, base.storage_options)) {
+    changes.storage_options = draft.storage_options ?? [];
+  }
+  if (draft.display_size !== base.display_size) changes.display_size = draft.display_size;
+  if (draft.processor !== base.processor) changes.processor = draft.processor;
+  if (draft.ram !== base.ram) changes.ram = draft.ram;
+  if (draft.camera !== base.camera) changes.camera = draft.camera;
+  if (draft.battery !== base.battery) changes.battery = draft.battery;
+  if (draft.release_year !== base.release_year) changes.release_year = draft.release_year;
+  if (draft.description !== base.description) changes.description = draft.description;
+  if (!arraysEqual(draft.images, base.images)) {
+    changes.images = draft.images ?? [];
+  }
+  if (draft.is_featured !== base.is_featured) changes.is_featured = draft.is_featured;
+  if (draft.is_published !== base.is_published) changes.is_published = draft.is_published;
+
+  const draftBrandName = draft.brand?.name ?? "";
+  const baseBrandName = base.brand?.name ?? "";
+  if (draftBrandName !== baseBrandName) {
+    changes.brand_name = draftBrandName;
+  }
+
+  return changes;
+}
+
 export default function AdminCatalog() {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
+  const { toast } = useToast();
   const [filters, setFilters] = useState<PhoneFilters>({});
   const [showFilters, setShowFilters] = useState(false);
   const [draftPhones, setDraftPhones] = useState<PhoneWithBrand[] | null>(null);
   const [selectedPhoneId, setSelectedPhoneId] = useState<string | null>(null);
   const [imagePreviews, setImagePreviews] = useState<Record<string, string>>({});
+  const [pendingPatches, setPendingPatches] = useState<Record<string, PendingProductChanges>>(
+    readStoredPendingPatches
+  );
+  const [pushToken, setPushToken] = useState<string>(readStoredPushToken);
+  const [isPublishing, setIsPublishing] = useState(false);
 
-  const { data: sourcePhones, isLoading, isError } = useQuery({
+  const { data: sourceData, isLoading, isError } = useQuery({
     queryKey: ["phones", "admin", "raw"],
-    queryFn: fetchPhonesFromJson,
+    queryFn: fetchAdminProducts,
   });
+  const sourcePhones = sourceData?.products ?? null;
+  const sourceSha = sourceData?.sha ?? null;
 
   useEffect(() => {
-    if (sourcePhones && !draftPhones) {
-      setDraftPhones(sourcePhones);
-      setSelectedPhoneId(sourcePhones[0]?.id ?? null);
+    if (typeof window === "undefined") return;
+    window.localStorage.setItem(PENDING_PATCHES_STORAGE_KEY, JSON.stringify(pendingPatches));
+  }, [pendingPatches]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (pushToken) {
+      window.localStorage.setItem(PUSH_TOKEN_STORAGE_KEY, pushToken);
+    } else {
+      window.localStorage.removeItem(PUSH_TOKEN_STORAGE_KEY);
     }
-  }, [sourcePhones, draftPhones]);
+  }, [pushToken]);
+
+  useEffect(() => {
+    if (sourcePhones) {
+      const mergedPhones = applyPendingPatches(sourcePhones, pendingPatches);
+      setDraftPhones(mergedPhones);
+      setSelectedPhoneId((current) => {
+        if (current && mergedPhones.some((phone) => phone.id === current)) {
+          return current;
+        }
+        return mergedPhones[0]?.id ?? null;
+      });
+    }
+  }, [sourcePhones, pendingPatches]);
 
   useEffect(() => {
     return () => {
@@ -223,11 +411,95 @@ export default function AdminCatalog() {
     return draftPhones.find((phone) => phone.id === selectedPhoneId) || null;
   }, [draftPhones, selectedPhoneId]);
 
+  const selectedSourcePhone = useMemo(() => {
+    if (!sourcePhones || !selectedPhoneId) return null;
+    return sourcePhones.find((phone) => phone.id === selectedPhoneId) || null;
+  }, [sourcePhones, selectedPhoneId]);
+
+  const selectedPendingPatch = selectedPhoneId ? pendingPatches[selectedPhoneId] : undefined;
+  const pendingCount = Object.keys(pendingPatches).length;
+
   const updateSelectedPhone = (updater: (phone: PhoneWithBrand) => PhoneWithBrand) => {
     if (!selectedPhoneId) return;
     setDraftPhones((prev) =>
       prev?.map((phone) => (phone.id === selectedPhoneId ? updater(phone) : phone)) ?? prev
     );
+  };
+  const handleSaveLocal = () => {
+    if (!selectedPhone || !selectedSourcePhone) return;
+    const changes = buildPendingChanges(selectedSourcePhone, selectedPhone);
+    if (Object.keys(changes).length === 0) {
+      setPendingPatches((prev) => {
+        if (!selectedPhoneId) return prev;
+        if (!prev[selectedPhoneId]) return prev;
+        const next = { ...prev };
+        delete next[selectedPhoneId];
+        return next;
+      });
+      toast({
+        title: "Sin cambios pendientes",
+        description: "No hay diferencias para guardar en la cola local.",
+      });
+      return;
+    }
+
+    setPendingPatches((prev) => ({
+      ...prev,
+      [selectedPhone.id]: changes,
+    }));
+    toast({
+      title: "Cambios guardados localmente",
+      description: "El producto se agregó a la cola local. Presiona Push para crear un solo commit.",
+    });
+  };
+
+  const handlePushQueuedChanges = async () => {
+    if (pendingCount === 0 || isPublishing) return;
+    setIsPublishing(true);
+    try {
+      const payload: PublishRequestBody = {
+        patches: Object.entries(pendingPatches).map(([id, changes]) => ({ id, changes })),
+        baseSha: sourceSha,
+      };
+
+      const headers: Record<string, string> = {
+        "Content-Type": "application/json",
+      };
+      if (pushToken.trim()) {
+        headers.Authorization = `Bearer ${pushToken.trim()}`;
+      }
+
+      const response = await fetch("/api/products/publish", {
+        method: "POST",
+        headers,
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(errorText || "No se pudo publicar los cambios.");
+      }
+
+      const result = (await response.json()) as PublishResponseBody;
+      setPendingPatches({});
+      setDraftPhones(result.products);
+      queryClient.setQueryData<AdminProductsResponse>(["phones", "admin", "raw"], {
+        products: result.products,
+        sha: result.sha,
+      });
+      toast({
+        title: "Push completado",
+        description: `Commit ${result.commitSha.slice(0, 7)} creado en main.`,
+      });
+    } catch (error) {
+      toast({
+        title: "Push falló",
+        description: error instanceof Error ? error.message : "No se pudo publicar los cambios.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsPublishing(false);
+    }
   };
 
   const selectedImage = selectedPhoneId ? imagePreviews[selectedPhoneId] : undefined;
@@ -239,8 +511,35 @@ export default function AdminCatalog() {
         <div className="container">
           <h1 className="page-title">Catálogo Admin</h1>
           <p className="text-sm text-muted-foreground mb-4">
-            Esta vista replica el catálogo y permite editar localmente los campos del producto. Aún no guarda cambios.
+            Usa Guardar local para acumular cambios y Push para publicar todo en un solo commit a main.
           </p>
+          <div className="mb-6 rounded-lg border bg-card p-4">
+            <div className="flex flex-col lg:flex-row lg:items-end gap-3">
+              <div className="w-full lg:max-w-sm space-y-2">
+                <Label htmlFor="push-token">Token push (opcional)</Label>
+                <Input
+                  id="push-token"
+                  type="password"
+                  placeholder="Bearer token para /api/products/publish"
+                  value={pushToken}
+                  onChange={(e) => setPushToken(e.target.value)}
+                />
+              </div>
+              <div className="flex items-center gap-3">
+                <Button
+                  onClick={handlePushQueuedChanges}
+                  disabled={pendingCount === 0 || isPublishing}
+                >
+                  {isPublishing ? "Publicando..." : `Push cambios (${pendingCount})`}
+                </Button>
+                <span className="text-sm text-muted-foreground">
+                  {pendingCount === 0
+                    ? "Sin cambios en cola"
+                    : `${pendingCount} producto(s) en cola local`}
+                </span>
+              </div>
+            </div>
+          </div>
 
           <div className="controls mb-6 flex flex-col md:flex-row gap-4 md:items-center md:justify-between">
             <div className="w-full max-w-md">
@@ -388,11 +687,21 @@ export default function AdminCatalog() {
               {selectedPhone && (
                 <Card>
                   <CardContent className="p-6 space-y-5">
-                    <div>
-                      <h2 className="font-display font-bold text-xl">Editando producto #{selectedPhone.id}</h2>
-                      <p className="text-sm text-muted-foreground">
-                        Cambios locales de vista previa. No se guarda nada todavía.
-                      </p>
+                    <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+                      <div>
+                        <h2 className="font-display font-bold text-xl">Editando producto #{selectedPhone.id}</h2>
+                        <p className="text-sm text-muted-foreground">
+                          Edita campos y presiona Guardar local para agregar este producto a la cola.
+                        </p>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        {selectedPendingPatch && (
+                          <Badge variant="secondary">En cola para Push</Badge>
+                        )}
+                        <Button onClick={handleSaveLocal} variant="secondary">
+                          Guardar local
+                        </Button>
+                      </div>
                     </div>
 
                     <div className="grid md:grid-cols-2 gap-4">

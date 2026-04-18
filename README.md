@@ -33,3 +33,16 @@ npm run build:gh
 ## Environment variables
 Copy `.env.example` to `.env`:
 - `VITE_WHATSAPP_NUMBER`
+
+## Admin publish API (single commit push)
+The admin app can queue many local product edits and publish them in one commit to `main` via Worker API routes:
+- `GET /api/products`
+- `POST /api/products/publish`
+
+Required Wrangler secrets:
+- `GITHUB_TOKEN` (GitHub token with `contents:write` for this repo)
+- `ADMIN_API_TOKEN` (bearer token expected by `/api/products/publish`)
+
+Set secrets:
+- `npx wrangler secret put GITHUB_TOKEN`
+- `npx wrangler secret put ADMIN_API_TOKEN`
