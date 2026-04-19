@@ -63,6 +63,7 @@ const PENDING_PATCHES_STORAGE_KEY = "centralcelulares.admin.pending-patches.v1";
 const PENDING_IMAGE_UPLOADS_STORAGE_KEY = "centralcelulares.admin.pending-image-uploads.v1";
 const PUSH_TOKEN_STORAGE_KEY = "centralcelulares.admin.push-token.v1";
 const EDITED_FIELD_CLASSNAME = "border-amber-500 bg-amber-100/40 ring-1 ring-amber-400/60";
+const ALLOWED_IMAGE_EXTENSIONS = new Set([".jpg", ".jpeg", ".png", ".webp", ".gif"]);
 
 function readStoredPendingPatches(): Record<string, PendingProductChanges> {
   if (typeof window === "undefined") return {};
@@ -101,6 +102,31 @@ function inferFileExtension(fileName: string, mimeType: string): string {
   if (mimeType.includes("gif")) return ".gif";
   if (mimeType.includes("jpeg") || mimeType.includes("jpg")) return ".jpg";
   return ".jpg";
+}
+
+function normalizeImageExtension(extension: string): string {
+  const trimmed = extension.trim().toLowerCase();
+  if (!trimmed) {
+    throw new Error("Formato de imagen inválido.");
+  }
+  const withDot = trimmed.startsWith(".") ? trimmed : `.${trimmed}`;
+  if (!ALLOWED_IMAGE_EXTENSIONS.has(withDot)) {
+    throw new Error("Formato de imagen no soportado. Usa JPG, PNG, WEBP o GIF.");
+  }
+  return withDot === ".jpeg" ? ".jpg" : withDot;
+}
+
+function sanitizeIdForFileName(id: string): string {
+  const sanitized = id.trim().replace(/[^a-zA-Z0-9_-]/g, "-");
+  if (!sanitized) {
+    throw new Error("ID de producto inválido para nombre de archivo.");
+  }
+  return sanitized;
+}
+
+function buildProductImagePath(productId: string, extension: string): string {
+  const safeId = sanitizeIdForFileName(productId);
+  return `/images/fotos/p-${safeId}${extension}`;
 }
 
 function fileToBase64(file: File): Promise<string> {
@@ -392,7 +418,7 @@ export default function AdminPhoneDetail() {
         <Navbar />
         <div className="container mx-auto px-4 py-16 text-center">
           <h1 className="text-2xl font-bold mb-4">Producto no encontrado</h1>
-          <Link to="/catalog">
+          <Link to="/admin/catalog">
             <Button>Volver al catálogo</Button>
           </Link>
         </div>
@@ -411,7 +437,7 @@ export default function AdminPhoneDetail() {
     <div className="min-h-screen bg-background">
       <Navbar />
       <div className="container mx-auto px-4 py-8">
-        <Link to="/catalog" className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground mb-6">
+        <Link to="/admin/catalog" className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground mb-6">
           <ArrowLeft className="w-4 h-4" />
           Volver al catálogo
         </Link>
@@ -573,26 +599,24 @@ export default function AdminPhoneDetail() {
                   onChange={async (e) => {
                     const file = e.target.files?.[0];
                     if (!file || !id) return;
-
-                    const extension = inferFileExtension(file.name, file.type);
-                    const normalizedExtension = extension.startsWith(".")
-                      ? extension.toLowerCase()
-                      : `.${extension.toLowerCase()}`;
-                    const targetImagePath = `/images/fotos/p-${id}${normalizedExtension}`;
-                    setPreviewImage((old) => {
-                      if (old) URL.revokeObjectURL(old);
-                      return URL.createObjectURL(file);
-                    });
-                    setDraftPhone((prev) =>
-                      prev
-                        ? {
-                            ...prev,
-                            images: [targetImagePath, ...(prev.images?.slice(1) || [])],
-                          }
-                        : prev
-                    );
                     try {
+                      const normalizedExtension = normalizeImageExtension(
+                        inferFileExtension(file.name, file.type)
+                      );
+                      const targetImagePath = buildProductImagePath(id, normalizedExtension);
                       const contentBase64 = await fileToBase64(file);
+                      setPreviewImage((old) => {
+                        if (old) URL.revokeObjectURL(old);
+                        return URL.createObjectURL(file);
+                      });
+                      setDraftPhone((prev) =>
+                        prev
+                          ? {
+                              ...prev,
+                              images: [targetImagePath, ...(prev.images?.slice(1) || [])],
+                            }
+                          : prev
+                      );
                       setPendingImageUploads((prev) => ({
                         ...prev,
                         [id]: {

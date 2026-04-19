@@ -518,7 +518,7 @@ export default function AdminCatalog() {
                       key={phone.id}
                       phone={phone}
                       queued={queuedProductIds.has(phone.id)}
-                      onSelect={() => navigate(`/phone/${phone.id}`)}
+                      onSelect={() => navigate(`/admin/phone/${phone.id}`)}
                     />
                   ))}
                 </div>
