@@ -1,5 +1,5 @@
 interface Env {
-  ASSETS: Fetcher;
+  ASSETS?: Fetcher;
   GITHUB_TOKEN?: string;
   GITHUB_OWNER?: string;
   GITHUB_REPO?: string;
@@ -165,21 +165,30 @@ function getCorsOrigin(request: Request, env: Env): string {
   return requestOrigin === configured ? configured : configured;
 }
 
-function getGitHubConfig(env: Env) {
-  const token = env.GITHUB_TOKEN?.trim();
+function getGitHubReadConfig(env: Env) {
+  const token = env.GITHUB_TOKEN?.trim() || undefined;
   const owner = env.GITHUB_OWNER?.trim();
   const repo = env.GITHUB_REPO?.trim();
   const branch = env.GITHUB_TARGET_BRANCH?.trim() || "main";
   const path = env.GITHUB_PRODUCTS_PATH?.trim() || "public/data/products.json";
-  if (!token || !owner || !repo) {
+  if (!owner || !repo) {
     return null;
   }
   return { token, owner, repo, branch, path };
 }
 
-function buildGitHubHeaders(token: string, extraHeaders?: HeadersInit): HeadersInit {
+function getGitHubWriteConfig(env: Env) {
+  const readCfg = getGitHubReadConfig(env);
+  const token = env.GITHUB_TOKEN?.trim();
+  if (!readCfg || !token) {
+    return null;
+  }
+  return { ...readCfg, token };
+}
+
+function buildGitHubHeaders(token?: string, extraHeaders?: HeadersInit): HeadersInit {
   return {
-    Authorization: `Bearer ${token}`,
+    ...(token ? { Authorization: `Bearer ${token}` } : {}),
     Accept: "application/vnd.github+json",
     "User-Agent": "centralcelulares-admin-worker",
     ...(extraHeaders || {}),
@@ -209,9 +218,9 @@ async function fetchGitHubProducts(env: Env): Promise<{
   products: ProductRecord[];
   sha: string;
 }> {
-  const cfg = getGitHubConfig(env);
+  const cfg = getGitHubReadConfig(env);
   if (!cfg) {
-    throw new Error("Missing GitHub worker configuration.");
+    throw new Error("Missing GitHub read configuration.");
   }
 
   const url = `https://api.github.com/repos/${cfg.owner}/${cfg.repo}/contents/${normalizePath(
@@ -230,6 +239,18 @@ async function fetchGitHubProducts(env: Env): Promise<{
   const jsonText = decodeBase64Utf8(data.content);
   const products = JSON.parse(jsonText) as ProductRecord[];
   return { products, sha: data.sha };
+}
+
+async function tryFetchProductsFromAssets(request: Request, env: Env): Promise<ProductRecord[] | null> {
+  if (!env.ASSETS || typeof env.ASSETS.fetch !== "function") {
+    return null;
+  }
+  const fallbackUrl = new URL("/data/products.json", request.url).toString();
+  const assetResponse = await env.ASSETS.fetch(fallbackUrl);
+  if (!assetResponse.ok) {
+    throw new Error(`Asset products read failed (${assetResponse.status}).`);
+  }
+  return (await assetResponse.json()) as ProductRecord[];
 }
 
 function isStringArray(value: unknown): value is string[] {
@@ -438,18 +459,27 @@ async function handleGetProducts(request: Request, env: Env): Promise<Response> 
   const corsOrigin = getCorsOrigin(request, env);
 
   try {
-    const cfg = getGitHubConfig(env);
-    if (!cfg) {
-      const fallbackUrl = new URL("/data/products.json", request.url).toString();
-      const assetResponse = await env.ASSETS.fetch(fallbackUrl);
-      if (!assetResponse.ok) {
-        return jsonResponse({ error: "Failed to read products from assets." }, 500, corsOrigin);
+    const readCfg = getGitHubReadConfig(env);
+
+    if (readCfg) {
+      try {
+        const { products, sha } = await fetchGitHubProducts(env);
+        return jsonResponse({ products, sha }, 200, corsOrigin);
+      } catch (githubError) {
+        const fallbackProducts = await tryFetchProductsFromAssets(request, env);
+        if (fallbackProducts) {
+          return jsonResponse({ products: fallbackProducts, sha: null }, 200, corsOrigin);
+        }
+        throw githubError;
       }
-      const products = (await assetResponse.json()) as ProductRecord[];
-      return jsonResponse({ products, sha: null }, 200, corsOrigin);
     }
-    const { products, sha } = await fetchGitHubProducts(env);
-    return jsonResponse({ products, sha }, 200, corsOrigin);
+
+    const fallbackProducts = await tryFetchProductsFromAssets(request, env);
+    if (fallbackProducts) {
+      return jsonResponse({ products: fallbackProducts, sha: null }, 200, corsOrigin);
+    }
+
+    return jsonResponse({ error: "GitHub worker configuration is incomplete." }, 500, corsOrigin);
   } catch (error) {
     return jsonResponse(
       {
@@ -466,8 +496,7 @@ async function handlePublishProducts(request: Request, env: Env): Promise<Respon
   if (!requireAuth(request, env)) {
     return jsonResponse({ error: "Unauthorized" }, 401, corsOrigin);
   }
-
-  const cfg = getGitHubConfig(env);
+  const cfg = getGitHubWriteConfig(env);
   if (!cfg) {
     return jsonResponse({ error: "GitHub worker configuration is incomplete." }, 500, corsOrigin);
   }
@@ -596,6 +625,10 @@ export default {
       return handlePublishProducts(request, env);
     }
 
-    return env.ASSETS.fetch(request);
+    if (env.ASSETS && typeof env.ASSETS.fetch === "function") {
+      return env.ASSETS.fetch(request);
+    }
+
+    return new Response("Not Found", { status: 404 });
   },
 };
