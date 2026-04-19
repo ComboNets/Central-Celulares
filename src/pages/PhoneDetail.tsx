@@ -22,9 +22,14 @@ export default function PhoneDetail() {
   }, [id]);
 
   const handleWhatsAppClick = () => {
-    if (phone && whatsappNumber) {
-      trackEvent("whatsapp_click", phone.id);
-      window.open(generateWhatsAppLink(whatsappNumber, phone.model), "_blank");
+    if (!phone) return;
+
+    trackEvent("whatsapp_click", phone.id);
+    const whatsappLink = generateWhatsAppLink(whatsappNumber ?? "", phone.model);
+    const whatsappWindow = window.open(whatsappLink, "_blank", "noopener,noreferrer");
+
+    if (!whatsappWindow) {
+      window.location.href = whatsappLink;
     }
   };
 

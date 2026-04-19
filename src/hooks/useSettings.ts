@@ -13,5 +13,8 @@ export function useWhatsAppNumber() {
 export function generateWhatsAppLink(phoneNumber: string, phoneModel: string) {
   const cleanNumber = phoneNumber.replace(/\D/g, "");
   const message = encodeURIComponent(`Hola, estoy interesado en el ${phoneModel}. ¿Está disponible?`);
-  return `https://wa.me/${cleanNumber}?text=${message}`;
+  if (!cleanNumber) {
+    return `https://wa.me/?text=${message}`;
+  }
+  return `https://api.whatsapp.com/send?phone=${cleanNumber}&text=${message}`;
 }
