@@ -9,9 +9,10 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
+import { useAdminAuthActions } from "@/hooks/useAdminAuth";
 import { resolveProductImageUrl } from "@/lib/productAssets";
 import type { Brand, PhoneFilters, PhoneWithBrand } from "@/types/products";
-import { Search, SlidersHorizontal, X } from "lucide-react";
+import { LogOut, Search, SlidersHorizontal, X } from "lucide-react";
 
 interface AdminProductsResponse {
   products: PhoneWithBrand[];
@@ -62,7 +63,6 @@ interface PendingImageUpload {
 
 const PENDING_PATCHES_STORAGE_KEY = "centralcelulares.admin.pending-patches.v1";
 const PENDING_IMAGE_UPLOADS_STORAGE_KEY = "centralcelulares.admin.pending-image-uploads.v1";
-const PUSH_TOKEN_STORAGE_KEY = "centralcelulares.admin.push-token.v1";
 
 function readStoredPendingPatches(): Record<string, PendingProductChanges> {
   if (typeof window === "undefined") return {};
@@ -74,11 +74,6 @@ function readStoredPendingPatches(): Record<string, PendingProductChanges> {
   } catch {
     return {};
   }
-}
-
-function readStoredPushToken(): string {
-  if (typeof window === "undefined") return "";
-  return window.localStorage.getItem(PUSH_TOKEN_STORAGE_KEY) || "";
 }
 
 function readStoredPendingImageUploads(): Record<string, PendingImageUpload> {
@@ -246,6 +241,7 @@ export default function AdminCatalog() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const { toast } = useToast();
+  const { logout } = useAdminAuthActions();
 
   const [filters, setFilters] = useState<PhoneFilters>({});
   const [showFilters, setShowFilters] = useState(false);
@@ -255,7 +251,6 @@ export default function AdminCatalog() {
   const [pendingImageUploads, setPendingImageUploads] = useState<Record<string, PendingImageUpload>>(
     readStoredPendingImageUploads
   );
-  const [pushToken, setPushToken] = useState<string>(readStoredPushToken);
   const [isPublishing, setIsPublishing] = useState(false);
 
   const { data: sourceData, isLoading, isError } = useQuery({
@@ -275,15 +270,6 @@ export default function AdminCatalog() {
     if (typeof window === "undefined") return;
     window.localStorage.setItem(PENDING_IMAGE_UPLOADS_STORAGE_KEY, JSON.stringify(pendingImageUploads));
   }, [pendingImageUploads]);
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    if (pushToken) {
-      window.localStorage.setItem(PUSH_TOKEN_STORAGE_KEY, pushToken);
-    } else {
-      window.localStorage.removeItem(PUSH_TOKEN_STORAGE_KEY);
-    }
-  }, [pushToken]);
 
   const updateFilter = <K extends keyof PhoneFilters>(key: K, value: PhoneFilters[K]) => {
     setFilters((prev) => ({ ...prev, [key]: value }));
@@ -319,20 +305,17 @@ export default function AdminCatalog() {
         baseSha: sourceSha,
       };
 
-      const headers: Record<string, string> = {
-        "Content-Type": "application/json",
-      };
-      if (pushToken.trim()) {
-        headers.Authorization = `Bearer ${pushToken.trim()}`;
-      }
-
       const response = await fetch("/api/products/publish", {
         method: "POST",
-        headers,
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify(payload),
       });
 
       if (!response.ok) {
+        if (response.status === 401) {
+          navigate("/login", { replace: true, state: { from: "/admin/catalog" } });
+        }
         const errorText = await response.text();
         throw new Error(errorText || "No se pudo publicar los cambios.");
       }
@@ -359,6 +342,11 @@ export default function AdminCatalog() {
     }
   };
 
+  const handleLogout = async () => {
+    await logout();
+    navigate("/login", { replace: true });
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -366,24 +354,20 @@ export default function AdminCatalog() {
         <div className="container">
           <div className="mb-2 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <h1 className="page-title mb-0">Catálogo Admin</h1>
-            <Button onClick={() => navigate("/admin/product/new")}>Agregar producto</Button>
+            <div className="flex flex-wrap items-center gap-2">
+              <Button onClick={() => navigate("/admin/product/new")}>Agregar producto</Button>
+              <Button variant="outline" onClick={handleLogout}>
+                <LogOut className="mr-2 h-4 w-4" />
+                Salir
+              </Button>
+            </div>
           </div>
           <p className="text-sm text-muted-foreground mb-4">
             Haz clic en un producto para editarlo en la vista de detalle (mismo diseño de showcase).
           </p>
 
           <div className="mb-6 rounded-lg border bg-card p-4">
-            <div className="flex flex-col lg:flex-row lg:items-end gap-3">
-              <div className="w-full lg:max-w-sm space-y-2">
-                <Label htmlFor="push-token">Token push (opcional)</Label>
-                <Input
-                  id="push-token"
-                  type="password"
-                  placeholder="Bearer token para /api/products/publish"
-                  value={pushToken}
-                  onChange={(e) => setPushToken(e.target.value)}
-                />
-              </div>
+            <div className="flex flex-col lg:flex-row lg:items-center gap-3">
               <div className="flex items-center gap-3">
                 <Button onClick={handlePushQueuedChanges} disabled={pendingCount === 0 || isPublishing}>
                   {isPublishing ? "Publicando..." : `Push cambios (${pendingCount})`}

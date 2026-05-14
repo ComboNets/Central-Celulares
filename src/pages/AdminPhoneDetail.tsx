@@ -1,8 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Navbar } from "@/components/Navbar";
 import { useToast } from "@/hooks/use-toast";
+import { useAdminAuthActions } from "@/hooks/useAdminAuth";
 import { resolveProductImageUrl } from "@/lib/productAssets";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -11,7 +12,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import type { PhoneWithBrand } from "@/types/products";
-import { ArrowLeft, Battery, Camera, Calendar, Cpu, HardDrive, Monitor } from "lucide-react";
+import { ArrowLeft, Battery, Camera, Calendar, Cpu, HardDrive, LogOut, Monitor } from "lucide-react";
 
 interface AdminProductsResponse {
   products: PhoneWithBrand[];
@@ -62,7 +63,6 @@ interface PendingImageUpload {
 
 const PENDING_PATCHES_STORAGE_KEY = "centralcelulares.admin.pending-patches.v1";
 const PENDING_IMAGE_UPLOADS_STORAGE_KEY = "centralcelulares.admin.pending-image-uploads.v1";
-const PUSH_TOKEN_STORAGE_KEY = "centralcelulares.admin.push-token.v1";
 const EDITED_FIELD_CLASSNAME = "border-amber-500 bg-amber-100/40 ring-1 ring-amber-400/60";
 const ALLOWED_IMAGE_EXTENSIONS = new Set([".jpg", ".jpeg", ".png", ".webp", ".gif"]);
 
@@ -76,11 +76,6 @@ function readStoredPendingPatches(): Record<string, PendingProductChanges> {
   } catch {
     return {};
   }
-}
-
-function readStoredPushToken(): string {
-  if (typeof window === "undefined") return "";
-  return window.localStorage.getItem(PUSH_TOKEN_STORAGE_KEY) || "";
 }
 
 function readStoredPendingImageUploads(): Record<string, PendingImageUpload> {
@@ -240,14 +235,15 @@ async function fetchAdminProducts(): Promise<AdminProductsResponse> {
 
 export default function AdminPhoneDetail() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
   const { toast } = useToast();
+  const { logout } = useAdminAuthActions();
 
   const [pendingPatches, setPendingPatches] = useState<Record<string, PendingProductChanges>>(readStoredPendingPatches);
   const [pendingImageUploads, setPendingImageUploads] = useState<Record<string, PendingImageUpload>>(
     readStoredPendingImageUploads
   );
-  const [pushToken, setPushToken] = useState<string>(readStoredPushToken);
   const [isPublishing, setIsPublishing] = useState(false);
   const [draftPhone, setDraftPhone] = useState<PhoneWithBrand | null>(null);
   const [previewImage, setPreviewImage] = useState<string | null>(null);
@@ -292,16 +288,6 @@ export default function AdminPhoneDetail() {
     if (typeof window === "undefined") return;
     window.localStorage.setItem(PENDING_IMAGE_UPLOADS_STORAGE_KEY, JSON.stringify(pendingImageUploads));
   }, [pendingImageUploads]);
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    if (pushToken) {
-      window.localStorage.setItem(PUSH_TOKEN_STORAGE_KEY, pushToken);
-    } else {
-      window.localStorage.removeItem(PUSH_TOKEN_STORAGE_KEY);
-    }
-  }, [pushToken]);
-
 
   useEffect(() => {
     return () => {
@@ -361,20 +347,17 @@ export default function AdminPhoneDetail() {
         baseSha: sourceSha,
       };
 
-      const headers: Record<string, string> = {
-        "Content-Type": "application/json",
-      };
-      if (pushToken.trim()) {
-        headers.Authorization = `Bearer ${pushToken.trim()}`;
-      }
-
       const response = await fetch("/api/products/publish", {
         method: "POST",
-        headers,
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify(payload),
       });
 
       if (!response.ok) {
+        if (response.status === 401) {
+          navigate("/login", { replace: true, state: { from: `/admin/phone/${id}` } });
+        }
         const errorText = await response.text();
         throw new Error(errorText || "No se pudo publicar los cambios.");
       }
@@ -399,6 +382,11 @@ export default function AdminPhoneDetail() {
     } finally {
       setIsPublishing(false);
     }
+  };
+
+  const handleLogout = async () => {
+    await logout();
+    navigate("/login", { replace: true });
   };
 
   if (isLoading) {
@@ -446,23 +434,17 @@ export default function AdminPhoneDetail() {
         </Link>
 
         <div className="mb-6 rounded-lg border bg-card p-4">
-          <div className="flex flex-col lg:flex-row lg:items-end gap-3">
-            <div className="w-full lg:max-w-sm space-y-2">
-              <Label htmlFor="push-token">Token push (opcional)</Label>
-              <Input
-                id="push-token"
-                type="password"
-                placeholder="Bearer token para /api/products/publish"
-                value={pushToken}
-                onChange={(e) => setPushToken(e.target.value)}
-              />
-            </div>
+          <div className="flex flex-col lg:flex-row lg:items-center gap-3">
             <div className="flex items-center gap-3">
               <Button onClick={handlePushQueuedChanges} disabled={pendingCount === 0 || isPublishing}>
                 {isPublishing ? "Publicando..." : `Push cambios (${pendingCount})`}
               </Button>
               <Button onClick={handleSaveLocal} variant="secondary">
                 Guardar local
+              </Button>
+              <Button onClick={handleLogout} variant="outline">
+                <LogOut className="mr-2 h-4 w-4" />
+                Salir
               </Button>
               <span className="text-sm text-muted-foreground">
                 {selectedPatch || selectedUpload

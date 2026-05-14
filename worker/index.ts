@@ -7,6 +7,9 @@ interface Env {
   GITHUB_PRODUCTS_PATH?: string;
   ALLOWED_ORIGIN?: string;
   ADMIN_API_TOKEN?: string;
+  ADMIN_PASSWORD?: string;
+  ADMIN_PASSWORD_HASH?: string;
+  ADMIN_SESSION_SECRET?: string;
 }
 
 interface ProductRecord {
@@ -141,18 +144,134 @@ const ALLOWED_CHANGE_KEYS = new Set<keyof PendingProductChanges>([
 ]);
 
 const ALLOWED_IMAGE_EXTENSIONS = new Set([".jpg", ".jpeg", ".png", ".webp", ".gif"]);
+const ADMIN_SESSION_COOKIE_NAME = "centralcelulares_admin_session";
+const ADMIN_SESSION_MAX_AGE_SECONDS = 60 * 60 * 12;
 
-function jsonResponse(body: unknown, status = 200, corsOrigin = "*"): Response {
+function jsonResponse(body: unknown, status = 200, corsOrigin = "*", extraHeaders?: HeadersInit): Response {
   return new Response(JSON.stringify(body), {
     status,
     headers: {
       "Content-Type": "application/json; charset=utf-8",
       "Access-Control-Allow-Origin": corsOrigin,
+      "Access-Control-Allow-Credentials": "true",
       "Access-Control-Allow-Headers": "Content-Type, Authorization",
       "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
       "Cache-Control": "no-store",
+      ...(extraHeaders || {}),
     },
   });
+}
+
+function bytesToHex(bytes: ArrayBuffer): string {
+  return Array.from(new Uint8Array(bytes))
+    .map((byte) => byte.toString(16).padStart(2, "0"))
+    .join("");
+}
+
+function bytesToBase64Url(bytes: ArrayBuffer): string {
+  let binary = "";
+  const array = new Uint8Array(bytes);
+  for (const byte of array) binary += String.fromCharCode(byte);
+  return btoa(binary).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/g, "");
+}
+
+function base64UrlToString(value: string): string {
+  const padded = value.replace(/-/g, "+").replace(/_/g, "/").padEnd(Math.ceil(value.length / 4) * 4, "=");
+  const binary = atob(padded);
+  const bytes = Uint8Array.from(binary, (char) => char.charCodeAt(0));
+  return new TextDecoder().decode(bytes);
+}
+
+function stringToBase64Url(value: string): string {
+  const bytes = new TextEncoder().encode(value);
+  return bytesToBase64Url(bytes);
+}
+
+async function sha256Hex(value: string): Promise<string> {
+  return bytesToHex(await crypto.subtle.digest("SHA-256", new TextEncoder().encode(value)));
+}
+
+async function hmacSha256Base64Url(secret: string, value: string): Promise<string> {
+  const key = await crypto.subtle.importKey(
+    "raw",
+    new TextEncoder().encode(secret),
+    { name: "HMAC", hash: "SHA-256" },
+    false,
+    ["sign"]
+  );
+  const signature = await crypto.subtle.sign("HMAC", key, new TextEncoder().encode(value));
+  return bytesToBase64Url(signature);
+}
+
+function constantTimeEqual(left: string, right: string): boolean {
+  if (left.length !== right.length) return false;
+  let result = 0;
+  for (let i = 0; i < left.length; i += 1) {
+    result |= left.charCodeAt(i) ^ right.charCodeAt(i);
+  }
+  return result === 0;
+}
+
+function readCookie(request: Request, name: string): string | null {
+  const cookieHeader = request.headers.get("Cookie") || "";
+  for (const part of cookieHeader.split(";")) {
+    const [rawName, ...rawValue] = part.trim().split("=");
+    if (rawName === name) return rawValue.join("=");
+  }
+  return null;
+}
+
+async function verifyAdminPassword(password: string, env: Env): Promise<boolean> {
+  const configuredHash = env.ADMIN_PASSWORD_HASH?.trim().toLowerCase();
+  if (configuredHash) {
+    return constantTimeEqual(await sha256Hex(password), configuredHash);
+  }
+
+  const configuredPassword = env.ADMIN_PASSWORD?.trim();
+  if (configuredPassword) {
+    return constantTimeEqual(password, configuredPassword);
+  }
+
+  return false;
+}
+
+async function createAdminSessionCookie(env: Env): Promise<string> {
+  const secret = env.ADMIN_SESSION_SECRET?.trim();
+  if (!secret) {
+    throw new Error("ADMIN_SESSION_SECRET is not configured.");
+  }
+
+  const payload = stringToBase64Url(
+    JSON.stringify({
+      sub: "admin",
+      exp: Math.floor(Date.now() / 1000) + ADMIN_SESSION_MAX_AGE_SECONDS,
+    })
+  );
+  const signature = await hmacSha256Base64Url(secret, payload);
+  return `${ADMIN_SESSION_COOKIE_NAME}=${payload}.${signature}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=${ADMIN_SESSION_MAX_AGE_SECONDS}`;
+}
+
+async function hasValidAdminSession(request: Request, env: Env): Promise<boolean> {
+  const secret = env.ADMIN_SESSION_SECRET?.trim();
+  const token = readCookie(request, ADMIN_SESSION_COOKIE_NAME);
+  if (!secret || !token) return false;
+
+  const [payload, signature] = token.split(".");
+  if (!payload || !signature) return false;
+
+  const expectedSignature = await hmacSha256Base64Url(secret, payload);
+  if (!constantTimeEqual(signature, expectedSignature)) return false;
+
+  try {
+    const session = JSON.parse(base64UrlToString(payload)) as { sub?: string; exp?: number };
+    return session.sub === "admin" && typeof session.exp === "number" && session.exp > Math.floor(Date.now() / 1000);
+  } catch {
+    return false;
+  }
+}
+
+function clearAdminSessionCookie(): string {
+  return `${ADMIN_SESSION_COOKIE_NAME}=; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0`;
 }
 
 function normalizePath(path: string): string {
@@ -623,12 +742,63 @@ async function createGitHubCommitWithFiles(
   };
 }
 
-function requireAuth(request: Request, env: Env): boolean {
+async function requireAuth(request: Request, env: Env): Promise<boolean> {
+  if (await hasValidAdminSession(request, env)) return true;
+
   const expected = env.ADMIN_API_TOKEN?.trim();
-  if (!expected) return true;
+  if (!expected) return false;
   const authHeader = request.headers.get("Authorization") || "";
   const bearer = authHeader.startsWith("Bearer ") ? authHeader.slice(7).trim() : "";
   return bearer === expected;
+}
+
+async function handleLogin(request: Request, env: Env): Promise<Response> {
+  const corsOrigin = getCorsOrigin(request, env);
+  let payload: { password?: string };
+  try {
+    payload = (await request.json()) as { password?: string };
+  } catch {
+    return jsonResponse({ error: "Invalid JSON body." }, 400, corsOrigin);
+  }
+
+  const password = typeof payload.password === "string" ? payload.password : "";
+  if (!password || !(await verifyAdminPassword(password, env))) {
+    return jsonResponse({ error: "Credenciales inválidas." }, 401, corsOrigin);
+  }
+
+  try {
+    const sessionCookie = await createAdminSessionCookie(env);
+    return jsonResponse(
+      { ok: true, user: { name: "admin" } },
+      200,
+      corsOrigin,
+      { "Set-Cookie": sessionCookie }
+    );
+  } catch (error) {
+    return jsonResponse(
+      { error: error instanceof Error ? error.message : "No se pudo iniciar sesión." },
+      500,
+      corsOrigin
+    );
+  }
+}
+
+async function handleMe(request: Request, env: Env): Promise<Response> {
+  const corsOrigin = getCorsOrigin(request, env);
+  if (!(await hasValidAdminSession(request, env))) {
+    return jsonResponse({ authenticated: false }, 401, corsOrigin);
+  }
+  return jsonResponse({ authenticated: true, user: { name: "admin" } }, 200, corsOrigin);
+}
+
+function handleLogout(request: Request, env: Env): Response {
+  const corsOrigin = getCorsOrigin(request, env);
+  return jsonResponse(
+    { ok: true },
+    200,
+    corsOrigin,
+    { "Set-Cookie": clearAdminSessionCookie() }
+  );
 }
 
 async function handleGetProducts(request: Request, env: Env): Promise<Response> {
@@ -669,7 +839,7 @@ async function handleGetProducts(request: Request, env: Env): Promise<Response> 
 
 async function handlePublishProducts(request: Request, env: Env): Promise<Response> {
   const corsOrigin = getCorsOrigin(request, env);
-  if (!requireAuth(request, env)) {
+  if (!(await requireAuth(request, env))) {
     return jsonResponse({ error: "Unauthorized" }, 401, corsOrigin);
   }
   const cfg = getGitHubWriteConfig(env);
@@ -805,6 +975,18 @@ export default {
 
     if (request.method === "OPTIONS") {
       return jsonResponse({ ok: true }, 200, corsOrigin);
+    }
+
+    if (url.pathname === "/api/auth/login" && request.method === "POST") {
+      return handleLogin(request, env);
+    }
+
+    if (url.pathname === "/api/auth/me" && request.method === "GET") {
+      return handleMe(request, env);
+    }
+
+    if (url.pathname === "/api/auth/logout" && request.method === "POST") {
+      return handleLogout(request, env);
     }
 
     if (url.pathname === "/api/products" && request.method === "GET") {

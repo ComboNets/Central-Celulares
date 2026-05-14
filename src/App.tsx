@@ -12,6 +12,8 @@ import Services from "./pages/Services";
 import AdminCatalog from "./pages/AdminCatalog";
 import AdminPhoneDetail from "./pages/AdminPhoneDetail";
 import AdminAddProduct from "./pages/AdminAddProduct";
+import AdminLogin from "./pages/AdminLogin";
+import { RequireAdminAuth } from "./components/RequireAdminAuth";
 
 const queryClient = new QueryClient();
 const hostname = typeof window === "undefined" ? "" : window.location.hostname.toLowerCase();
@@ -25,9 +27,19 @@ const App = () => (
       <Sonner />
       <BrowserRouter basename={import.meta.env.BASE_URL}>
         <Routes>
-          <Route path="/" element={isAdminHost ? <AdminCatalog /> : <Index />} />
-          <Route path="/catalog" element={isAdminHost ? <AdminCatalog /> : <Catalog />} />
-          <Route path="/phone/:id" element={isAdminHost ? <AdminPhoneDetail /> : <PhoneDetail />} />
+          <Route
+            path="/"
+            element={isAdminHost ? <RequireAdminAuth><AdminCatalog /></RequireAdminAuth> : <Index />}
+          />
+          <Route
+            path="/catalog"
+            element={isAdminHost ? <RequireAdminAuth><AdminCatalog /></RequireAdminAuth> : <Catalog />}
+          />
+          <Route
+            path="/phone/:id"
+            element={isAdminHost ? <RequireAdminAuth><AdminPhoneDetail /></RequireAdminAuth> : <PhoneDetail />}
+          />
+          <Route path="/login" element={canUseAdminRoutes ? <AdminLogin /> : <Navigate to="/" replace />} />
           <Route path="/services" element={<Services />} />
           <Route path="/about" element={<About />} />
           <Route
@@ -36,15 +48,15 @@ const App = () => (
           />
           <Route
             path="/admin/catalog"
-            element={canUseAdminRoutes ? <AdminCatalog /> : <Navigate to="/" replace />}
+            element={canUseAdminRoutes ? <RequireAdminAuth><AdminCatalog /></RequireAdminAuth> : <Navigate to="/" replace />}
           />
           <Route
             path="/admin/phone/:id"
-            element={canUseAdminRoutes ? <AdminPhoneDetail /> : <Navigate to="/" replace />}
+            element={canUseAdminRoutes ? <RequireAdminAuth><AdminPhoneDetail /></RequireAdminAuth> : <Navigate to="/" replace />}
           />
           <Route
             path="/admin/product/new"
-            element={canUseAdminRoutes ? <AdminAddProduct /> : <Navigate to="/" replace />}
+            element={canUseAdminRoutes ? <RequireAdminAuth><AdminAddProduct /></RequireAdminAuth> : <Navigate to="/" replace />}
           />
           <Route path="*" element={<NotFound />} />
         </Routes>

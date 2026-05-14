@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Navbar } from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
@@ -6,8 +6,10 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/hooks/use-toast";
-import { ArrowLeft } from "lucide-react";
+import { useAdminAuthActions } from "@/hooks/useAdminAuth";
+import { ArrowLeft, Battery, Camera, Calendar, Cpu, HardDrive, LogOut, Monitor } from "lucide-react";
 
 interface CreateProductRequest {
   id: string;
@@ -53,8 +55,6 @@ interface NewProductFormState {
   is_published: boolean;
 }
 
-const PUSH_TOKEN_STORAGE_KEY = "centralcelulares.admin.push-token.v1";
-
 const INITIAL_FORM_STATE: NewProductFormState = {
   id: "",
   brand_name: "",
@@ -74,27 +74,13 @@ const INITIAL_FORM_STATE: NewProductFormState = {
   is_published: true,
 };
 
-function readStoredPushToken(): string {
-  if (typeof window === "undefined") return "";
-  return window.localStorage.getItem(PUSH_TOKEN_STORAGE_KEY) || "";
-}
-
 export default function AdminAddProduct() {
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { logout } = useAdminAuthActions();
 
   const [form, setForm] = useState<NewProductFormState>(INITIAL_FORM_STATE);
-  const [pushToken, setPushToken] = useState<string>(readStoredPushToken);
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    if (pushToken) {
-      window.localStorage.setItem(PUSH_TOKEN_STORAGE_KEY, pushToken);
-    } else {
-      window.localStorage.removeItem(PUSH_TOKEN_STORAGE_KEY);
-    }
-  }, [pushToken]);
 
   const handleCreateProduct = async () => {
     if (isSubmitting) return;
@@ -115,8 +101,8 @@ export default function AdminAddProduct() {
     const parsedPrice = Number(form.price.trim());
     if (!Number.isFinite(parsedPrice) || parsedPrice < 0) {
       toast({
-        title: "Precio inválido",
-        description: "Ingresa un precio válido mayor o igual a 0.",
+        title: "Precio invalido",
+        description: "Ingresa un precio valido mayor o igual a 0.",
         variant: "destructive",
       });
       return;
@@ -128,8 +114,8 @@ export default function AdminAddProduct() {
       const parsedSalePrice = Number(salePriceRaw);
       if (!Number.isFinite(parsedSalePrice) || parsedSalePrice < 0) {
         toast({
-          title: "Precio oferta inválido",
-          description: "Ingresa un precio de oferta válido o déjalo vacío.",
+          title: "Precio oferta invalido",
+          description: "Ingresa un precio de oferta valido o dejalo vacio.",
           variant: "destructive",
         });
         return;
@@ -143,8 +129,8 @@ export default function AdminAddProduct() {
       const parsedReleaseYear = Number(releaseYearRaw);
       if (!Number.isInteger(parsedReleaseYear)) {
         toast({
-          title: "Año inválido",
-          description: "El año de lanzamiento debe ser un número entero.",
+          title: "Anio invalido",
+          description: "El anio de lanzamiento debe ser un numero entero.",
           variant: "destructive",
         });
         return;
@@ -179,20 +165,17 @@ export default function AdminAddProduct() {
 
     setIsSubmitting(true);
     try {
-      const headers: Record<string, string> = {
-        "Content-Type": "application/json",
-      };
-      if (pushToken.trim()) {
-        headers.Authorization = `Bearer ${pushToken.trim()}`;
-      }
-
       const response = await fetch("/api/products/publish", {
         method: "POST",
-        headers,
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify({ creates: [payload] }),
       });
 
       if (!response.ok) {
+        if (response.status === 401) {
+          navigate("/login", { replace: true, state: { from: "/admin/product/new" } });
+        }
         const errorText = (await response.text()).trim();
         let errorMessage = errorText || "No se pudo agregar el producto.";
         try {
@@ -222,6 +205,11 @@ export default function AdminAddProduct() {
     }
   };
 
+  const handleLogout = async () => {
+    await logout();
+    navigate("/login", { replace: true });
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -231,42 +219,46 @@ export default function AdminAddProduct() {
           className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground mb-6"
         >
           <ArrowLeft className="w-4 h-4" />
-          Volver al catálogo
+          Volver al catalogo
         </Link>
 
         <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <h1 className="page-title mb-0">Agregar producto</h1>
-          <Button onClick={handleCreateProduct} disabled={isSubmitting}>
-            {isSubmitting ? "Agregando..." : "Crear y publicar"}
-          </Button>
+          <div className="flex flex-wrap items-center gap-2">
+            <Button onClick={handleCreateProduct} disabled={isSubmitting}>
+              {isSubmitting ? "Agregando..." : "Crear y publicar"}
+            </Button>
+            <Button onClick={handleLogout} variant="outline">
+              <LogOut className="mr-2 h-4 w-4" />
+              Salir
+            </Button>
+          </div>
         </div>
 
-        <Card className="mb-6">
-          <CardContent className="p-6">
-            <div className="space-y-2 max-w-md">
-              <Label htmlFor="push-token">Token push (opcional)</Label>
-              <Input
-                id="push-token"
-                type="password"
-                placeholder="Bearer token para /api/products/publish"
-                value={pushToken}
-                onChange={(e) => setPushToken(e.target.value)}
-              />
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardContent className="p-6 space-y-5">
-            <div className="grid md:grid-cols-3 gap-4">
-              <div className="space-y-2">
-                <Label>ID *</Label>
-                <Input value={form.id} onChange={(e) => setForm((prev) => ({ ...prev, id: e.target.value }))} />
+        <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
+          <div className="relative aspect-square bg-secondary rounded-2xl overflow-hidden">
+            {form.image_path.trim() ? (
+              <img src={form.image_path.trim()} alt={form.model || "Nuevo producto"} className="w-full h-full object-cover" />
+            ) : (
+              <div className="w-full h-full flex flex-col items-center justify-center px-8 text-center text-muted-foreground">
+                <Camera className="mb-3 h-10 w-10 text-primary/70" />
+                <p className="text-sm font-medium">Vista previa de imagen</p>
+                <p className="mt-1 text-xs">Agrega una ruta como /images/fotos/p-nuevo.jpg</p>
               </div>
+            )}
+            <div className="absolute top-4 left-4 flex flex-col gap-2">
+              {form.is_featured && <span className="featured-badge">Destacado</span>}
+              {form.sale_price && <span className="sale-badge">Oferta</span>}
+            </div>
+          </div>
+
+          <div className="space-y-5">
+            <div className="grid md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label>Marca *</Label>
                 <Input
                   value={form.brand_name}
+                  placeholder="Ej: Xiaomi"
                   onChange={(e) => setForm((prev) => ({ ...prev, brand_name: e.target.value }))}
                 />
               </div>
@@ -274,17 +266,28 @@ export default function AdminAddProduct() {
                 <Label>Modelo *</Label>
                 <Input
                   value={form.model}
+                  placeholder="Ej: Redmi Note 14 128GB"
                   onChange={(e) => setForm((prev) => ({ ...prev, model: e.target.value }))}
                 />
               </div>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-4">
+            <div className="space-y-2">
+              <Label>ID *</Label>
+              <Input
+                value={form.id}
+                placeholder="Ej: 65"
+                onChange={(e) => setForm((prev) => ({ ...prev, id: e.target.value }))}
+              />
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label>Precio *</Label>
                 <Input
                   type="number"
                   value={form.price}
+                  placeholder="Ej: 1190000"
                   onChange={(e) => setForm((prev) => ({ ...prev, price: e.target.value }))}
                 />
               </div>
@@ -293,103 +296,119 @@ export default function AdminAddProduct() {
                 <Input
                   type="number"
                   value={form.sale_price}
+                  placeholder="Ej: 1090000"
                   onChange={(e) => setForm((prev) => ({ ...prev, sale_price: e.target.value }))}
-                />
-              </div>
-              <div className="space-y-2">
-                <Label>Año lanzamiento</Label>
-                <Input
-                  type="number"
-                  value={form.release_year}
-                  onChange={(e) => setForm((prev) => ({ ...prev, release_year: e.target.value }))}
-                />
-              </div>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label>Almacenamientos (coma separada)</Label>
-                <Input
-                  value={form.storage_options}
-                  onChange={(e) => setForm((prev) => ({ ...prev, storage_options: e.target.value }))}
-                />
-              </div>
-              <div className="space-y-2">
-                <Label>Ruta imagen principal</Label>
-                <Input
-                  value={form.image_path}
-                  onChange={(e) => setForm((prev) => ({ ...prev, image_path: e.target.value }))}
-                />
-              </div>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label>Pantalla</Label>
-                <Input
-                  value={form.display_size}
-                  onChange={(e) => setForm((prev) => ({ ...prev, display_size: e.target.value }))}
-                />
-              </div>
-              <div className="space-y-2">
-                <Label>Procesador</Label>
-                <Input
-                  value={form.processor}
-                  onChange={(e) => setForm((prev) => ({ ...prev, processor: e.target.value }))}
-                />
-              </div>
-              <div className="space-y-2">
-                <Label>RAM</Label>
-                <Input
-                  value={form.ram}
-                  onChange={(e) => setForm((prev) => ({ ...prev, ram: e.target.value }))}
-                />
-              </div>
-              <div className="space-y-2">
-                <Label>Cámara</Label>
-                <Input
-                  value={form.camera}
-                  onChange={(e) => setForm((prev) => ({ ...prev, camera: e.target.value }))}
-                />
-              </div>
-              <div className="space-y-2">
-                <Label>Batería</Label>
-                <Input
-                  value={form.battery}
-                  onChange={(e) => setForm((prev) => ({ ...prev, battery: e.target.value }))}
                 />
               </div>
             </div>
 
             <div className="space-y-2">
-              <Label>Descripción</Label>
+              <Label>Almacenamientos (coma separada)</Label>
+              <Input
+                value={form.storage_options}
+                placeholder="Ej: 128GB, 256GB"
+                onChange={(e) => setForm((prev) => ({ ...prev, storage_options: e.target.value }))}
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label>Descripcion</Label>
               <textarea
                 value={form.description}
+                placeholder="Ej: Celular nuevo con excelente bateria, buena camara y rendimiento fluido."
                 onChange={(e) => setForm((prev) => ({ ...prev, description: e.target.value }))}
                 className="min-h-24 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
               />
             </div>
 
-            <div className="flex flex-wrap gap-6">
-              <div className="flex items-center gap-2">
-                <Checkbox
-                  id="add-is-featured"
-                  checked={form.is_featured}
-                  onCheckedChange={(checked) => setForm((prev) => ({ ...prev, is_featured: checked === true }))}
-                />
-                <Label htmlFor="add-is-featured">is_featured</Label>
-              </div>
-              <div className="flex items-center gap-2">
-                <Checkbox
-                  id="add-is-published"
-                  checked={form.is_published}
-                  onCheckedChange={(checked) => setForm((prev) => ({ ...prev, is_published: checked === true }))}
-                />
-                <Label htmlFor="add-is-published">is_published</Label>
-              </div>
+            <div className="space-y-2">
+              <Label>Ruta imagen principal</Label>
+              <Input
+                value={form.image_path}
+                placeholder="/images/fotos/p-65.jpg"
+                onChange={(e) => setForm((prev) => ({ ...prev, image_path: e.target.value }))}
+              />
             </div>
-          </CardContent>
-        </Card>
+
+            <Separator className="my-4" />
+
+            <Card>
+              <CardContent className="p-6">
+                <h3 className="font-display font-bold text-lg mb-4">Especificaciones</h3>
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label className="flex items-center gap-2"><Monitor className="w-4 h-4" /> Pantalla</Label>
+                    <Input
+                      value={form.display_size}
+                      placeholder="Ej: 6.7&quot; AMOLED"
+                      onChange={(e) => setForm((prev) => ({ ...prev, display_size: e.target.value }))}
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label className="flex items-center gap-2"><Cpu className="w-4 h-4" /> Procesador</Label>
+                    <Input
+                      value={form.processor}
+                      placeholder="Ej: Snapdragon 7s Gen 2"
+                      onChange={(e) => setForm((prev) => ({ ...prev, processor: e.target.value }))}
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label className="flex items-center gap-2"><HardDrive className="w-4 h-4" /> RAM</Label>
+                    <Input
+                      value={form.ram}
+                      placeholder="Ej: 8GB"
+                      onChange={(e) => setForm((prev) => ({ ...prev, ram: e.target.value }))}
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label className="flex items-center gap-2"><Camera className="w-4 h-4" /> Camara</Label>
+                    <Input
+                      value={form.camera}
+                      placeholder="Ej: Trasera 108MP; Frontal 16MP"
+                      onChange={(e) => setForm((prev) => ({ ...prev, camera: e.target.value }))}
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label className="flex items-center gap-2"><Battery className="w-4 h-4" /> Bateria</Label>
+                    <Input
+                      value={form.battery}
+                      placeholder="Ej: 5000mAh"
+                      onChange={(e) => setForm((prev) => ({ ...prev, battery: e.target.value }))}
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label className="flex items-center gap-2"><Calendar className="w-4 h-4" /> Lanzamiento</Label>
+                    <Input
+                      type="number"
+                      value={form.release_year}
+                      placeholder="Ej: 2025"
+                      onChange={(e) => setForm((prev) => ({ ...prev, release_year: e.target.value }))}
+                    />
+                  </div>
+                </div>
+
+                <div className="flex flex-wrap gap-6 mt-6">
+                  <div className="flex items-center gap-2 rounded-md px-2 py-1">
+                    <Checkbox
+                      id="add-is-featured"
+                      checked={form.is_featured}
+                      onCheckedChange={(checked) => setForm((prev) => ({ ...prev, is_featured: checked === true }))}
+                    />
+                    <Label htmlFor="add-is-featured">is_featured</Label>
+                  </div>
+                  <div className="flex items-center gap-2 rounded-md px-2 py-1">
+                    <Checkbox
+                      id="add-is-published"
+                      checked={form.is_published}
+                      onCheckedChange={(checked) => setForm((prev) => ({ ...prev, is_published: checked === true }))}
+                    />
+                    <Label htmlFor="add-is-published">is_published</Label>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
       </div>
     </div>
   );
