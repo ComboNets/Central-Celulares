@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "centralcelulares",
+  "name": "centralcelulares-admin",
   "workers_dev": true,
   "main": "./worker/index.ts",
   "compatibility_date": "2026-03-20",
