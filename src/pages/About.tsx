@@ -14,7 +14,7 @@ export default function About() {
               Tu tienda de confianza en Paraguay.
             </p>
             <p className="text-sm md:text-base text-muted-foreground whitespace-pre-line">
-              {"¡Bienvenidos a Central Celulares!\n\nCon más de 20 años de experiencia en el mercado, Central Celulares se ha establecido como un referente en la venta de celulares, accesorios y servicios en Caaguazú. Ubicados en la avenida Bernardino Caballero esquina Roberto L Petit, nuestro equipo está comprometido con brindar la mejor atención y los mejores productos a nuestros clientes.\n\nNuestra oferta:\n\n• Venta de celulares de las mejores marcas\n• Accesorios y repuestos para todos los modelos\n• Servicios técnicos especializados\n• Venta de productos informáticos\n\n¿Por qué elegirnos?\n\n• Más de 20 años de experiencia en el mercado\n• Personal capacitado y atento\n• Excelentes precios y promociones"}
+              {"¡Bienvenidos a Central Celulares!\n\nCon más de 20 años de experiencia en el mercado, Central Celulares se ha establecido como un referente en la venta de celulares, accesorios y servicios en Caaguazú. Ubicados en Avda. Bernardino Caballero esq. Roberto L. Pettit, nuestro equipo está comprometido con brindar la mejor atención y los mejores productos a nuestros clientes.\n\nNuestra oferta:\n\n• Venta de celulares de las mejores marcas\n• Accesorios y repuestos para todos los modelos\n• Servicios técnicos especializados\n• Venta de productos informáticos\n\n¿Por qué elegirnos?\n\n• Más de 20 años de experiencia en el mercado\n• Personal capacitado y atento\n• Excelentes precios y promociones"}
             </p>
           </section>
 
@@ -45,10 +45,10 @@ export default function About() {
           <section className="mb-12">
             <div className="max-w-lg mx-auto text-center space-y-2 text-sm md:text-base text-muted-foreground">
               <h2 className="font-display text-2xl font-bold mb-3">Ubicación y Contacto</h2>
-              <p><MapPin className="inline-block w-4 h-4 mr-2 text-primary" />Dirección: Calle Principal 123, Asunción, Paraguay</p>
-              <p><PhoneCall className="inline-block w-4 h-4 mr-2 text-primary" />Teléfono: +595 21 123 4567</p>
-              <p><Mail className="inline-block w-4 h-4 mr-2 text-primary" />Email: info@centralcelulares.com</p>
-              <p><Clock className="inline-block w-4 h-4 mr-2 text-primary" />Horario: Lunes a Sábado, 9:00 AM - 8:00 PM</p>
+              <p><MapPin className="inline-block w-4 h-4 mr-2 text-primary" />Dirección: Avda. Bernardino Caballero esq. Roberto L. Pettit, Caaguazú, Paraguay</p>
+              <p><PhoneCall className="inline-block w-4 h-4 mr-2 text-primary" />Teléfono: 0971403620</p>
+              <p><Mail className="inline-block w-4 h-4 mr-2 text-primary" />Email: centralcelularespy@gmail.com</p>
+              <p><Clock className="inline-block w-4 h-4 mr-2 text-primary" />Horario: 07:30 am hasta 17:30</p>
             </div>
           </section>
         </div>
