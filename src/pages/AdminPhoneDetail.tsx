@@ -3,6 +3,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Link, useParams } from "react-router-dom";
 import { Navbar } from "@/components/Navbar";
 import { useToast } from "@/hooks/use-toast";
+import { resolveProductImageUrl } from "@/lib/productAssets";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -205,15 +206,12 @@ function parseOptionalNumber(value: string): number | null {
 }
 
 function resolveImageSrc(rawImage?: string): string | undefined {
-  if (!rawImage) return undefined;
-  if (rawImage.startsWith("http") || rawImage.startsWith("blob:")) return rawImage;
-  const baseUrl = import.meta.env.BASE_URL || "/";
-  return `${baseUrl.replace(/\/$/, "")}/${rawImage.replace(/^\//, "")}`;
+  return resolveProductImageUrl(rawImage);
 }
 
 async function fetchFallbackProductsJson(): Promise<PhoneWithBrand[]> {
   const fallbackUrl = `${import.meta.env.BASE_URL}data/products.json`;
-  const response = await fetch(fallbackUrl);
+  const response = await fetch(fallbackUrl, { cache: "no-store" });
   if (!response.ok) {
     throw new Error("Failed to load products.json");
   }
@@ -222,7 +220,10 @@ async function fetchFallbackProductsJson(): Promise<PhoneWithBrand[]> {
 
 async function fetchAdminProducts(): Promise<AdminProductsResponse> {
   try {
-    const response = await fetch("/api/products", { headers: { Accept: "application/json" } });
+    const response = await fetch("/api/products", {
+      headers: { Accept: "application/json" },
+      cache: "no-store",
+    });
     if (response.ok) {
       const data = (await response.json()) as
         | AdminProductsResponse
@@ -254,6 +255,8 @@ export default function AdminPhoneDetail() {
   const { data: sourceData, isLoading, isError } = useQuery({
     queryKey: ["phones", "admin", "raw"],
     queryFn: fetchAdminProducts,
+    refetchOnMount: "always",
+    refetchOnWindowFocus: true,
   });
   const sourcePhones = sourceData?.products ?? [];
   const sourceSha = sourceData?.sha ?? null;

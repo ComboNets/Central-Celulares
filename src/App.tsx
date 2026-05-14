@@ -11,6 +11,7 @@ import About from "./pages/About";
 import Services from "./pages/Services";
 import AdminCatalog from "./pages/AdminCatalog";
 import AdminPhoneDetail from "./pages/AdminPhoneDetail";
+import AdminAddProduct from "./pages/AdminAddProduct";
 
 const queryClient = new QueryClient();
 const hostname = typeof window === "undefined" ? "" : window.location.hostname.toLowerCase();
@@ -40,6 +41,10 @@ const App = () => (
           <Route
             path="/admin/phone/:id"
             element={canUseAdminRoutes ? <AdminPhoneDetail /> : <Navigate to="/" replace />}
+          />
+          <Route
+            path="/admin/product/new"
+            element={canUseAdminRoutes ? <AdminAddProduct /> : <Navigate to="/" replace />}
           />
           <Route path="*" element={<NotFound />} />
         </Routes>

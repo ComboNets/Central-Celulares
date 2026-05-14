@@ -2,6 +2,7 @@ import type { KeyboardEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
+import { resolveProductImageUrl } from "@/lib/productAssets";
 import type { PhoneWithBrand } from "@/types/products";
 
 interface PhoneCardProps {
@@ -16,13 +17,7 @@ export function PhoneCard({ phone }: PhoneCardProps) {
     ? Math.round(((phone.price - phone.sale_price!) / phone.price) * 100)
     : 0;
 
-  const baseUrl = import.meta.env.BASE_URL || "/";
-  const rawImage = phone.images?.[0];
-  const imageSrc = rawImage
-    ? rawImage.startsWith("http")
-      ? rawImage
-      : `${baseUrl.replace(/\/$/, "")}/${rawImage.replace(/^\//, "")}`
-    : undefined;
+  const imageSrc = resolveProductImageUrl(phone.images?.[0]);
 
   const openDetail = () => navigate(`/phone/${phone.id}`);
   const onKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {

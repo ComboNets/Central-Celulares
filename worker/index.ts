@@ -51,6 +51,25 @@ interface PendingProductChanges {
   brand_name?: string;
 }
 
+interface PendingProductCreate {
+  id: string;
+  model: string;
+  price: number;
+  sale_price?: number | null;
+  storage_options?: string[] | null;
+  display_size?: string | null;
+  processor?: string | null;
+  ram?: string | null;
+  camera?: string | null;
+  battery?: string | null;
+  release_year?: number | null;
+  description?: string | null;
+  images?: string[] | null;
+  is_featured?: boolean;
+  is_published?: boolean;
+  brand_name?: string;
+}
+
 interface PendingImageUpload {
   id: string;
   extension: string;
@@ -63,6 +82,7 @@ interface PublishRequestBody {
     id: string;
     changes: PendingProductChanges;
   }>;
+  creates?: PendingProductCreate[];
   imageUploads?: PendingImageUpload[];
   baseSha?: string | null;
 }
@@ -130,6 +150,7 @@ function jsonResponse(body: unknown, status = 200, corsOrigin = "*"): Response {
       "Access-Control-Allow-Origin": corsOrigin,
       "Access-Control-Allow-Headers": "Content-Type, Authorization",
       "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+      "Cache-Control": "no-store",
     },
   });
 }
@@ -162,7 +183,14 @@ function getCorsOrigin(request: Request, env: Env): string {
   const configured = env.ALLOWED_ORIGIN?.trim() || "";
   if (!configured) return "*";
   const requestOrigin = request.headers.get("Origin");
-  return requestOrigin === configured ? configured : configured;
+  const allowedOrigins = configured
+    .split(",")
+    .map((origin) => origin.trim())
+    .filter(Boolean);
+  if (requestOrigin && allowedOrigins.includes(requestOrigin)) {
+    return requestOrigin;
+  }
+  return allowedOrigins[0] || configured;
 }
 
 function getGitHubReadConfig(env: Env) {
@@ -241,6 +269,51 @@ async function fetchGitHubProducts(env: Env): Promise<{
   return { products, sha: data.sha };
 }
 
+function getContentTypeForPath(path: string): string {
+  const lower = path.toLowerCase();
+  if (lower.endsWith(".jpg") || lower.endsWith(".jpeg")) return "image/jpeg";
+  if (lower.endsWith(".png")) return "image/png";
+  if (lower.endsWith(".webp")) return "image/webp";
+  if (lower.endsWith(".gif")) return "image/gif";
+  return "application/octet-stream";
+}
+
+async function handleProductImage(request: Request, env: Env): Promise<Response | null> {
+  const cfg = getGitHubReadConfig(env);
+  if (!cfg) return null;
+
+  const url = new URL(request.url);
+  const prefix = "/images/fotos/";
+  if (!url.pathname.startsWith(prefix)) return null;
+
+  const fileName = decodeURIComponent(url.pathname.slice(prefix.length));
+  if (!fileName || fileName.includes("/") || fileName.includes("\\") || fileName.includes("..")) {
+    return new Response("Invalid image path", { status: 400 });
+  }
+
+  const repoPath = `public/images/fotos/${fileName}`;
+  const githubUrl = `https://api.github.com/repos/${cfg.owner}/${cfg.repo}/contents/${normalizePath(
+    repoPath
+  )}?ref=${encodeURIComponent(cfg.branch)}`;
+
+  const response = await fetch(githubUrl, {
+    headers: buildGitHubHeaders(cfg.token, {
+      Accept: "application/vnd.github.raw",
+    }),
+  });
+
+  if (!response.ok) return null;
+
+  return new Response(response.body, {
+    status: 200,
+    headers: {
+      "Content-Type": response.headers.get("Content-Type") || getContentTypeForPath(fileName),
+      "Cache-Control": "public, max-age=60",
+      "Access-Control-Allow-Origin": getCorsOrigin(request, env),
+    },
+  });
+}
+
 async function tryFetchProductsFromAssets(request: Request, env: Env): Promise<ProductRecord[] | null> {
   if (!env.ASSETS || typeof env.ASSETS.fetch !== "function") {
     return null;
@@ -255,6 +328,109 @@ async function tryFetchProductsFromAssets(request: Request, env: Env): Promise<P
 
 function isStringArray(value: unknown): value is string[] {
   return Array.isArray(value) && value.every((item) => typeof item === "string");
+}
+
+function toOptionalString(value: unknown, fieldName: string): string | null {
+  if (value === undefined || value === null) return null;
+  if (typeof value !== "string") {
+    throw new Error(`${fieldName} must be string or null.`);
+  }
+  const trimmed = value.trim();
+  return trimmed || null;
+}
+
+function slugify(value: string): string {
+  return value
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+function buildValidatedCreatedProduct(input: PendingProductCreate): ProductRecord {
+  if (!input || typeof input !== "object") {
+    throw new Error("Each create item must be an object.");
+  }
+
+  const id = typeof input.id === "string" ? input.id.trim() : "";
+  if (!id) {
+    throw new Error("Each create item requires a valid id.");
+  }
+
+  const model = typeof input.model === "string" ? input.model.trim() : "";
+  if (!model) {
+    throw new Error(`Product ${id}: model is required.`);
+  }
+
+  if (typeof input.price !== "number" || !Number.isFinite(input.price) || input.price < 0) {
+    throw new Error(`Product ${id}: price must be a valid number >= 0.`);
+  }
+
+  if (input.sale_price !== undefined) {
+    if (input.sale_price !== null && (typeof input.sale_price !== "number" || !Number.isFinite(input.sale_price) || input.sale_price < 0)) {
+      throw new Error(`Product ${id}: sale_price must be number >= 0 or null.`);
+    }
+  }
+
+  if (input.storage_options !== undefined) {
+    if (input.storage_options !== null && !isStringArray(input.storage_options)) {
+      throw new Error(`Product ${id}: storage_options must be string[] or null.`);
+    }
+  }
+
+  if (input.release_year !== undefined) {
+    if (input.release_year !== null && (typeof input.release_year !== "number" || !Number.isInteger(input.release_year))) {
+      throw new Error(`Product ${id}: release_year must be integer or null.`);
+    }
+  }
+
+  if (input.images !== undefined) {
+    if (input.images !== null && !isStringArray(input.images)) {
+      throw new Error(`Product ${id}: images must be string[] or null.`);
+    }
+  }
+
+  if (input.is_featured !== undefined && typeof input.is_featured !== "boolean") {
+    throw new Error(`Product ${id}: is_featured must be boolean.`);
+  }
+  if (input.is_published !== undefined && typeof input.is_published !== "boolean") {
+    throw new Error(`Product ${id}: is_published must be boolean.`);
+  }
+
+  const brandName = toOptionalString(input.brand_name, "brand_name") || "Sin marca";
+  const now = new Date().toISOString();
+  const fallbackBrandId = `brand-${sanitizeIdForFileName(id).toLowerCase()}`;
+  const brandId = slugify(brandName) || fallbackBrandId;
+
+  return {
+    id,
+    brand_id: brandId,
+    model,
+    price: input.price,
+    sale_price: input.sale_price ?? null,
+    storage_options: input.storage_options ?? null,
+    display_size: toOptionalString(input.display_size, "display_size"),
+    processor: toOptionalString(input.processor, "processor"),
+    ram: toOptionalString(input.ram, "ram"),
+    camera: toOptionalString(input.camera, "camera"),
+    battery: toOptionalString(input.battery, "battery"),
+    release_year: input.release_year ?? null,
+    description: toOptionalString(input.description, "description"),
+    images: input.images ?? [],
+    is_featured: input.is_featured ?? false,
+    is_published: input.is_published ?? true,
+    view_count: 0,
+    click_count: 0,
+    created_at: now,
+    updated_at: now,
+    brand: {
+      id: brandId,
+      name: brandName,
+      logo_url: null,
+      created_at: now,
+    },
+  };
 }
 
 function applyValidatedChanges(product: ProductRecord, changes: PendingProductChanges): ProductRecord {
@@ -509,10 +685,11 @@ async function handlePublishProducts(request: Request, env: Env): Promise<Respon
   }
 
   const patches = Array.isArray(payload.patches) ? payload.patches : [];
+  const creates = Array.isArray(payload.creates) ? payload.creates : [];
   const imageUploads = Array.isArray(payload.imageUploads) ? payload.imageUploads : [];
 
-  if (patches.length === 0 && imageUploads.length === 0) {
-    return jsonResponse({ error: "patches or imageUploads must contain at least one item." }, 400, corsOrigin);
+  if (patches.length === 0 && creates.length === 0 && imageUploads.length === 0) {
+    return jsonResponse({ error: "patches, creates or imageUploads must contain at least one item." }, 400, corsOrigin);
   }
 
   try {
@@ -538,6 +715,19 @@ async function handlePublishProducts(request: Request, env: Env): Promise<Respon
         throw new Error(`Product id ${patch.id} not found.`);
       }
       nextProducts[index] = applyValidatedChanges(nextProducts[index], patch.changes || {});
+    }
+
+    const seenCreateIds = new Set<string>();
+    for (const create of creates) {
+      const createdProduct = buildValidatedCreatedProduct(create);
+      if (seenCreateIds.has(createdProduct.id)) {
+        throw new Error(`Product id ${createdProduct.id} is duplicated in creates payload.`);
+      }
+      if (nextProducts.some((existing) => String(existing.id) === String(createdProduct.id))) {
+        throw new Error(`Product id ${createdProduct.id} already exists.`);
+      }
+      nextProducts.push(createdProduct);
+      seenCreateIds.add(createdProduct.id);
     }
 
     const imageFileWrites = new Map<string, string>();
@@ -570,7 +760,7 @@ async function handlePublishProducts(request: Request, env: Env): Promise<Respon
     }
 
     const content = `${JSON.stringify(nextProducts, null, 2)}\n`;
-    const commitMessage = `chore(products): publish admin changes (${patches.length} updates, ${imageUploads.length} images) at ${new Date().toISOString()}`;
+    const commitMessage = `chore(products): publish admin changes (${patches.length} updates, ${creates.length} creates, ${imageUploads.length} images) at ${new Date().toISOString()}`;
 
     const files: GitHubFileWrite[] = [
       {
@@ -623,6 +813,11 @@ export default {
 
     if (url.pathname === "/api/products/publish" && request.method === "POST") {
       return handlePublishProducts(request, env);
+    }
+
+    if (url.pathname.startsWith("/images/fotos/") && request.method === "GET") {
+      const imageResponse = await handleProductImage(request, env);
+      if (imageResponse) return imageResponse;
     }
 
     if (env.ASSETS && typeof env.ASSETS.fetch === "function") {

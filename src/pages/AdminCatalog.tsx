@@ -9,6 +9,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
+import { resolveProductImageUrl } from "@/lib/productAssets";
 import type { Brand, PhoneFilters, PhoneWithBrand } from "@/types/products";
 import { Search, SlidersHorizontal, X } from "lucide-react";
 
@@ -94,7 +95,7 @@ function readStoredPendingImageUploads(): Record<string, PendingImageUpload> {
 
 async function fetchFallbackProductsJson(): Promise<PhoneWithBrand[]> {
   const fallbackUrl = `${import.meta.env.BASE_URL}data/products.json`;
-  const response = await fetch(fallbackUrl);
+  const response = await fetch(fallbackUrl, { cache: "no-store" });
   if (!response.ok) {
     throw new Error("Failed to load products.json");
   }
@@ -105,6 +106,7 @@ async function fetchAdminProducts(): Promise<AdminProductsResponse> {
   try {
     const response = await fetch("/api/products", {
       headers: { Accept: "application/json" },
+      cache: "no-store",
     });
     if (response.ok) {
       const data = (await response.json()) as
@@ -169,10 +171,7 @@ function applyPhoneFilters(phones: PhoneWithBrand[], filters?: PhoneFilters): Ph
 }
 
 function resolveImageSrc(rawImage?: string): string | undefined {
-  if (!rawImage) return undefined;
-  if (rawImage.startsWith("http") || rawImage.startsWith("blob:")) return rawImage;
-  const baseUrl = import.meta.env.BASE_URL || "/";
-  return `${baseUrl.replace(/\/$/, "")}/${rawImage.replace(/^\//, "")}`;
+  return resolveProductImageUrl(rawImage);
 }
 
 interface AdminPhoneCardProps {
@@ -262,6 +261,8 @@ export default function AdminCatalog() {
   const { data: sourceData, isLoading, isError } = useQuery({
     queryKey: ["phones", "admin", "raw"],
     queryFn: fetchAdminProducts,
+    refetchOnMount: "always",
+    refetchOnWindowFocus: true,
   });
   const sourcePhones = sourceData?.products ?? [];
   const sourceSha = sourceData?.sha ?? null;
@@ -363,7 +364,10 @@ export default function AdminCatalog() {
       <Navbar />
       <main className="main-content">
         <div className="container">
-          <h1 className="page-title">Catálogo Admin</h1>
+          <div className="mb-2 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <h1 className="page-title mb-0">Catálogo Admin</h1>
+            <Button onClick={() => navigate("/admin/product/new")}>Agregar producto</Button>
+          </div>
           <p className="text-sm text-muted-foreground mb-4">
             Haz clic en un producto para editarlo en la vista de detalle (mismo diseño de showcase).
           </p>
