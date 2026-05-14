@@ -1,13 +1,43 @@
 import { useQuery } from "@tanstack/react-query";
 import type { PhoneWithBrand, PhoneFilters, Brand } from "@/types/products";
 
+interface ProductsApiResponse {
+  products?: PhoneWithBrand[];
+}
+
+const PRODUCTS_API_URL =
+  import.meta.env.VITE_PRODUCTS_API_URL || "https://admin.centralcelulares.com.py/api/products";
+
+async function fetchPhonesFromApi(): Promise<PhoneWithBrand[]> {
+  const response = await fetch(PRODUCTS_API_URL, {
+    headers: { Accept: "application/json" },
+    cache: "no-store",
+  });
+  if (!response.ok) {
+    throw new Error("Failed to load products from API");
+  }
+
+  const data = (await response.json()) as ProductsApiResponse | PhoneWithBrand[];
+  if (Array.isArray(data)) return data;
+  if (Array.isArray(data.products)) return data.products;
+  throw new Error("Products API returned an invalid response");
+}
+
 async function fetchPhonesFromJson(): Promise<PhoneWithBrand[]> {
   const url = `${import.meta.env.BASE_URL}data/products.json`;
-  const response = await fetch(url);
+  const response = await fetch(url, { cache: "no-store" });
   if (!response.ok) {
     throw new Error("Failed to load products.json");
   }
   return (await response.json()) as PhoneWithBrand[];
+}
+
+async function fetchPhones(): Promise<PhoneWithBrand[]> {
+  try {
+    return await fetchPhonesFromApi();
+  } catch {
+    return fetchPhonesFromJson();
+  }
 }
 
 function applyPhoneFilters(phones: PhoneWithBrand[], filters?: PhoneFilters): PhoneWithBrand[] {
@@ -62,7 +92,7 @@ export function usePhones(filters?: PhoneFilters) {
   return useQuery({
     queryKey: ["phones", filters],
     queryFn: async () => {
-      const phones = await fetchPhonesFromJson();
+      const phones = await fetchPhones();
       return applyPhoneFilters(phones, filters);
     },
   });
@@ -73,7 +103,7 @@ export function usePhone(id: string | undefined) {
     queryKey: ["phone", id],
     queryFn: async () => {
       if (!id) return null;
-      const phones = await fetchPhonesFromJson();
+      const phones = await fetchPhones();
       return phones.find((p) => p.id === id) || null;
     },
     enabled: !!id,
@@ -84,7 +114,7 @@ export function useFeaturedPhones() {
   return useQuery({
     queryKey: ["phones", "featured"],
     queryFn: async () => {
-      const phones = await fetchPhonesFromJson();
+      const phones = await fetchPhones();
       return phones.filter((p) => p.is_published && p.is_featured).slice(0, 6);
     },
   });
@@ -94,7 +124,7 @@ export function useSalePhones() {
   return useQuery({
     queryKey: ["phones", "sale"],
     queryFn: async () => {
-      const phones = await fetchPhonesFromJson();
+      const phones = await fetchPhones();
       return phones.filter((p) => p.is_published && p.sale_price !== null).slice(0, 8);
     },
   });
@@ -104,7 +134,7 @@ export function useBrands() {
   return useQuery({
     queryKey: ["brands"],
     queryFn: async () => {
-      const phones = await fetchPhonesFromJson();
+      const phones = await fetchPhones();
       const map = new Map<string, Brand>();
 
       for (const phone of phones) {

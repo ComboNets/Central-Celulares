@@ -2,6 +2,7 @@ import { Navbar } from "@/components/Navbar";
 import { usePhone } from "@/hooks/usePhones";
 import { useWhatsAppNumber, generateWhatsAppLink } from "@/hooks/useSettings";
 import { trackEvent } from "@/hooks/useAnalytics";
+import { resolveProductImageUrl } from "@/lib/productAssets";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -70,14 +71,11 @@ export default function PhoneDetail() {
     { icon: Calendar, label: "Lanzamiento", value: phone.release_year?.toString() },
   ];
 
-  const baseUrl = import.meta.env.BASE_URL || "/";
   const rawImages = Array.isArray(phone.images) ? phone.images : [];
   const resolvedImages = rawImages
     .filter(Boolean)
-    .map((raw) => {
-      if (raw.startsWith("http")) return raw;
-      return `${baseUrl.replace(/\/$/, "")}/${raw.replace(/^\//, "")}`;
-    });
+    .map((raw) => resolveProductImageUrl(raw))
+    .filter((image): image is string => Boolean(image));
   const mainImage = resolvedImages[0];
 
   return (
